@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-paxtgt)y_(k&88%j_ivt$m_8k(xfq_1_&b%m%)e7c)n9z*n!to
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'myapp',
     'store',
     'tags',
-    'debug_toolbar'
+    'debug_toolbar',
+    'errorhandler',
 ]
 
 MIDDLEWARE = [
@@ -141,6 +142,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_URL = '/myapp/login/'
+
+
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

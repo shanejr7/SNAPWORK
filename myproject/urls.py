@@ -19,6 +19,11 @@ import debug_toolbar
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('store.urls')),
+    path('store/', include('store.urls')),
     path('myapp/', include('myapp.urls')),
+    path('tags/', include('tags.urls')),
     path('__debug__/',include(debug_toolbar.urls)),
+    path('error/',include("errorhandler.urls")),
 ]
+
