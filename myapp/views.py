@@ -88,7 +88,7 @@ def signup(request):
 			# Create user and save to the database
 			max_id = User.objects.last().id
 			max_id = max_id +1
-			create_user = User.create_user(self=User.objects,id=max_id,user_name=user_name,username=username,email=email,password=password,phone=phone_number,license="n/a",img_license_front_url="n/a",img_license_back_url="n/a", img_url="n/a",background_img_url="n/a",verified_identity=False,background_check_status ="n/a",quality_rank =0.0, timestamp=time_stamp)
+			create_user = User.create_user(self=User.objects,id=max_id,user_name=user_name,username=username,email=email,password=password,phone=phone_number,license="n/a",img_license_front_url="n/a",img_license_back_url="n/a", img_url="images/author/user.jpg",background_img_url="n/a",verified_identity=False,background_check_status ="n/a",quality_rank =0.0, timestamp=time_stamp)
 			create_user.save()
 			create_user.last_login = timezone.now()
 			create_user.save(update_fields=['last_login'])
@@ -96,6 +96,7 @@ def signup(request):
 			request.session['id'] = max_id;
 			request.session['username'] = username;
 			request.session['email'] = email;
+			request.session['img_url'] = 'images/author/user.jpg';
 			request.session['quality_rank'] = 0.0;
 
 			return redirect('/myapp/myprofile')
@@ -132,6 +133,7 @@ def login(request):
 			request.session['id'] = user.id
 			request.session['username'] = user.username
 			request.session['email'] = user.email
+			request.session['img_url'] = user.img_url;
 			request.session['quality_rank'] = user.quality_rank
 			return redirect('/myapp/myprofile')
 		else:

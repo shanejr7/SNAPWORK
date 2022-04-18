@@ -203,12 +203,42 @@ def apply(request):
 
 def activity(request):
 
+    # query by timestamp
+    # sort different table queries by timestamp -> merge into activity array list
+
+        # select Store table and join with associated User
+
+        # select User from Follow table and join with associated following User
+
+        # select User from Like table and join with associated like Store 
+
+        # select Auction table and associated Store , User
+
+        # List<Activity> activ = new ArrayList<Activity>();
+
+        # activ.add(store_obj) .. .get(0).setObjectTypeName("store") 
+        # activ.add(follow_obj) .get(1).setObjectTypeName("follow") 
+        # activ.add(like_obj)   .get(2).setObjectTypeName("like") 
+        # activ.add(auction_obj)  .get(3).setObjectTypeName("auction") 
+        
+        # sort different table with different cloumns by timestamps with activ object
+        # print correct html activity template based on obj types
+
+        #loop activ object
+        # if objType == type1:
+            # this template
+        # if objType == type2:
+            # this template
+        #......... etc
+
     # error = []
 
     #  context = {
 
-    #     "products": store_obj,
-    #     "users": owner_obj,
+    #     "store": store_obj,  // new store post
+    #     "follow": follow_obj, // user just followed another user
+    #     "like": like_obj,  // user just liked a store
+    #     "auction": auction_obj, // user just made a auction submission
     #     "error": error,
 
     # }
@@ -217,11 +247,12 @@ def activity(request):
 
 def rankings(request):
 
+    # query rankings of all users desc
+
     # error = []
 
     #  context = {
 
-    #     "products": store_obj,
     #     "users": owner_obj,
     #     "error": error,
 

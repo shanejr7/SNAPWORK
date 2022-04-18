@@ -76,12 +76,16 @@ class Follow(models.Model):
 
     user_follower_id = models.IntegerField()
 
+    timestamp = models.TextField()
+
     user = models.ForeignKey("User", on_delete=models.SET_NULL, null=True)
 
 
 class Like(models.Model):
 
     user_id = models.IntegerField()
+
+    timestamp = models.TextField()
 
     store = models.ForeignKey("Store", on_delete=models.SET_NULL, null=True)
 
