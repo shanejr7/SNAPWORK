@@ -1,6 +1,4 @@
-# Django-Application
-
-# Gigaland - NFT HTML Market Place Template + RTL
+# SNAPWORK TECHNOLOGIES - AERAVI TECHNOLOGIES LLC
 
 # Framework: (Django - Python)
 # Geo localizations functions: (GCP) 
