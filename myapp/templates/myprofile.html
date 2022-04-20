@@ -59,16 +59,15 @@
 
                                     </li>
                                     <li>
-                                        <a href="explore.html">Explore<span></span></a>
+                                        <a href="#">Explore<span></span></a>
                                         <ul>
-                                            <li><a href="live-auction.html">Live Auction</a></li>
-
+                                            <li><a href="/liveauctions/">Live Auction</a></li>
                                         </ul>
                                     </li>
                                     <li>
                                         <a href="#" class="active">Profile<span></span></a>
                                         <ul>
-                                            <li><a href="wallet.html">Wallet</a></li>
+                                            <li><a href="/myapp/wallet/">Wallet</a></li>
                                             <li><a href="/myapp/create/">Create</a></li>
                                             <li><a href="/myapp/editprofile/">Edit profile</a></li>
                                             <li><a href="/myapp/logoff">Log Off</a></li>
@@ -108,7 +107,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                           <div class="d_profile">
+                         <div class="d_profile">
                             <div class="profile_avatar">
                                 <div class="d_profile_img">
                                     {% if request.session.img_url  != 'n/a' %}
@@ -119,25 +118,25 @@
                                     <img src="{% static '' %}{{ request.session.img_url }}" alt="">
                                     {% endif %}
 
-                                  <!--   <i class="fa fa-check"></i> -->
+                                    <!--   <i class="fa fa-check"></i> -->
                                 </div>
 
                                 <div class="profile_name">
                                     <h4>
-                                     {{  request.session.username }}                                           
-                                     <div class="clearfix"></div>
-                                     <span id="wallet" class="profile_wallet">http://127.0.0.1:8000/myapp/profile/{{ request.session.id }}</span>
-                                     <button id="btn_copy" title="Copy Text">Copy</button>
-                                 </h4>
-                             </div>
+                                       {{  request.session.username }}                                           
+                                       <div class="clearfix"></div>
+                                       <span id="wallet" class="profile_wallet">http://127.0.0.1:8000/myapp/profile/{{ request.session.id }}</span>
+                                       <button id="btn_copy" title="Copy Text">Copy</button>
+                                   </h4>
+                               </div>
 
-                         </div>
+                           </div>
 
 
-                     </div>
-                 </div>
+                       </div>
+                   </div>
 
-                 <div class="col-md-12">
+                   <div class="col-md-12">
 
                     <div class="de_tab tab_simple">
 
@@ -161,8 +160,8 @@
 
                                     <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                                         <div class="nft__item">
-                                         {% if p.duration_timestamp != "n/a" and p.auction == True %}
-                                         <div>
+                                           {% if p.duration_timestamp != "n/a" and p.auction == True %}
+                                           <div>
                                             Auctions ends in <div class="de_countdown" data-year="{{ p.duration_timestamp|slice:'6:10' }}" data-month="{{ p.duration_timestamp|slice:'0:2' }}" data-day="{{ p.duration_timestamp|slice:'3:5'   }}" data-hour="{{ p.duration_timestamp|slice:'11:13' }}"></div>
                                         </div>
                                         {% endif %}
@@ -252,129 +251,129 @@
                                             ${{p.price}} USD<span>{{ p.timestamp|slice:'0:2' }}/{{ p.timestamp|slice:'3:5'   }}</span>
                                         </div>
                                         <div class="nft__item_action">
-                                           {% if p.product_type != "n/a" and p.auction == False and p.quantity != 0 %}
-                                           <a href="/store/{{p.user_id}}/{{p.id}}" >
-                                              Buy Now
-                                          </a>
-                                          {% endif %}
-                                          {% if p.product_type != "n/a" and p.auction == False and p.quantity == 0 %}
-                                          <a href="/store/{{p.user_id}}/{{p.id}}" >
-                                              Sold out
-                                          </a>
-                                          {% endif %}
-                                          {% if p.contract_type != "n/a" and p.auction == False %}
-                                          <a  href="/store/{{p.user_id}}/{{p.id}}" >
-                                              Apply Now
-                                          </a>
-                                          {% endif %}
-                                          {% if p.service_type != "n/a" and p.auction == False %}
-                                          <a href="/store/{{p.user_id}}/{{p.id}}" >
-                                            Apply Now
-                                        </a>
-                                        {% endif %}
-                                        &nbsp;
-                                        {% if p.auction == True and p.contract_type != "n/a" %}
-                                        <a href="/store/{{p.user_id}}/{{p.id}}" >
-                                          Place a Bid
+                                         {% if p.product_type != "n/a" and p.auction == False and p.quantity != 0 %}
+                                         <a href="/store/{{p.user_id}}/{{p.id}}" >
+                                          Buy Now
                                       </a>
                                       {% endif %}
-                                      {% if p.auction == True and p.service_type != "n/a" %}
+                                      {% if p.product_type != "n/a" and p.auction == False and p.quantity == 0 %}
                                       <a href="/store/{{p.user_id}}/{{p.id}}" >
-                                          Place a bid 
+                                          Sold out
                                       </a>
                                       {% endif %}
-                                      {% if p.auction == True and p.product_type != "n/a" %}
+                                      {% if p.contract_type != "n/a" and p.auction == False %}
+                                      <a  href="/store/{{p.user_id}}/{{p.id}}" >
+                                          Apply Now
+                                      </a>
+                                      {% endif %}
+                                      {% if p.service_type != "n/a" and p.auction == False %}
                                       <a href="/store/{{p.user_id}}/{{p.id}}" >
-                                          Place a Bid
-                                      </a>
-                                      {% endif %}
-                                  </div>
-                                  <div class="nft__item_like">
-                                    <i class="fa fa-heart"></i><span>50</span>
-                                </div>                            
-                            </div> 
-                        </div>
-                    </div>    
+                                        Apply Now
+                                    </a>
+                                    {% endif %}
+                                    &nbsp;
+                                    {% if p.auction == True and p.contract_type != "n/a" %}
+                                    <a href="/store/{{p.user_id}}/{{p.id}}" >
+                                      Place a Bid
+                                  </a>
+                                  {% endif %}
+                                  {% if p.auction == True and p.service_type != "n/a" %}
+                                  <a href="/store/{{p.user_id}}/{{p.id}}" >
+                                      Place a bid 
+                                  </a>
+                                  {% endif %}
+                                  {% if p.auction == True and p.product_type != "n/a" %}
+                                  <a href="/store/{{p.user_id}}/{{p.id}}" >
+                                      Place a Bid
+                                  </a>
+                                  {% endif %}
+                              </div>
+                              <div class="nft__item_like">
+                                <i class="fa fa-heart"></i><span>50</span>
+                            </div>                            
+                        </div> 
+                    </div>
+                </div>    
 
-                    {% endfor %}             
+                {% endfor %}             
 
 
-                </div>
             </div>
+        </div>
 
-            <div class="tab-2">
-                <div class="row">
+        <div class="tab-2">
+            <div class="row">
 
-                    <!-- nft item begin -->
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="nft__item">
-                            <div class="author_list_pp">
-                                <a href="author.html">                                    
-                                    <img class="lazy" src="{% static 'images/author/author-1.jpg' %}" alt="">
-                                    <i class="fa fa-check"></i>
-                                </a>
-                            </div>
-                            <div class="nft__item_wrap">
-                                <div class="nft__item_extra">
-                                    <div class="nft__item_buttons">
-                                        <button onclick="location.href='item-details.html'">Buy Now</button>
-                                        <div class="nft__item_share">
-                                            <h4>Share</h4>
-                                            <a href="https://www.facebook.com/sharer/sharer.php?u=https://gigaland.io" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
-                                            <a href="https://twitter.com/intent/tweet?url=https://gigaland.io" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
-                                            <a href="mailto:?subject=I wanted you to see this site&amp;body=Check out this site https://gigaland.io"><i class="fa fa-envelope fa-lg"></i></a>
-                                        </div>
+                <!-- nft item begin -->
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="nft__item">
+                        <div class="author_list_pp">
+                            <a href="author.html">                                    
+                                <img class="lazy" src="{% static 'images/author/author-1.jpg' %}" alt="">
+                                <i class="fa fa-check"></i>
+                            </a>
+                        </div>
+                        <div class="nft__item_wrap">
+                            <div class="nft__item_extra">
+                                <div class="nft__item_buttons">
+                                    <button onclick="location.href='item-details.html'">Buy Now</button>
+                                    <div class="nft__item_share">
+                                        <h4>Share</h4>
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://gigaland.io" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
+                                        <a href="https://twitter.com/intent/tweet?url=https://gigaland.io" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
+                                        <a href="mailto:?subject=I wanted you to see this site&amp;body=Check out this site https://gigaland.io"><i class="fa fa-envelope fa-lg"></i></a>
                                     </div>
                                 </div>
-                                <a href="item-details.html">
-                                    <img src="{% static 'images/collections/coll-item-3.jpg' %}" class="lazy nft__item_preview" alt="">
-                                </a>
                             </div>
-                            <div class="nft__item_info">
-                                <a href="item-details.html">
-                                    <h4>Abstraction #256</h4>
-                                </a>
-                                <div class="nft__item_click">
-                                    <span></span>
-                                </div>
-                                <div class="nft__item_price">
-                                    0.05 ETH<span>1/11</span>
-                                </div>
-                                <div class="nft__item_action">
-                                    <a href="#">Place a bid</a>
-                                </div>
-                                <div class="nft__item_like">
-                                    <i class="fa fa-heart"></i><span>97</span>
-                                </div>                                 
-                            </div> 
+                            <a href="item-details.html">
+                                <img src="{% static 'images/collections/coll-item-3.jpg' %}" class="lazy nft__item_preview" alt="">
+                            </a>
                         </div>
-                    </div>
-
-
-
-                </div>
-            </div>
-         <div class="tab-3">
-                <div class="row">
-
-                    {% for follow in follower_tracker %}
-                    {{follow.id}}
-                         <!-- nft item begin -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="nft__item">
-                            <div class="author_list_pp">
-                                <a href="/myapp/profile/{{follow.user__id}}">                                    
-                                    <img class="lazy" src="{% static '' %}{{ follow.user__img_url }}" alt="">
-                                    <!-- <i class="fa fa-check"></i> -->
-                                </a>
+                        <div class="nft__item_info">
+                            <a href="item-details.html">
+                                <h4>Abstraction #256</h4>
+                            </a>
+                            <div class="nft__item_click">
+                                <span></span>
                             </div>
+                            <div class="nft__item_price">
+                                0.05 ETH<span>1/11</span>
+                            </div>
+                            <div class="nft__item_action">
+                                <a href="#">Place a bid</a>
+                            </div>
+                            <div class="nft__item_like">
+                                <i class="fa fa-heart"></i><span>97</span>
+                            </div>                                 
+                        </div> 
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        <div class="tab-3">
+            <div class="row">
+
+                {% for follow in follower_tracker %}
+                {{follow.id}}
+                <!-- nft item begin -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="nft__item">
+                        <div class="author_list_pp">
+                            <a href="/myapp/profile/{{follow.user__id}}">                                    
+                                <img class="lazy" src="{% static '' %}{{ follow.user__img_url }}" alt="">
+                                <!-- <i class="fa fa-check"></i> -->
+                            </a>
+                        </div>
                         
-                            <br>
-                            <br>
-                            <div class="nft__item_info">
-                                <a href="/myapp/profile/{{follow.user__id}}">
-                                    <h4>{{follow.user__username}}</h4>
-                                </a>
+                        <br>
+                        <br>
+                        <div class="nft__item_info">
+                            <a href="/myapp/profile/{{follow.user__id}}">
+                                <h4>{{follow.user__username}}</h4>
+                            </a>
                                <!--  <div class="nft__item_click">
                                     <span></span>
                                 </div> -->
@@ -397,12 +396,12 @@
                 </div>
             </div>
 
-           
+            
             <div class="tab-4">
                 <div class="row">
 
                     {% for follow in follow_tracker %}
-                         <!-- nft item begin -->
+                    <!-- nft item begin -->
                     <div class="col-lg-3 col-md-6">
                         <div class="nft__item">
                             <div class="author_list_pp">
@@ -411,7 +410,7 @@
                                     <!-- <i class="fa fa-check"></i> -->
                                 </a>
                             </div>
-                        
+                            
                             <br>
                             <br>
                             <div class="nft__item_info">
@@ -518,24 +517,24 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="de-flex">
-                       <div class="de-flex-col">
-                         <a href="https://www.aeravi.io" target="_blank">
-                            <!-- <img alt="" class="f-logo" src="images/logo.png" /> --><span class="copy">&copy; Copyright - Aeravi Technologies LLC</span>
-                        </a>
-                    </div>
-                    <div class="de-flex-col">
-                        <div class="social-icons">
-                            <a href="#"><i class="fa fa-facebook fa-lg"></i></a>
-                            <a href="#"><i class="fa fa-twitter fa-lg"></i></a>
-                            <a href="#"><i class="fa fa-linkedin fa-lg"></i></a>
-                            <a href="#"><i class="fa fa-pinterest fa-lg"></i></a>
-                            <a href="#"><i class="fa fa-rss fa-lg"></i></a>
-                        </div>
+                     <div class="de-flex-col">
+                       <a href="https://www.aeravi.io" target="_blank">
+                        <!-- <img alt="" class="f-logo" src="images/logo.png" /> --><span class="copy">&copy; Copyright - Aeravi Technologies LLC</span>
+                    </a>
+                </div>
+                <div class="de-flex-col">
+                    <div class="social-icons">
+                        <a href="#"><i class="fa fa-facebook fa-lg"></i></a>
+                        <a href="#"><i class="fa fa-twitter fa-lg"></i></a>
+                        <a href="#"><i class="fa fa-linkedin fa-lg"></i></a>
+                        <a href="#"><i class="fa fa-pinterest fa-lg"></i></a>
+                        <a href="#"><i class="fa fa-rss fa-lg"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 </footer>
 <!-- footer close -->

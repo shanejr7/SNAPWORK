@@ -277,5 +277,6 @@ def rankings(request):
     
     return render(request, "rankings.html",context)
 
-
+def liveauctions(request):
+    return render(request,'liveauctions.html')
 

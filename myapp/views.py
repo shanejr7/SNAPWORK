@@ -195,6 +195,12 @@ def profile_auth(request):
 		return redirect('/myapp/login')
 
 
+def profile_create_auth(request):
+	return render(request,'create.html')
+
+def profile_wallet_auth(request):
+	return render(request,'wallet.html')
+
 def edit_profile_auth(request):
 	return render(request,'editprofile.html')
 
@@ -211,7 +217,12 @@ def profile(request,uid):
 
 	uid = strip_tags(uid)
 
-	session_id = request.session['id']
+
+	try:
+		session_id = request.session['id']
+	except:
+		redirect 
+
  
 	if int(uid):
 		owner_obj = User.objects.get(pk=uid)

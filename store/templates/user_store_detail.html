@@ -59,41 +59,41 @@
                                     <li>
                                         <a href="/store/">Home<span></span></a>
                                     </li>
-                                    <li>
-                                        <a href="explore.html">Explore<span></span></a>
+                                  <li>
+                                        <a href="#">Explore<span></span></a>
                                         <ul>
-                                            <li><a href="live-auction.html">Live Auction</a></li>
-                                            
+                                            <li><a href="/liveauctions/">Live Auction</a></li>
                                         </ul>
                                     </li>
                                     <li>
                                         <a href="#">Pages<span></span></a>
                                         <ul>
-                                           {% if request.session.username != None %}
-                                           <li><a href="/myapp/myprofile/">Profile</a></li>
-                                           {% endif %}
-                                           {% if request.session.username == None %}
-                                           <li><a href="/myapp/login/">Login</a></li>
-                                           {% endif %}
-                                           {% if request.session.username == None %}
-                                           <li><a href="/myapp/signup">Signup</a></li>
-                                           {% endif %}
-                                           <li><a href="wallet.html">Wallet</a></li>
-                                           <li><a href="create-options.html">Create</a></li>
-                                           {% if request.session.username != None %}
-                                           <li><a href="/myapp/logoff">Log Off</a></li>
-                                           {% endif %}
-                                       </ul>
-                                   </li>                                    
-                                   <li>
+                                         {% if request.session.username != None %}
+                                         <li><a href="/myapp/myprofile/">Profile</a></li>
+                                         <li><a href="/myapp/wallet/">Wallet</a></li>
+                                         <li><a href="/myapp/create/">Create</a></li>
+                                         {% endif %}
+                                         {% if request.session.username == None %}
+                                         <li><a href="/myapp/login/">Login</a></li>
+                                         {% endif %}
+                                         {% if request.session.username == None %}
+                                         <li><a href="/myapp/signup">Signup</a></li>
+                                         {% endif %}
+                                         
+                                         {% if request.session.username != None %}
+                                         <li><a href="/myapp/logoff">Log Off</a></li>
+                                         {% endif %}
+                                     </ul>
+                                 </li>                                    
+                                 <li>
                                     <a href="#">Stats<span></span></a>
                                     <ul>
-                                     <li><a href="/store/activity/">Activity</a></li>
-                                     <li><a href="/store/rankings/">Rankings</a></li>
-                                 </ul>
-                             </li>
-                         </ul>
-                         <div class="menu_side_area">
+                                       <li><a href="/store/activity/">Activity</a></li>
+                                       <li><a href="/store/rankings/">Rankings</a></li>
+                                   </ul>
+                               </li>
+                           </ul>
+                           <div class="menu_side_area">
                             <a href="wallet.html" class="btn-main btn-wallet"><i class="icon_wallet_alt"></i><span>Connect Wallet</span></a>
                             <span id="menu-btn"></span>
                         </div>
@@ -297,81 +297,12 @@
                                     <!-- at 6/15/2021, 3:20 AM -->
                                     <div id="bids" class="tab-2">
 
-                                       {% for a in auction_users %}
-                                       <div class="p_list">
+                                     {% for a in auction_users %}
+                                     <div class="p_list">
                                         
-                                         {% if a.accepted_bid == True and a.application == True %}
-                                         
-                                         <div class="p_list_pp">
-                                            <a href="/myapp/profile/{{ a.user_id }}">
-                                                <img class="lazy" src="{% static '' %}{{ a.user__img_url }}" alt="">
-                                                <i class="fa fa-check"></i>
-                                            </a>
-                                        </div> 
-                                        {% endif %}
-                                        {% if a.accepted_bid == False and a.application == True %}
-                                        
-                                        <div class="p_list_pp">
-                                            <a href="/myapp/profile/{{ a.user_id }}">
-                                                <img class="lazy" src="{% static '' %}{{ a.user__img_url }}" alt="">
-                                                <i class="fa fa-check"></i>
-                                            </a>
-                                        </div> 
-                                        {% endif %}
-                                        {% if a.accepted_bid == True and a.application == False %}
-                                        
-                                        <div class="p_list_pp">
-                                            <a href="/myapp/profile/{{ a.user_id }}">
-                                                <img class="lazy" src="{% static '' %}{{ a.user__img_url }}" alt="">
-                                                <i class="fa fa-check"></i>
-                                            </a>
-                                        </div> 
-                                        {% endif %}
-                                        {% if a.accepted_bid == False and a.application == False %}
-                                        
-                                        <div class="p_list_pp">
-                                            <a href="/myapp/profile/{{ a.user_id }}">
-                                                <img class="lazy" src="{% static '' %}{{ a.user__img_url }}" alt="">
-                                                <i class="fa fa-check"></i>
-                                            </a>
-                                        </div> 
-                                        {% endif %}    
-
-                                        <div class="p_list_info">
-                                            {% if a.accepted_bid == True and a.application == True %}
-                                            Application accepted
-                                            <span>by <b>{{a.user__username}}</b> at {{ a.timestamp}}</span>
-                                            {% endif %}
-                                            {% if a.accepted_bid == False and a.application == True %}
-                                            Applied
-                                            <span>by <b>{{a.user__username}}</b> at {{ a.timestamp}}</span>
-                                            {% endif %}
-                                            {% if a.accepted_bid == True and a.application == False  %}
-                                            Bid accepted <b>${{a.price}} USD</b>
-                                            <span>by <b>{{a.user__username}}</b> at {{ a.timestamp}}</span>
-                                            {% endif %}
-                                            {% if a.accepted_bid == False and a.application == False  %}
-                                            Bid <b>${{a.price}} USD</b>
-                                            <span>by <b>{{a.user__username}}</b> at {{ a.timestamp}}</span>
-
-                                            {% endif %}
-
-                                            
-                                        </div>
-                                    </div>
-                                    
-                                    {% endfor %}
-
-                                </div>
-                                
-                                <div class="tab-3">
-
-                                 {% for a in auction_history %}
-                                 
-                                 <div class="p_list">
-                                     {% if a.accepted_bid == True and a.application == True %}
-                                     
-                                     <div class="p_list_pp">
+                                       {% if a.accepted_bid == True and a.application == True %}
+                                       
+                                       <div class="p_list_pp">
                                         <a href="/myapp/profile/{{ a.user_id }}">
                                             <img class="lazy" src="{% static '' %}{{ a.user__img_url }}" alt="">
                                             <i class="fa fa-check"></i>
@@ -404,7 +335,7 @@
                                             <i class="fa fa-check"></i>
                                         </a>
                                     </div> 
-                                    {% endif %}   
+                                    {% endif %}    
 
                                     <div class="p_list_info">
                                         {% if a.accepted_bid == True and a.application == True %}
@@ -415,86 +346,155 @@
                                         Applied
                                         <span>by <b>{{a.user__username}}</b> at {{ a.timestamp}}</span>
                                         {% endif %}
-                                        {% if a.store__auction == True and a.accepted_bid == True and a.application == False %}
+                                        {% if a.accepted_bid == True and a.application == False  %}
                                         Bid accepted <b>${{a.price}} USD</b>
                                         <span>by <b>{{a.user__username}}</b> at {{ a.timestamp}}</span>
                                         {% endif %}
-                                        {% if a.store__auction == True and a.accepted_bid == False and a.application == False %}
+                                        {% if a.accepted_bid == False and a.application == False  %}
                                         Bid <b>${{a.price}} USD</b>
                                         <span>by <b>{{a.user__username}}</b> at {{ a.timestamp}}</span>
 
                                         {% endif %}
 
-                                        {% if a.store__auction == False and a.accepted_bid == False and a.application == False %}
-                                        Bought <b>${{a.price}} USD</b>
-                                        <span>by <b>{{a.user__username}}</b> at {{ a.timestamp}}</span>
-
-                                        {% endif %}
+                                        
                                     </div>
                                 </div>
                                 
                                 {% endfor %}
-                                
+
                             </div>
                             
+                            <div class="tab-3">
+
+                               {% for a in auction_history %}
+                               
+                               <div class="p_list">
+                                   {% if a.accepted_bid == True and a.application == True %}
+                                   
+                                   <div class="p_list_pp">
+                                    <a href="/myapp/profile/{{ a.user_id }}">
+                                        <img class="lazy" src="{% static '' %}{{ a.user__img_url }}" alt="">
+                                        <i class="fa fa-check"></i>
+                                    </a>
+                                </div> 
+                                {% endif %}
+                                {% if a.accepted_bid == False and a.application == True %}
+                                
+                                <div class="p_list_pp">
+                                    <a href="/myapp/profile/{{ a.user_id }}">
+                                        <img class="lazy" src="{% static '' %}{{ a.user__img_url }}" alt="">
+                                        <i class="fa fa-check"></i>
+                                    </a>
+                                </div> 
+                                {% endif %}
+                                {% if a.accepted_bid == True and a.application == False %}
+                                
+                                <div class="p_list_pp">
+                                    <a href="/myapp/profile/{{ a.user_id }}">
+                                        <img class="lazy" src="{% static '' %}{{ a.user__img_url }}" alt="">
+                                        <i class="fa fa-check"></i>
+                                    </a>
+                                </div> 
+                                {% endif %}
+                                {% if a.accepted_bid == False and a.application == False %}
+                                
+                                <div class="p_list_pp">
+                                    <a href="/myapp/profile/{{ a.user_id }}">
+                                        <img class="lazy" src="{% static '' %}{{ a.user__img_url }}" alt="">
+                                        <i class="fa fa-check"></i>
+                                    </a>
+                                </div> 
+                                {% endif %}   
+
+                                <div class="p_list_info">
+                                    {% if a.accepted_bid == True and a.application == True %}
+                                    Application accepted
+                                    <span>by <b>{{a.user__username}}</b> at {{ a.timestamp}}</span>
+                                    {% endif %}
+                                    {% if a.accepted_bid == False and a.application == True %}
+                                    Applied
+                                    <span>by <b>{{a.user__username}}</b> at {{ a.timestamp}}</span>
+                                    {% endif %}
+                                    {% if a.store__auction == True and a.accepted_bid == True and a.application == False %}
+                                    Bid accepted <b>${{a.price}} USD</b>
+                                    <span>by <b>{{a.user__username}}</b> at {{ a.timestamp}}</span>
+                                    {% endif %}
+                                    {% if a.store__auction == True and a.accepted_bid == False and a.application == False %}
+                                    Bid <b>${{a.price}} USD</b>
+                                    <span>by <b>{{a.user__username}}</b> at {{ a.timestamp}}</span>
+
+                                    {% endif %}
+
+                                    {% if a.store__auction == False and a.accepted_bid == False and a.application == False %}
+                                    Bought <b>${{a.price}} USD</b>
+                                    <span>by <b>{{a.user__username}}</b> at {{ a.timestamp}}</span>
+
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            {% endfor %}
+                            
                         </div>
+                        
+                    </div>
 
-                        <div class="spacer-10"></div>
+                    <div class="spacer-10"></div>
 
-                        <h6>Price</h6>
-                        {% for product in products %}
-                        <div class="nft-item-price" id="price">
-                            <!-- <img src="{% static 'images/misc/ethereum.svg' %}" alt=""> -->
-                            <span>USD (${{ product.price }})</span>
-                            <!-- </span>()</div> -->
-                            <!-- Button trigger modal -->
-                            {% if product.product_type != "n/a" and product.auction == False and product.quantity != 0 %}
-                            <a href="#" class="btn-main btn-lg product" data-bs-toggle="modal" data-bs-target="#buy_now">
-                              Buy Now
-                          </a>
-                          {% endif %}
-                          {% if product.product_type != "n/a" and product.auction == False and product.quantity == 0 %}
-                          <a href="#" class="btn-warning btn-lg product">
-                              Sold out
-                          </a>
-                          {% endif %}
-                          {% if product.contract_type != "n/a" and product.auction == False %}
-                          <a  href="#" class="btn-main btn-lg application" data-bs-toggle="modal" data-bs-target="#apply_now">
-                              Apply Now
-                          </a>
-                          {% endif %}
-                          {% if product.service_type != "n/a" and product.auction == False %}
-                          <a href="#" class="btn-main btn-lg application" data-bs-toggle="modal" data-bs-target="#apply_now">
-                            Apply Now
-                        </a>
-                        {% endif %}
-                        &nbsp;
-                        {% if product.auction == True and product.contract_type != "n/a" %}
-                        <a href="#" class="btn-main btn-lg btn-light applicationBid" data-bs-toggle="modal" data-bs-target="#place_a_bid_application">
-                          Place a Bid
+                    <h6>Price</h6>
+                    {% for product in products %}
+                    <div class="nft-item-price" id="price">
+                        <!-- <img src="{% static 'images/misc/ethereum.svg' %}" alt=""> -->
+                        <span>USD (${{ product.price }})</span>
+                        <!-- </span>()</div> -->
+                        <!-- Button trigger modal -->
+                        {% if product.product_type != "n/a" and product.auction == False and product.quantity != 0 %}
+                        <a href="#" class="btn-main btn-lg product" data-bs-toggle="modal" data-bs-target="#buy_now">
+                          Buy Now
                       </a>
                       {% endif %}
-                      {% if product.auction == True and product.service_type != "n/a" %}
-                      <a href="#" class="btn-main btn-lg btn-light applicationBid" data-bs-toggle="modal" data-bs-target="#place_a_bid_application">
-                          Place a bid 
+                      {% if product.product_type != "n/a" and product.auction == False and product.quantity == 0 %}
+                      <a href="#" class="btn-warning btn-lg product">
+                          Sold out
                       </a>
                       {% endif %}
-
-                      {% if product.auction == True and product.product_type != "n/a" %}
-                      <a href="#" class="btn-main btn-lg btn-light productBid" data-bs-toggle="modal" data-bs-target="#place_a_bid">
-                          Place a Bid
+                      {% if product.contract_type != "n/a" and product.auction == False %}
+                      <a  href="#" class="btn-main btn-lg application" data-bs-toggle="modal" data-bs-target="#apply_now">
+                          Apply Now
                       </a>
                       {% endif %}
+                      {% if product.service_type != "n/a" and product.auction == False %}
+                      <a href="#" class="btn-main btn-lg application" data-bs-toggle="modal" data-bs-target="#apply_now">
+                        Apply Now
+                    </a>
+                    {% endif %}
+                    &nbsp;
+                    {% if product.auction == True and product.contract_type != "n/a" %}
+                    <a href="#" class="btn-main btn-lg btn-light applicationBid" data-bs-toggle="modal" data-bs-target="#place_a_bid_application">
+                      Place a Bid
+                  </a>
+                  {% endif %}
+                  {% if product.auction == True and product.service_type != "n/a" %}
+                  <a href="#" class="btn-main btn-lg btn-light applicationBid" data-bs-toggle="modal" data-bs-target="#place_a_bid_application">
+                      Place a bid 
+                  </a>
+                  {% endif %}
+
+                  {% if product.auction == True and product.product_type != "n/a" %}
+                  <a href="#" class="btn-main btn-lg btn-light productBid" data-bs-toggle="modal" data-bs-target="#place_a_bid">
+                      Place a Bid
+                  </a>
+                  {% endif %}
 
 
-                      {% endfor %}
-                      
-                  </div>
+                  {% endfor %}
                   
               </div>
+              
           </div>
       </div>
   </div>
+</div>
 </section>
 
 
@@ -838,7 +838,7 @@
                 <div class="col-md-12">
                     <div class="de-flex">
                         <div class="de-flex-col">
-                           <a href="https://www.aeravi.io" target="_blank">
+                         <a href="https://www.aeravi.io" target="_blank">
                             <!-- <img alt="" class="f-logo" src="images/logo.png" /> --><span class="copy">&copy; Copyright - Aeravi Technologies LLC</span>
                         </a>
                     </div>
@@ -1004,7 +1004,7 @@
                         },
                         success: function (data) {
                             if (data) {
-                               
+                             
                     // alert(data);
                     // call function to do something with data
                     // $('#bids').html(data);

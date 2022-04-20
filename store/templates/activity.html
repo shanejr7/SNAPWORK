@@ -59,9 +59,9 @@
                                     <a href="/store/" >Home<span></span></a>
                                 </li>
                                 <li>
-                                    <a href="explore.html">Explore<span></span></a>
+                                    <a href="#">Explore<span></span></a>
                                     <ul>
-                                        <li><a href="live-auction.html">Live Auction</a></li>
+                                        <li><a href="/liveauctions/">Live Auction</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -69,6 +69,8 @@
                                     <ul>
                                         {% if request.session.username != None %}
                                         <li><a href="/myapp/myprofile/">Profile</a></li>
+                                        <li><a href="/myapp/wallet/">Wallet</a></li>
+                                        <li><a href="/myapp/create/">Create</a></li>
                                         {% endif %}
                                         {% if request.session.username == None %}
                                         <li><a href="/myapp/login/">Login</a></li>
@@ -76,8 +78,6 @@
                                         {% if request.session.username == None %}
                                         <li><a href="/myapp/signup">Signup</a></li>
                                         {% endif %}
-                                        <li><a href="wallet.html">Wallet</a></li>
-                                        <li><a href="create-options.html">Create</a></li>
                                         {% if request.session.username != None %}
                                         <li><a href="/myapp/logoff">Log Off</a></li>
                                         {% endif %}
@@ -92,10 +92,12 @@
                                 </li>
 
                             </ul>
+                            {% if request.session.username != None %}
                             <div class="menu_side_area">
-                                <a href="wallet.html" class="btn-main btn-wallet"><i class="icon_wallet_alt"></i><span>Connect Wallet</span></a>
+                                <a href="/myapp/wallet/" class="btn-main btn-wallet"><i class="icon_wallet_alt"></i><span>Connect Wallet</span></a>
                                 <span id="menu-btn"></span>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -114,91 +116,91 @@
                     <div class="row">
 
                         <div class="col-md-12 text-center">
-                         <h1>Activity</h1>
-                     </div>
-                     <div class="clearfix"></div>
-                 </div>
-             </div>
-         </div>
-     </section>
-     <!-- section close -->
+                           <h1>Activity</h1>
+                       </div>
+                       <div class="clearfix"></div>
+                   </div>
+               </div>
+           </div>
+       </section>
+       <!-- section close -->
 
 
-     <!-- section begin -->
-     <section aria-label="section">
+       <!-- section begin -->
+       <section aria-label="section">
         <div class="container">
-         <div class="row">
+           <div class="row">
 
-          <div class="col-md-12">
-            <ul class="activity-list">
+              <div class="col-md-12">
+                <ul class="activity-list">
 
-                {% for stores in store %}
+                    {% for stores in store %}
 
-                {% if stores.product_type != 'n/a' %}
+                    {% if stores.product_type != 'n/a' %}
 
-                <li class="act_sale">
-                    <img src="{% static '' %}{{stores.img_url}}" alt="">
-                    <div class="act_list_text">
-                        <h4>{{stores.title}}</h4>
-                        {{stores.body}} by <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> for ${{stores.price}}
-                        <span class="act_list_date">
-                            {{stores.timestamp}}
-                        </span>
-                    </div>
-                </li>
+                    <li class="act_sale">
+                        <img src="{% static '' %}{{stores.img_url}}" alt="">
+                        <div class="act_list_text">
+                            <h4>{{stores.title}}</h4>
+                            {{stores.body}} by <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> for ${{stores.price}}
+                            <span class="act_list_date">
+                                {{stores.timestamp}}
+                            </span>
+                        </div>
+                    </li>
 
-                {% endif %}
+                    {% endif %}
 
-                {% if stores.contract_type != 'n/a' %}
+                    {% if stores.contract_type != 'n/a' %}
 
-                <li class="act_offer">
-                    <img src="{% static '' %}{{stores.img_url}}" alt="">
-                    <div class="act_list_text">
-                        <h4>{{stores.title}}</h4>
-                        <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> offered ${{stores.price}}
-                        <span class="act_list_date">
-                             {{stores.timestamp}}
-                        </span>
-                    </div>
-                </li>
+                    <li class="act_offer">
+                        <img src="{% static '' %}{{stores.img_url}}" alt="">
+                        <div class="act_list_text">
+                            <h4>{{stores.title}}</h4>
+                            <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> offered ${{stores.price}}
+                            <span class="act_list_date">
+                               {{stores.timestamp}}
+                           </span>
+                       </div>
+                   </li>
 
-                {% endif %}
+                   {% endif %}
 
-                {% if stores.service_type != 'n/a'  %}
+                   {% if stores.service_type != 'n/a'  %}
 
-                 <li class="act_offer">
-                    <img src="{% static '' %}{{stores.img_url}}" alt="">
-                    <div class="act_list_text">
-                        <h4>{{stores.title}}</h4>
-                        <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> offered ${{stores.price}}
-                        <span class="act_list_date">
-                             {{stores.timestamp}}
-                        </span>
-                    </div>
-                </li>
-
-                {% endif %}
-
-                {% if stores.data_type != 'n/a' %}
-
-                 <li class="act_sale">
+                   <li class="act_offer">
                     <img src="{% static '' %}{{stores.img_url}}" alt="">
                     <div class="act_list_text">
                         <h4>{{stores.title}}</h4>
                         <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> offered ${{stores.price}}
                         <span class="act_list_date">
-                             {{stores.timestamp}}
-                        </span>
-                    </div>
-                </li>
+                           {{stores.timestamp}}
+                       </span>
+                   </div>
+               </li>
 
-                {% endif %}
+               {% endif %}
 
-                {% endfor %}
+               {% if stores.data_type != 'n/a' %}
+
+               <li class="act_sale">
+                <img src="{% static '' %}{{stores.img_url}}" alt="">
+                <div class="act_list_text">
+                    <h4>{{stores.title}}</h4>
+                    <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> offered ${{stores.price}}
+                    <span class="act_list_date">
+                       {{stores.timestamp}}
+                   </span>
+               </div>
+           </li>
+
+           {% endif %}
+
+           {% endfor %}
 
 
-            </ul>
-        </div>
+       </ul>
+   </div>
 
                     <!--     <div class="col-md-4">
                             <span class="filter__l">Filter</span>

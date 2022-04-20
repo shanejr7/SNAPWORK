@@ -69,6 +69,8 @@
                                     <ul>
                                         {% if request.session.username != None %}
                                         <li><a href="/myapp/myprofile/">Profile</a></li>
+                                        <li><a href="/myapp/wallet/">Wallet</a></li>
+                                        <li><a href="/myapp/create/">Create</a></li>
                                         {% endif %}
                                         {% if request.session.username == None %}
                                         <li><a href="/myapp/login/">Login</a></li>
@@ -76,8 +78,7 @@
                                         {% if request.session.username == None %}
                                         <li><a href="/myapp/signup">Signup</a></li>
                                         {% endif %}
-                                        <li><a href="wallet.html">Wallet</a></li>
-                                        <li><a href="create-options.html">Create</a></li>
+                                        
                                         {% if request.session.username != None %}
                                         <li><a href="/myapp/logoff">Log Off</a></li>
                                         {% endif %}
@@ -92,10 +93,12 @@
                                 </li>
 
                             </ul>
+                            {% if request.session.username != None %}
                             <div class="menu_side_area">
-                                <a href="wallet.html" class="btn-main btn-wallet"><i class="icon_wallet_alt"></i><span>Connect Wallet</span></a>
+                                <a href="/myapp/wallet/" class="btn-main btn-wallet"><i class="icon_wallet_alt"></i><span>Connect Wallet</span></a>
                                 <span id="menu-btn"></span>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -114,18 +117,18 @@
                     <div class="row">
 
                         <div class="col-md-12 text-center">
-                         <h1>Top Rankings</h1>
-                     </div>
-                     <div class="clearfix"></div>
-                 </div>
-             </div>
-         </div>
-     </section>
-     <!-- section close -->
+                           <h1>Top Rankings</h1>
+                       </div>
+                       <div class="clearfix"></div>
+                   </div>
+               </div>
+           </div>
+       </section>
+       <!-- section close -->
 
 
-     <!-- section begin -->
-     <section aria-label="section">
+       <!-- section begin -->
+       <section aria-label="section">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -190,18 +193,16 @@
                         {% endfor %}
 
 
-
-
                     </tbody>
                 </table>
 
                 <div class="spacer-double"></div>
 
-                <ul class="pagination justify-content-center">
+               <!--  <ul class="pagination justify-content-center">
                     <li class="active"><a href="#">1 - 20</a></li>
                     <li><a href="#">21 - 40</a></li>
                     <li><a href="#">41 - 60</a></li>
-                </ul>                                    
+                </ul>  -->                                   
             </div>
         </div>
     </div>
