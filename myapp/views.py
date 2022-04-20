@@ -225,7 +225,6 @@ def profile(request,uid):
 			follow_session_obj = []
 			follow_obj = []
 			follower_obj = []
-			isFollow = False
 
 			
 	else:
@@ -237,7 +236,6 @@ def profile(request,uid):
 		if follow_session_obj:
 			Follower.objects.filter(user_follower_id=owner_obj.id).delete()
 			Follow.objects.filter(user_follower_id=session_id).delete()
-			isFollow = False
 
 		else:
 			follow_session_obj = Follow(user_id=owner_obj.id, user_follower_id =session_id)
@@ -248,9 +246,12 @@ def profile(request,uid):
 			follower_obj = Follower.objects.filter(user_follower_id=owner_obj.id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
 			follow_obj = Follow.objects.filter(user_follower_id=owner_obj.id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
 			follow_session_obj = Follow.objects.filter(user_id=owner_obj.id, user_follower_id =session_id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
-			isFollow = True
 		
 
+	if Follow.objects.filter(user_id=owner_obj.id, user_follower_id =session_id).exists():
+		isFollow = True
+	else:
+		isFollow = False
 
 	context = {
 
