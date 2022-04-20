@@ -203,7 +203,25 @@ def apply(request):
 
 def activity(request):
 
-    # query by timestamp
+    store_obj = []
+    error = []
+
+    store_obj = Store.objects.values('user__id','user__username','user__email','user__license','user__timestamp',
+        'id','product','title','body','price','quantity','auction','product_type', 'contract_type','service_type',
+        'data_type','season','views','img_url','address', 'duration_timestamp','timestamp').order_by('user__timestamp') 
+
+  
+
+    context = {
+
+        "store": store_obj,  #// new store post
+        "error": error,
+
+    }
+    
+    return render(request, "activity.html",context)
+
+      # query by timestamp
     # sort different table queries by timestamp -> merge into activity array list
 
         # select Store table and join with associated User
@@ -230,35 +248,31 @@ def activity(request):
         # if objType == type2:
             # this template
         #......... etc
+    #       context = {
 
-    # error = []
-
-    #  context = {
-
-    #     "store": store_obj,  // new store post
-    #     "follow": follow_obj, // user just followed another user
-    #     "like": like_obj,  // user just liked a store
-    #     "auction": auction_obj, // user just made a auction submission
+    #     "store": store_obj,  #// new store post
+    #     "follow": follow_obj, #// user just followed another user
+    #     "like": like_obj,  #// user just liked a store
+    #     "auction": auction_obj, #// user just made a auction submission
     #     "error": error,
 
     # }
-    
-    return render(request, "activity.html")
+
 
 def rankings(request):
 
     # query rankings of all users desc
+    owner_obj = []
+    error = []
 
-    # error = []
+    context = {
 
-    #  context = {
+        "users": owner_obj,
+        "error": error,
 
-    #     "users": owner_obj,
-    #     "error": error,
-
-    # }
+    }
     
-    return render(request, "rankings.html")
+    return render(request, "rankings.html",context)
 
 
 
