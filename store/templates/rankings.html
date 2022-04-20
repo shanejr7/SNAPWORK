@@ -12,34 +12,34 @@
     <meta content="" name="keywords" />
     <meta content="" name="author" />
     <!-- CSS Files
-    ================================================== -->
-    <link id="bootstrap" href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
-    <link id="bootstrap-grid" href="{% static 'css/bootstrap-grid.min.css' %}" rel="stylesheet" type="text/css" />
-    <link id="bootstrap-reboot" href="{% static 'css/bootstrap-reboot.min.css' %}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'css/animate.css' %}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'css/owl.carousel.css' %}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'css/owl.theme.css' %}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'css/owl.transitions.css' %}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'css/jquery.countdown.css' %}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
-    <!-- color scheme -->
-    <link id="colors" href="{% static 'css/colors/scheme-01.css' %}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'css/coloring.css' %}" rel="stylesheet" type="text/css" />
-</head>
+        ================================================== -->
+        <link id="bootstrap" href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+        <link id="bootstrap-grid" href="{% static 'css/bootstrap-grid.min.css' %}" rel="stylesheet" type="text/css" />
+        <link id="bootstrap-reboot" href="{% static 'css/bootstrap-reboot.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/animate.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/owl.carousel.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/owl.theme.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/owl.transitions.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/jquery.countdown.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+        <!-- color scheme -->
+        <link id="colors" href="{% static 'css/colors/scheme-01.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/coloring.css' %}" rel="stylesheet" type="text/css" />
+    </head>
 
-<body>
-    <div id="wrapper">
+    <body>
+        <div id="wrapper">
 
-        <!-- header begin -->
-        <header class="transparent">
-            <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="de-flex sm-pt10">
-                        <div class="de-flex-col">
-                            <div class="de-flex-col">
-                                <!-- logo begin -->
+            <!-- header begin -->
+            <header class="transparent">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="de-flex sm-pt10">
+                                <div class="de-flex-col">
+                                    <div class="de-flex-col">
+                                        <!-- logo begin -->
                              <!--    <div id="logo">
                                     <a href="index.html">
                                         <img alt="" class="logo" src="{% static 'images/logo-light.png' %}" />
@@ -54,44 +54,44 @@
                         </div>
                         <div class="de-flex-col header-col-mid">
                             <!-- mainmenu begin -->
-                                <ul id="mainmenu">
-                                    <li>
-                                        <a href="/store/" >Home<span></span></a>
-                                    </li>
-                                    <li>
-                                        <a href="explore.html">Explore<span></span></a>
-                                        <ul>
-                                            <li><a href="live-auction.html">Live Auction</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Pages<span></span></a>
-                                        <ul>
-                                            {% if request.session.username != None %}
-                                            <li><a href="/myapp/myprofile/">Profile</a></li>
-                                            {% endif %}
-                                            {% if request.session.username == None %}
-                                            <li><a href="/myapp/login/">Login</a></li>
-                                            {% endif %}
-                                            {% if request.session.username == None %}
-                                              <li><a href="/myapp/signup">Signup</a></li>
-                                            {% endif %}
-                                            <li><a href="wallet.html">Wallet</a></li>
-                                            <li><a href="create-options.html">Create</a></li>
-                                             {% if request.session.username != None %}
-                                              <li><a href="/myapp/logoff">Log Off</a></li>
-                                            {% endif %}
-                                        </ul>
-                                    </li>                                    
-                                    <li>
-                                        <a href="#" class="active">Stats<span></span></a>
-                                        <ul>
-                                            <li><a href="/store/activity/">Activity</a></li>
-                                            <li><a href="/store/rankings/">Rankings</a></li>
-                                        </ul>
-                                    </li>
-            
-                                </ul>
+                            <ul id="mainmenu">
+                                <li>
+                                    <a href="/store/" >Home<span></span></a>
+                                </li>
+                                <li>
+                                    <a href="explore.html">Explore<span></span></a>
+                                    <ul>
+                                        <li><a href="live-auction.html">Live Auction</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Pages<span></span></a>
+                                    <ul>
+                                        {% if request.session.username != None %}
+                                        <li><a href="/myapp/myprofile/">Profile</a></li>
+                                        {% endif %}
+                                        {% if request.session.username == None %}
+                                        <li><a href="/myapp/login/">Login</a></li>
+                                        {% endif %}
+                                        {% if request.session.username == None %}
+                                        <li><a href="/myapp/signup">Signup</a></li>
+                                        {% endif %}
+                                        <li><a href="wallet.html">Wallet</a></li>
+                                        <li><a href="create-options.html">Create</a></li>
+                                        {% if request.session.username != None %}
+                                        <li><a href="/myapp/logoff">Log Off</a></li>
+                                        {% endif %}
+                                    </ul>
+                                </li>                                    
+                                <li>
+                                    <a href="#" class="active">Stats<span></span></a>
+                                    <ul>
+                                        <li><a href="/store/activity/">Activity</a></li>
+                                        <li><a href="/store/rankings/">Rankings</a></li>
+                                    </ul>
+                                </li>
+
+                            </ul>
                             <div class="menu_side_area">
                                 <a href="wallet.html" class="btn-main btn-wallet"><i class="icon_wallet_alt"></i><span>Connect Wallet</span></a>
                                 <span id="menu-btn"></span>
@@ -101,34 +101,34 @@
                 </div>
             </div>
         </div>
-        </header>
-        <!-- header close -->
-        <!-- content begin -->
-        <div class="no-bottom no-top" id="content">
-            <div id="top"></div>
-            
-            <!-- section begin -->
-            <section id="subheader" class="text-light" data-bgimage="url({% static 'images/background/subheader.jpg' %}) top">
-                    <div class="center-y relative text-center">
-                        <div class="container">
-                            <div class="row">
-                                
-                                <div class="col-md-12 text-center">
-									<h1>Top Rankings</h1>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-            </section>
-            <!-- section close -->
-            
+    </header>
+    <!-- header close -->
+    <!-- content begin -->
+    <div class="no-bottom no-top" id="content">
+        <div id="top"></div>
 
-            <!-- section begin -->
-            <section aria-label="section">
+        <!-- section begin -->
+        <section id="subheader" class="text-light" data-bgimage="url({% static 'images/background/subheader.jpg' %}) top">
+            <div class="center-y relative text-center">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12">
+
+                        <div class="col-md-12 text-center">
+                         <h1>Top Rankings</h1>
+                     </div>
+                     <div class="clearfix"></div>
+                 </div>
+             </div>
+         </div>
+     </section>
+     <!-- section close -->
+
+
+     <!-- section begin -->
+     <section aria-label="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
                            <!--  <div class="items_filter text-center">
 
                                 <div id="filter_by_duration" class="dropdown">
@@ -161,313 +161,167 @@
                               <thead>
                                 <tr>
                                   <th scope="col">Collection</th>
-                                  <th scope="col">Volume</th>
-                                  <th scope="col">24h %</th>
-                                  <th scope="col">7d %</th>
+                                  <!-- <th scope="col">Volume</th> -->
+                                  <th scope="col">Quality</th>
+                             <!--      <th scope="col">7d %</th>
                                   <th scope="col">Floor Price</th>
                                   <th scope="col">Owners</th>
-                                  <th scope="col">Assets</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <th scope="row">
-                                  <div class="coll_list_pp">
-                                    <img class="lazy" src="images/author/author-1.jpg" alt="">
-                                    <i class="fa fa-check"></i>
-                                  </div>  
-                                  Abstraction</th>
-                                  <td>15,225.87</td>
-                                  <td class="d-plus">+87.54%</td>
-                                  <td class="d-plus">+309.49%</td>
-                                  <td>5.9</td>
-                                  <td>2.8k</td>
-                                  <td>58.5k</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">
-                                  <div class="coll_list_pp">
-                                    <img class="lazy" src="images/author/author-2.jpg" alt="">
-                                    <i class="fa fa-check"></i>
-                                  </div>  
-                                  Sketchify</th>
-                                  <td>14,304.78</td>
-                                  <td class="d-plus">+35.11%</td>
-                                  <td class="d-plus">+239.83%</td>
-                                  <td>2.9</td>
-                                  <td>2.3k</td>
-                                  <td>28.4k</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">
-                                  <div class="coll_list_pp">
-                                    <img class="lazy" src="images/author/author-3.jpg" alt="">
-                                    <i class="fa fa-check"></i>
-                                  </div>  
-                                  Cartoonism</th>
-                                  <td>13,705.58</td>
-                                  <td class="d-min">-33.56%</td>
-                                  <td class="d-plus">+307.97%</td>
-                                  <td>4.5</td>
-                                  <td>2.2k</td>
-                                  <td>48.8k</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">
-                                  <div class="coll_list_pp">
-                                    <img class="lazy" src="images/author/author-4.jpg" alt="">
-                                    <i class="fa fa-check"></i>
-                                  </div>  
-                                  Papercut</th>
-                                  <td>12,516.75</td>
-                                  <td class="d-plus">+23.45%</td>
-                                  <td class="d-plus">+171.25%</td>
-                                  <td>6.3</td>
-                                  <td>5.3k</td>
-                                  <td>54.2k</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">
-                                  <div class="coll_list_pp">
-                                    <img class="lazy" src="images/author/author-5.jpg" alt="">
-                                    <i class="fa fa-check"></i>
-                                  </div>  
-                                  Virtuland</th>
-                                  <td>11,586.26</td>
-                                  <td class="d-plus">+80.91%</td>
-                                  <td class="d-plus">+241.18%</td>
-                                  <td>2.2</td>
-                                  <td>1.8k</td>
-                                  <td>23.9k</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">
-                                  <div class="coll_list_pp">
-                                    <img class="lazy" src="images/author/author-6.jpg" alt="">
-                                    <i class="fa fa-check"></i>
-                                  </div>  
-                                  CoolThings</th>
-                                  <td>10,645.96</td>
-                                  <td class="d-plus">+51.99%</td>
-                                  <td class="d-min">-29.82%</td>
-                                  <td>6.6</td>
-                                  <td>1.8k</td>
-                                  <td>23.6k</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">
-                                  <div class="coll_list_pp">
-                                    <img class="lazy" src="images/author/author-7.jpg" alt="">
-                                    <i class="fa fa-check"></i>
-                                  </div>  
-                                  DigiPunks</th>
-                                  <td>9,219.13</td>
-                                  <td class="d-plus">+42.24%</td>
-                                  <td class="d-plus">+95.45%</td>
-                                  <td>1.2</td>
-                                  <td>3.8k</td>
-                                  <td>58.4k</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">
-                                  <div class="coll_list_pp">
-                                    <img class="lazy" src="images/author/author-8.jpg" alt="">
-                                    <i class="fa fa-check"></i>
-                                  </div>  
-                                  RockToonz</th>
-                                  <td>8,436.15</td>
-                                  <td class="d-plus">+61.31%</td>
-                                  <td class="d-plus">+347.19%</td>
-                                  <td>2.4</td>
-                                  <td>1.4k</td>
-                                  <td>63.3k</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">
-                                  <div class="coll_list_pp">
-                                    <img class="lazy" src="images/author/author-9.jpg" alt="">
-                                    <i class="fa fa-check"></i>
-                                  </div>  
-                                  BeeFriends</th>
-                                  <td>7,505.16</td>
-                                  <td class="d-plus">+64.46%</td>
-                                  <td class="d-plus">+240.94%</td>
-                                  <td>2.3</td>
-                                  <td>5.2k</td>
-                                  <td>70.3k</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">
-                                  <div class="coll_list_pp">
-                                    <img class="lazy" src="images/author/author-10.jpg" alt="">
-                                    <i class="fa fa-check"></i>
-                                  </div>  
-                                  Patternlicious</th>
-                                  <td>6,593.91</td>
-                                  <td class="d-min">-33.78%</td>
-                                  <td class="d-plus">+82.32%</td>
-                                  <td>4.5</td>
-                                  <td>6.5k</td>
-                                  <td>53.3k</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">
-                                  <div class="coll_list_pp">
-                                    <img class="lazy" src="images/author/author-11.jpg" alt="">
-                                    <i class="fa fa-check"></i>
-                                  </div>  
-                                  FlyingFox</th>
-                                  <td>5,605.97</td>
-                                  <td class="d-plus">+48.67%</td>
-                                  <td class="d-plus">+101.33%</td>
-                                  <td>4.6</td>
-                                  <td>5.1k</td>
-                                  <td>36.2k</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">
-                                  <div class="coll_list_pp">
-                                    <img class="lazy" src="images/author/author-12.jpg" alt="">
-                                    <i class="fa fa-check"></i>
-                                  </div>  
-                                  Autoglyphs</th>
-                                  <td>4,904.27</td>
-                                  <td class="d-plus">+86.15%</td>
-                                  <td class="d-plus">+391.49%</td>
-                                  <td>4.5</td>
-                                  <td>6.2k</td>
-                                  <td>21.1k</td>
-                                </tr>
-                              </tbody>
-                            </table>
+                                  <th scope="col">Assets</th> -->
+                              </tr>
+                          </thead>
+                          <tbody>
+                            {% for user in users %}
 
-                            <div class="spacer-double"></div>
+                            <tr>
+                              <th scope="row"><a href="/myapp/profile/{{user.id}}">
+                                  <div class="coll_list_pp">
+                                    <img class="lazy" src="{% static '' %}{{user.img_url}}" alt="">
+                                    <!--       <i class="fa fa-check"></i> -->
+                                </div>  
+                            {{user.username}}</a></th>
+                            <!-- <td>15,225.87</td> -->
+                            <td class="d-plus">+{{user.quality_rank}}%</td>
+                            <!-- <td class="d-plus">+309.49%</td> -->
+                          <!--   <td>5.9</td>
+                            <td>2.8k</td>
+                            <td>58.5k</td> -->
+                        </tr>
 
-                            <ul class="pagination justify-content-center">
-                                <li class="active"><a href="#">1 - 20</a></li>
-                                <li><a href="#">21 - 40</a></li>
-                                <li><a href="#">41 - 60</a></li>
-                            </ul>                                    
-                        </div>
-                    </div>
-                </div>
-            </section>
+                        {% endfor %}
 
+
+
+
+                    </tbody>
+                </table>
+
+                <div class="spacer-double"></div>
+
+                <ul class="pagination justify-content-center">
+                    <li class="active"><a href="#">1 - 20</a></li>
+                    <li><a href="#">21 - 40</a></li>
+                    <li><a href="#">41 - 60</a></li>
+                </ul>                                    
+            </div>
         </div>
-        <!-- content close -->
-
-        <a href="#" id="back-to-top"></a>
-        
-        <!-- footer begin -->
-        <footer class="footer-light">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6 col-xs-1">
-                        <div class="widget">
-                            <h5>Marketplace</h5>
-                            <ul>
-                                <li><a href="#">All NFTs</a></li>
-                                <li><a href="#">Art</a></li>
-                                <li><a href="#">Music</a></li>
-                                <li><a href="#">Domain Names</a></li>
-                                <li><a href="#">Virtual World</a></li>
-                                <li><a href="#">Collectibles</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-1">
-                        <div class="widget">
-                            <h5>Resources</h5>
-                            <ul>
-                                <li><a href="#">Help Center</a></li>
-                                <li><a href="#">Partners</a></li>
-                                <li><a href="#">Suggestions</a></li>
-                                <li><a href="#">Discord</a></li>
-                                <li><a href="#">Docs</a></li>
-                                <li><a href="#">Newsletter</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-1">
-                        <div class="widget">
-                            <h5>Community</h5>
-                            <ul>
-                                <li><a href="#">Community</a></li>
-                                <li><a href="#">Documentation</a></li>
-                                <li><a href="#">Brand Assets</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Forum</a></li>
-                                <li><a href="#">Mailing List</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 col-xs-1">
-                        <div class="widget">
-                            <h5>Newsletter</h5>
-                            <p>Signup for our newsletter to get the latest news in your inbox.</p>
-                            <form action="blank.php" class="row form-dark" id="form_subscribe" method="post" name="form_subscribe">
-                                <div class="col text-center">
-                                    <input class="form-control" id="txt_subscribe" name="txt_subscribe" placeholder="enter your email" type="text" /> <a href="#" id="btn-subscribe"><i class="arrow_right bg-color-secondary"></i></a>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </form>
-                            <div class="spacer-10"></div>
-                            <small>Your email is safe with us. We don't spam.</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="subfooter">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="de-flex">
-                                <div class="de-flex-col">
-                                    <a href="index.html">
-                                      <!--   <img alt="" class="f-logo" src="images/logo.png" /> --><span class="copy">&copy; Copyright - Aeravi Technologies LLC</span>
-                                    </a>
-                                </div>
-                                <div class="de-flex-col">
-                                    <div class="social-icons">
-                                        <a href="#"><i class="fa fa-facebook fa-lg"></i></a>
-                                        <a href="#"><i class="fa fa-twitter fa-lg"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin fa-lg"></i></a>
-                                        <a href="#"><i class="fa fa-pinterest fa-lg"></i></a>
-                                        <a href="#"><i class="fa fa-rss fa-lg"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- footer close -->
-        
     </div>
+</section>
+
+</div>
+<!-- content close -->
+
+<a href="#" id="back-to-top"></a>
+
+<!-- footer begin -->
+<footer class="footer-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-1">
+                <div class="widget">
+                    <h5>Marketplace</h5>
+                    <ul>
+                        <li><a href="#">All NFTs</a></li>
+                        <li><a href="#">Art</a></li>
+                        <li><a href="#">Music</a></li>
+                        <li><a href="#">Domain Names</a></li>
+                        <li><a href="#">Virtual World</a></li>
+                        <li><a href="#">Collectibles</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-1">
+                <div class="widget">
+                    <h5>Resources</h5>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Partners</a></li>
+                        <li><a href="#">Suggestions</a></li>
+                        <li><a href="#">Discord</a></li>
+                        <li><a href="#">Docs</a></li>
+                        <li><a href="#">Newsletter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-1">
+                <div class="widget">
+                    <h5>Community</h5>
+                    <ul>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Brand Assets</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Forum</a></li>
+                        <li><a href="#">Mailing List</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-1">
+                <div class="widget">
+                    <h5>Newsletter</h5>
+                    <p>Signup for our newsletter to get the latest news in your inbox.</p>
+                    <form action="blank.php" class="row form-dark" id="form_subscribe" method="post" name="form_subscribe">
+                        <div class="col text-center">
+                            <input class="form-control" id="txt_subscribe" name="txt_subscribe" placeholder="enter your email" type="text" /> <a href="#" id="btn-subscribe"><i class="arrow_right bg-color-secondary"></i></a>
+                            <div class="clearfix"></div>
+                        </div>
+                    </form>
+                    <div class="spacer-10"></div>
+                    <small>Your email is safe with us. We don't spam.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="subfooter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="de-flex">
+                        <div class="de-flex-col">
+                            <a href="index.html">
+                              <!--   <img alt="" class="f-logo" src="images/logo.png" /> --><span class="copy">&copy; Copyright - Aeravi Technologies LLC</span>
+                          </a>
+                      </div>
+                      <div class="de-flex-col">
+                        <div class="social-icons">
+                            <a href="#"><i class="fa fa-facebook fa-lg"></i></a>
+                            <a href="#"><i class="fa fa-twitter fa-lg"></i></a>
+                            <a href="#"><i class="fa fa-linkedin fa-lg"></i></a>
+                            <a href="#"><i class="fa fa-pinterest fa-lg"></i></a>
+                            <a href="#"><i class="fa fa-rss fa-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</footer>
+<!-- footer close -->
+
+</div>
 
 
-    
+
     <!-- Javascript Files
-    ================================================== -->
-    <script src="{% static 'js/jquery.min.js'  %}"></script>
-    <script src="{% static 'js/bootstrap.min.js'  %}"></script>
-    <script src="{% static 'js/bootstrap.bundle.min.js'  %}"></script>
-    <script src="{% static 'js/wow.min.js'  %}"></script>
-    <script src="{% static 'js/jquery.isotope.min.js'  %}"></script>
-    <script src="{% static 'js/easing.js'  %}"></script>
-    <script src="{% static 'js/owl.carousel.js'  %}"></script>
-    <script src="{% static 'js/validation.js'  %}"></script>
-    <script src="{% static 'js/jquery.magnific-popup.min.js'  %}"></script>
-    <script src="{% static 'js/enquire.min.js'  %}"></script>
-    <script src="{% static 'js/jquery.plugin.js'  %}"></script>
-    <script src="{% static 'js/jquery.countTo.js'  %}"></script>
-    <script src="{% static 'js/jquery.countdown.js'  %}"></script>
-    <script src="{% static 'js/jquery.lazy.min.js'  %}"></script>
-    <script src="{% static 'js/jquery.lazy.plugins.min.js'  %}"></script>
-    <script src="{% static 'js/designesia.js'  %}"></script>
+        ================================================== -->
+        <script src="{% static 'js/jquery.min.js'  %}"></script>
+        <script src="{% static 'js/bootstrap.min.js'  %}"></script>
+        <script src="{% static 'js/bootstrap.bundle.min.js'  %}"></script>
+        <script src="{% static 'js/wow.min.js'  %}"></script>
+        <script src="{% static 'js/jquery.isotope.min.js'  %}"></script>
+        <script src="{% static 'js/easing.js'  %}"></script>
+        <script src="{% static 'js/owl.carousel.js'  %}"></script>
+        <script src="{% static 'js/validation.js'  %}"></script>
+        <script src="{% static 'js/jquery.magnific-popup.min.js'  %}"></script>
+        <script src="{% static 'js/enquire.min.js'  %}"></script>
+        <script src="{% static 'js/jquery.plugin.js'  %}"></script>
+        <script src="{% static 'js/jquery.countTo.js'  %}"></script>
+        <script src="{% static 'js/jquery.countdown.js'  %}"></script>
+        <script src="{% static 'js/jquery.lazy.min.js'  %}"></script>
+        <script src="{% static 'js/jquery.lazy.plugins.min.js'  %}"></script>
+        <script src="{% static 'js/designesia.js'  %}"></script>
 
 
-</body>
+    </body>
 
-</html>
+    </html>

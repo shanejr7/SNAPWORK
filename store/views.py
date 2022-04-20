@@ -262,12 +262,15 @@ def activity(request):
 def rankings(request):
 
     # query rankings of all users desc
-    owner_obj = []
+    user_store_top_quality_rank_obj = []
     error = []
+
+    user_store_top_quality_rank_obj = User.objects.values('id','username','img_url','email','license','quality_rank','timestamp')
+
 
     context = {
 
-        "users": owner_obj,
+        "users":  user_store_top_quality_rank_obj,
         "error": error,
 
     }
