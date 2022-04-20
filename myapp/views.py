@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.utils.html import strip_tags
 from store.models import Store
 from store.models import User
+from store.models import Follow
+from store.models import Follower
 from django.utils.html import strip_tags
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
@@ -156,6 +158,7 @@ def logout_request(request):
 	del request.session['id'];
 	del request.session['username'];
 	del request.session['email'];
+	del request.session['img_url'];
 	del request.session['quality_rank'];
 	logout(request)
 
@@ -163,7 +166,34 @@ def logout_request(request):
 
 
 def profile_auth(request):
-	return render(request,'myprofile.html')
+
+	owner_obj = []
+	store_obj = []
+	follow_session_obj = []
+	error = []
+
+	try:
+		if not request.session['id']:
+			return redirect('/myapp/login')
+		else:
+			uid = request.session['id']
+			owner_obj = User.objects.get(pk=uid)
+			store_obj = Store.objects.filter(user_id=owner_obj.id)
+			follow_obj = Follow.objects.filter(user_follower_id=owner_obj.id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
+			follower_obj = Follow.objects.filter(user_id=owner_obj.id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
+			context = {
+        		"products": store_obj,
+        		"user": owner_obj,
+        		"follow_tracker":follow_obj,
+        		"follower_tracker":follower_obj,
+        		"error": error,
+
+    		}
+
+			return render(request,'myprofile.html',context)
+	except:
+		return redirect('/myapp/login')
+
 
 def edit_profile_auth(request):
 	return render(request,'editprofile.html')
@@ -172,21 +202,64 @@ def profile(request,uid):
 
 	owner_obj = []
 	store_obj = []
+	follow_session_obj = []
+	follow_obj = []
+	follower_obj = []
+	session_id = None
+	isFollow = False
 	error = []
 
 	uid = strip_tags(uid)
+
+	session_id = request.session['id']
  
 	if int(uid):
 		owner_obj = User.objects.get(pk=uid)
 		store_obj = Store.objects.filter(user_id=owner_obj.id)
- 
+	
+		try:
+			follower_obj = Follower.objects.filter(user_follower_id=owner_obj.id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
+			follow_obj = Follow.objects.filter(user_follower_id=owner_obj.id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
+			follow_session_obj = Follow.objects.filter(user_id=owner_obj.id, user_follower_id =session_id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
+		except Follow.DoesNotExist:
+			follow_session_obj = []
+			follow_obj = []
+			follower_obj = []
+			isFollow = False
+
+			
 	else:
 		error = "This page is empty. Please come back soon."
+
+
+	if request.POST:
+
+		if follow_session_obj:
+			Follower.objects.filter(user_follower_id=owner_obj.id).delete()
+			Follow.objects.filter(user_follower_id=session_id).delete()
+			isFollow = False
+
+		else:
+			follow_session_obj = Follow(user_id=owner_obj.id, user_follower_id =session_id)
+			follow_session_obj.save()
+
+			follower = Follower(user_id=session_id, user_follower_id =owner_obj.id)
+			follower.save()
+			follower_obj = Follower.objects.filter(user_follower_id=owner_obj.id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
+			follow_obj = Follow.objects.filter(user_follower_id=owner_obj.id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
+			follow_session_obj = Follow.objects.filter(user_id=owner_obj.id, user_follower_id =session_id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
+			isFollow = True
+		
+
 
 	context = {
 
         "products": store_obj,
         "user": owner_obj,
+        "session_follower":follow_session_obj,
+        "follow_tracker":follow_obj,
+        "follower_tracker":follower_obj,
+        "isFollow": isFollow,
         "error": error,
 
     }

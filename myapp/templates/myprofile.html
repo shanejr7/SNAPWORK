@@ -3,11 +3,11 @@
 <html lang="zxx">
 
 <head>
-    <title>BETA - NFT Marketplace Website</title>
+    <title>MANNU</title>
     <link rel="icon" href="{% static 'images/icon.png' %}" type="image/gif" sizes="16x16">
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="BETA - NFT Marketplace Website" name="description" />
+    <meta content="MANNU - Marketplace " name="description" />
     <meta content="" name="keywords" />
     <meta content="" name="author" />
     <!-- CSS Files
@@ -145,15 +145,9 @@
                             <!-- <li class="active"><span>On Sale</span></li> -->
                             <li class="active"><span>Created</span></li>
                             <li><span>Liked</span></li>
-                            <li><span>5 followers</span></li>
-                            <li><span>0 following</span></li>
+                            <li><span>{{follower_tracker.count}}  Followers</span></li>
+                            <li><span>{{follow_tracker.count}} Following</span></li>
                         </ul>
-
-
-
-
-
-
 
 
 
@@ -360,151 +354,89 @@
 
                 </div>
             </div>
-
-            <div class="tab-3">
+         <div class="tab-3">
                 <div class="row">
-                    <!-- nft item begin -->
+
+                    {% for follow in follower_tracker %}
+                    {{follow.id}}
+                         <!-- nft item begin -->
                     <div class="col-lg-3 col-md-6">
                         <div class="nft__item">
                             <div class="author_list_pp">
-                                <a href="author.html">                                    
-                                    <img class="lazy" src="{% static 'images/author/author-1.jpg' %}" alt="">
-                                    <i class="fa fa-check"></i>
+                                <a href="/myapp/profile/{{follow.user__id}}">                                    
+                                    <img class="lazy" src="{% static '' %}{{ follow.user__img_url }}" alt="">
+                                    <!-- <i class="fa fa-check"></i> -->
                                 </a>
                             </div>
-                         <!--    <div class="nft__item_wrap">
-                                <a href="item-details.html">
-                                    <img src="{% static 'images/items/anim-4.webp' %}" class="lazy nft__item_preview" alt="">
-                                </a>
-                            </div> -->
+                        
                             <br>
-                             <br>
+                            <br>
                             <div class="nft__item_info">
-                                <a href="item-details.html">
-                                    <h4>The Truth</h4>
+                                <a href="/myapp/profile/{{follow.user__id}}">
+                                    <h4>{{follow.user__username}}</h4>
                                 </a>
-                                <div class="nft__item_click">
+                               <!--  <div class="nft__item_click">
                                     <span></span>
-                                </div>
+                                </div> -->
                                 <div class="nft__item_price">
-                                    0.06 ETH<span>1/20</span>
+                                    memeber since<span>{{follow.user__timestamp}}</span>
                                 </div>
-                                <div class="nft__item_action">
+                               <!--  <div class="nft__item_action">
                                     <a href="#">Place a bid</a>
-                                </div>
-                                <div class="nft__item_like">
+                                </div> -->
+                               <!--  <div class="nft__item_like">
                                     <i class="fa fa-heart"></i><span>26</span>
-                                </div>                                 
+                                </div>  -->                                
                             </div>
                         </div>
                     </div>
-                    <!-- nft item begin -->
+                    {% endfor %}
+
+
+
+                </div>
+            </div>
+
+           
+            <div class="tab-4">
+                <div class="row">
+
+                    {% for follow in follow_tracker %}
+                         <!-- nft item begin -->
                     <div class="col-lg-3 col-md-6">
                         <div class="nft__item">
-                            <div class="de_countdown" data-year="2022" data-month="2" data-day="6" data-hour="8"></div>
                             <div class="author_list_pp">
-                                <a href="author.html">                                    
-                                    <img class="lazy" src="{% static 'images/author/author-2.jpg' %}" alt="">
-                                    <i class="fa fa-check"></i>
+                                <a href="/myapp/profile/{{follow.user__id}}">                                    
+                                    <img class="lazy" src="{% static '' %}{{ follow.user__img_url }}" alt="">
+                                    <!-- <i class="fa fa-check"></i> -->
                                 </a>
                             </div>
-                        <!--     <div class="nft__item_wrap">
-                                <a href="item-details.html">
-                                    <img src="{% static 'images/items/anim-2.webp' %}" class="lazy nft__item_preview" alt="">
-                                </a>
-                            </div> -->
-                              <br>
-                             <br>
+                        
+                            <br>
+                            <br>
                             <div class="nft__item_info">
-                                <a href="item-details.html">
-                                    <h4>Running Puppets</h4>
+                                <a href="/myapp/profile/{{follow.user__id}}">
+                                    <h4>{{follow.user__username}}</h4>
                                 </a>
-                                <div class="nft__item_click">
+                               <!--  <div class="nft__item_click">
                                     <span></span>
-                                </div>
+                                </div> -->
                                 <div class="nft__item_price">
-                                    0.03 ETH<span>1/24</span>
-                                </div>    
-                                <div class="nft__item_action">
-                                    <a href="#">Place a bid</a>
+                                    memeber since<span>{{follow.user__timestamp}}</span>
                                 </div>
-                                <div class="nft__item_like">
-                                    <i class="fa fa-heart"></i><span>45</span>
-                                </div>                                  
-                            </div> 
+                               <!--  <div class="nft__item_action">
+                                    <a href="#">Place a bid</a>
+                                </div> -->
+                               <!--  <div class="nft__item_like">
+                                    <i class="fa fa-heart"></i><span>26</span>
+                                </div>  -->                                
+                            </div>
                         </div>
                     </div>
-                    <!-- nft item begin -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="nft__item">
-                            <div class="author_list_pp">
-                                <a href="author.html">                                    
-                                    <img class="lazy" src="{% static 'images/author/author-3.jpg' %}" alt="">
-                                    <i class="fa fa-check"></i>
-                                </a>
-                            </div>
-                          <!--   <div class="nft__item_wrap">
-                                <a href="item-details.html">
-                                    <img src="{% static 'images/items/anim-1.webp' %}" class="lazy nft__item_preview" alt="">
-                                </a>
-                            </div> -->
-                              <br>
-                             <br>
-                            <div class="nft__item_info">
-                                <a href="item-details.html">
-                                    <h4>USA Wordmation</h4>
-                                </a>
-                                <div class="nft__item_click">
-                                    <span></span>
-                                </div>
-                                <div class="nft__item_price">
-                                    0.09 ETH<span>1/25</span>
-                                </div>
-                                <div class="nft__item_action">
-                                    <a href="#">Place a bid</a>
-                                </div>
-                                <div class="nft__item_like">
-                                    <i class="fa fa-heart"></i><span>76</span>
-                                </div>                                 
-                            </div> 
-                        </div>
-                    </div>
-                    <!-- nft item begin -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="nft__item">
-                            <div class="de_countdown" data-year="2022" data-month="2" data-day="8" data-hour="8"></div>
-                            <div class="author_list_pp">
-                                <a href="author.html">                                    
-                                    <img class="lazy" src="{% static 'images/author/author-4.jpg' %}" alt="">
-                                    <i class="fa fa-check"></i>
-                                </a>
-                            </div>
-                         <!--    <div class="nft__item_wrap">
-                                <a href="item-details.html">
-                                    <img src="{% static 'images/items/anim-5.webp' %}" class="lazy nft__item_preview" alt="">
-                                </a>
-                            </div> -->
-                              <br>
-                             <br>
-                            <div class="nft__item_info">
-                                <a href="item-details.html">
-                                    <h4>Loop Donut</h4>
-                                </a>
-                                <div class="nft__item_click">
-                                    <span></span>
-                                </div>
-                                <div class="nft__item_price">
-                                    0.09 ETH<span>1/14</span>
-                                </div>
-                                <div class="nft__item_action">
-                                    <a href="#">Place a bid</a>
-                                </div>
-                                <div class="nft__item_like">
-                                    <i class="fa fa-heart"></i><span>94</span>
-                                </div>                                 
-                            </div> 
-                        </div>
-                    </div>                                                
+                    {% endfor %}
+
+
+
                 </div>
             </div>
 

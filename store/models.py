@@ -76,7 +76,15 @@ class Follow(models.Model):
 
     user_follower_id = models.IntegerField()
 
-    timestamp = models.TextField()
+    timestamp = models.TextField(null = True)
+
+    user = models.ForeignKey("User", on_delete=models.SET_NULL, null=True)
+
+class Follower(models.Model):
+
+    user_follower_id = models.IntegerField()
+
+    timestamp = models.TextField(null = True)
 
     user = models.ForeignKey("User", on_delete=models.SET_NULL, null=True)
 
