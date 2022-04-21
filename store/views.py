@@ -278,5 +278,18 @@ def rankings(request):
     return render(request, "rankings.html",context)
 
 def liveauctions(request):
-    return render(request,'liveauctions.html')
+    # query rankings of all users desc
+    user_store_liveauctions = []
+    error = []
+
+
+    context = {
+
+        "store":  user_store_liveauctions,
+        "error": error,
+
+    }
+
+
+    return render(request,'liveauctions.html',context)
 

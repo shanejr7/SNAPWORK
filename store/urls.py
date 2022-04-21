@@ -16,6 +16,6 @@ urlpatterns = [
     path('apply/', views.apply, name='apply'),
     path('activity/', views.activity, name='activity'),
     path('rankings/', views.rankings, name='rankings'),
-     path('liveauctions/', views.liveauctions, name='liveauctions'),
+    path('liveauctions/', views.liveauctions, name='liveauctions'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
