@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-paxtgt)y_(k&88%j_ivt$m_8k(xfq_1_&b%m%)e7c)n9z*n!to'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['django-env.eba-kxteqitw.us-west-2.elasticbeanstalk.com']
 
 
 # Application definition
@@ -40,12 +40,10 @@ INSTALLED_APPS = [
     'myapp',
     'store',
     'tags',
-    'debug_toolbar',
     'errorhandler',
 ]
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -92,15 +90,27 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'DB':'postgres2',
+#         'PASSWORD': 'php123',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5433',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
-        'USER': 'postgres',
-        'DB':'postgres2',
-        'PASSWORD': 'php123',
-        'HOST': '127.0.0.1',
-        'PORT': '5433',
+        'USER': 'dbmasteruser',
+        'DB':'postgres',
+        'PASSWORD': '{YO_YY4#a~5^pn!U6XkrL5m{1w5t7nRK',
+        'HOST': 'ls-2554945fb962f9ccecafc4464452adffe814abbc.cm5gc7q4k5dt.us-east-2.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
