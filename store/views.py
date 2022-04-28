@@ -283,9 +283,13 @@ def liveauctions(request):
     error = []
 
 
+    user_store_liveauctions = Store.objects.filter(auction=True).values('user__id','user__username','user__email','user__license','user__timestamp',
+        'id','product','title','body','price','quantity','auction','product_type', 'contract_type','service_type',
+        'data_type','season','views','img_url','address', 'duration_timestamp','timestamp').order_by('user__timestamp')
+
     context = {
 
-        "store":  user_store_liveauctions,
+        "stores":  user_store_liveauctions,
         "error": error,
 
     }

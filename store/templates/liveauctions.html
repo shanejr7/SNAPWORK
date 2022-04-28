@@ -61,7 +61,7 @@
                                 <li>
                                     <a href="explore.html">Explore<span></span></a>
                                     <ul>
-                                        s<li><a href="/liveauctions/">Live Auction</a></li>
+                                        <li><a href="/liveauctions/">Live Auction</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -163,9 +163,11 @@
                             <table class="table de-table table-rank">
                               <thead>
                                 <tr>
-                                  <th scope="col">Collection</th>
+                                  <th scope="col">Auctions</th>
                                   <!-- <th scope="col">Volume</th> -->
-                                  <th scope="col">Quality</th>
+                                  <th scope="col">Title</th>
+                                  <th scope="col">Body</th>
+                                  <th scope="col">Price</th>
                              <!--      <th scope="col">7d %</th>
                                   <th scope="col">Floor Price</th>
                                   <th scope="col">Owners</th>
@@ -173,17 +175,19 @@
                               </tr>
                           </thead>
                           <tbody>
-                            {% for user in users %}
+                            {% for store in stores %}
 
                             <tr>
-                              <th scope="row"><a href="/myapp/profile/{{user.id}}">
+                              <th scope="row"><a href="/store/{{store.user__id}}/{{store.id}}">
                                   <div class="coll_list_pp">
-                                    <img class="lazy" src="{% static '' %}{{user.img_url}}" alt="">
+                                    <img class="lazy" src="{% static '' %}{{store.img_url}}" alt="">
                                     <!--       <i class="fa fa-check"></i> -->
                                 </div>  
-                            {{user.username}}</a></th>
+                            {{store.username}}</a></th>
                             <!-- <td>15,225.87</td> -->
-                            <td class="d-plus">+{{user.quality_rank}}%</td>
+                            <td class="d-plus">+ {{store.title}}</td>
+                            <td class="d-plus">+ {{store.body}}</td>
+                            <td class="d-plus">+ ${{store.price}}</td>
                             <!-- <td class="d-plus">+309.49%</td> -->
                           <!--   <td>5.9</td>
                             <td>2.8k</td>

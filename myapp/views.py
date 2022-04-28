@@ -17,7 +17,15 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth import logout
 from django.utils import timezone
 import datetime
+import logging
+import boto3
+from botocore.exceptions import ClientError
+import os
+from django.conf import settings
 
+
+s3_client = boto3.client('s3', region_name=settings.AWS_S3_REGION_NAME , aws_access_key_id=settings.AWS_ACCESS_KEY_ID ,
+                               aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY)
 
 # Create your views here.
 def signup(request):
@@ -26,12 +34,15 @@ def signup(request):
 	if query:
 		valid = True
 		email = "n/a"
-		user_name = strip_tags(request.POST['name'])
-		if request.POST['email']:
-			email = request.POST['email']
 		error = {}
 		check_email = []
 		check_username = []
+
+
+		user_name = strip_tags(request.POST['name'])
+
+		if request.POST['email']:
+			email = request.POST['email']
 
 		try:
 			val = validate_email(email)
@@ -77,7 +88,7 @@ def signup(request):
 
 		
 		if user_name == None or email == None or username == None or phone_number == None or password == None or valid == False :
-			# error = {'7':'missing input'}
+			error = {'7':'missing input'}
 			errors = {
 
 	        "error": error,
@@ -90,7 +101,7 @@ def signup(request):
 			# Create user and save to the database
 			max_id = User.objects.last().id
 			max_id = max_id +1
-			create_user = User.create_user(self=User.objects,id=max_id,user_name=user_name,username=username,email=email,password=password,phone=phone_number,license="n/a",img_license_front_url="n/a",img_license_back_url="n/a", img_url="images/author/user.jpg",background_img_url="n/a",verified_identity=False,background_check_status ="n/a",quality_rank =0.0, timestamp=time_stamp)
+			create_user = User.create_user(self=User.objects,id=max_id,user_name=user_name,username=username,email=email,password=password,phone=phone_number,license="n/a",img_license_front_url="n/a",img_license_back_url="n/a", img_url="images/author/user.jpg",background_img_url="images/background/subheader.jpg",verified_identity=False,background_check_status ="n/a",quality_rank =0.0, timestamp=time_stamp)
 			create_user.save()
 			create_user.last_login = timezone.now()
 			create_user.save(update_fields=['last_login'])
@@ -201,8 +212,84 @@ def profile_create_auth(request):
 def profile_wallet_auth(request):
 	return render(request,'wallet.html')
 
+@requires_csrf_token
 def edit_profile_auth(request):
-	return render(request,'editprofile.html')
+
+	error = {}
+	query =request.POST.get("submit_update_profile")
+
+	if query:
+
+		user_id = request.POST['user_id']
+		upload_profile_img = request.FILES['upload_profile_img']
+		# upload_banner_img = request.FILES['upload_banner_img']
+		key_profile_img = "images/author/"+ str(upload_profile_img)
+		# key_banner_img = "images/background/"+ str(upload_profile_img)
+		file_name = upload_profile_img
+
+		#try : only when profile image is changed
+		#Upload a file to an S3 bucket
+
+    	#:param file_name: File to upload
+    	#:param bucket: Bucket to upload to
+    	#:param object_name: S3 object name. If not specified then file_name is used
+    	#:return: True if file was uploaded, else False
+
+    	# If S3 object_name was not specified, use file_name
+
+		#Upload statments
+
+		if upload_profile_img:
+	
+			try:
+				user = User.objects.get(id=user_id)
+				s3_client.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME,Key=user.img_url)
+				user.img_url = key_profile_img;
+				response = s3_client.upload_fileobj(file_name, settings.AWS_STORAGE_BUCKET_NAME, key_profile_img)
+				user.save()
+				request.session['img_url'] = user.img_url
+				return render(request,'editprofile.html')
+			except ClientError as e:
+				error = {'1':"images was not uploaded succesfully"}
+				context = {
+        			"error": error,
+    			}
+				return render(request,'editprofile.html',context)
+				logging.error(e)
+				return False
+			return True
+
+
+		#try : only when background images is changed
+		# try:
+		# 	response = s3_client.upload_fileobj(file_name, settings.AWS_STORAGE_BUCKET_NAME, key_banner_img )
+		# 	# s3.Object(settings.AWS_STORAGE_BUCKET_NAME, 'images/author/file_name').delete() # old path 
+		# 	return render(request,'editprofile.html')
+		# except ClientError as e:
+		# 	error = {'1':"images was not uploaded succesfully"}
+		# 	context = {
+  #       		"error": error,
+  #   		}
+		# 	return render(request,'editprofile.html',context)
+		# 	logging.error(e)
+		# 	return False
+		# return True
+
+
+
+		#try : only when profile and background image is changed
+
+		# remove old path from amazon storage and database
+		# store new path in database and store images amazon storage
+
+		
+
+
+	context = {
+        "error": error,
+    }
+
+	return render(request,'editprofile.html',context)
 
 def profile(request,uid):
 
