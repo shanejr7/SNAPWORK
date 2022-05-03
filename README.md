@@ -22,6 +22,7 @@
 # Non-contract agreement services, products and data.
 # Temporary agreement services, products and data.
 # Images as proof of work.
+# Video as proof of work.
 # Data as proof of work.
 # Goods as proof of work.
 # Software as proof of work.
