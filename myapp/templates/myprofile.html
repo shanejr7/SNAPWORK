@@ -97,8 +97,15 @@
             <div id="top"></div>
             
             <!-- section begin -->
-            <section id="profile_banner" aria-label="section" class="text-light" data-bgimage="url({% static '' %}{{user.background_img_url}}) top">
+            {% if request.session.background_img_url  != 'n/a' %}
+                <section id="profile_banner" aria-label="section" class="text-light" data-bgimage="url({{request.session.background_img_url}}) top">
+            {% endif %}
 
+            {% if request.session.background_img_url  == 'n/a' %}
+                <section id="profile_banner" aria-label="section" class="text-light" data-bgimage="url({% static 'images/background/subheader.jpg' %}) top">
+            {% endif %}
+
+        
             </section>
             <!-- section close -->
             
@@ -110,11 +117,10 @@
                             <div class="profile_avatar">
                                 <div class="d_profile_img">
                                     {% if request.session.img_url  != 'n/a' %}
-                                    <img src="{% static '' %}{{ request.session.img_url }}" alt="">
+                                    <img src="{{ request.session.img_url }}" alt="">
                                     {% endif %}
                                     {% if request.session.img_url  == 'n/a' %}
-                                    f
-                                    <img src="{% static '' %}{{ request.session.img_url }}" alt="">
+                                    <img src="{% static 'images/author/user.jpg' %}" alt="">
                                     {% endif %}
 
                                     <!--   <i class="fa fa-check"></i> -->

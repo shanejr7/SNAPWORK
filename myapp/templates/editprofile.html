@@ -90,10 +90,19 @@
                                             <span class="d-count">8</span>
                                             <i class="fa fa-bell"></i>
                                         </span>
-
-                                        <span id="de-click-menu-profile" class="de-menu-profile">            
-                                            <img src="{% static '' %}{{ request.session.img_url }}" class="img-fluid" alt="">
+                                        {% if request.session.img_url  != 'n/a' %}
+                                          <span id="de-click-menu-profile" class="de-menu-profile">            
+                                            <img src="{{ request.session.img_url }}" class="img-fluid" alt="">
                                         </span>
+
+                                        {% endif %}
+                                        {% if request.session.img_url  == 'n/a' %}
+                                          <span id="de-click-menu-profile" class="de-menu-profile">            
+                                            <img src="{% static 'images/author/user.jpg' %}" class="img-fluid" alt="">
+                                        </span>
+
+                                        {% endif %}
+                                      
 
                                         <div id="de-submenu-notification" class="de-submenu">
                                             <div class="de-flex">
@@ -217,7 +226,6 @@
                             <input type="hidden" name="user_id" value="{{request.session.id}}">
 
                             <div class="de_tab tab_simple">
-                            
                                 <ul class="de_nav">
                                     <li class="active"><span><i class="fa fa-user"></i>Profile</span></li>
                                    <!--  <li><span><i class="fa fa-exclamation-circle"></i>Notifications</span></li> -->
@@ -274,13 +282,13 @@
                                                 <h5>Profile image <i class="fa fa-info-circle id-color-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Recommend 400 x 400. Max size: 50MB. Click the image to upload."></i></h5>
 
                                                 {% if request.session.img_url  != 'n/a' %}
-                                                <img src="{% static '' %}{{ request.session.img_url }}" id="click_profile_img" class="d-profile-img-edit img-fluid" alt="">
+                                                <img src="{{ request.session.img_url }}" id="click_profile_img" class="d-profile-img-edit img-fluid" alt="">
                                                 <input type="file" id="upload_profile_img" name="upload_profile_img"> 
                                                 {% endif %}
 
                                   
                                                 {% if request.session.img_url  == 'n/a' %}
-                                                <img src="{% static '' %}{{ request.session.img_url }}" id="click_profile_img" class="d-profile-img-edit img-fluid" alt="">
+                                                <img src="{% static 'images/author/user.jpg' %}" id="click_profile_img" class="d-profile-img-edit img-fluid" alt="">
                                                 <input type="file" id="upload_profile_img" name="upload_profile_img"> 
                                            
                                                 {% endif %}
@@ -289,7 +297,13 @@
                                                 <div class="spacer-30"></div>
 
                                                 <h5>Profile banner <i class="fa fa-info-circle id-color-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Recommend 1500 x 500. Max size: 50MB. Click the image to upload."></i></h5>
-                                                <img src="{% static 'images/background/subheader.jpg' %}" id="click_banner_img" class="d-banner-img-edit img-fluid" alt="">
+                                                {% if request.session.background_img_url  != 'n/a' %}
+                                                 <img src="{{ request.session.background_img_url }}" id="click_banner_img" class="d-banner-img-edit img-fluid" alt="">
+                                                {% endif %}
+
+                                                {% if request.session.background_img_url  == 'n/a' %}
+                                                 <img src="{% static 'images/background/subheader.jpg' %}" id="click_banner_img" class="d-banner-img-edit img-fluid" alt="">
+                                                {% endif %}
                                                 <input type="file" id="upload_banner_img" name="upload_banner_img"> 
 
                                             </div>                                         

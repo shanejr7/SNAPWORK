@@ -105,7 +105,9 @@ class Store(models.Model):
 
     body = models.TextField()
 
-    price = models.IntegerField()
+    price = models.FloatField()
+
+    minimum_bid = models.FloatField(null=True)
 
     quantity = models.IntegerField(null=True)
 
@@ -138,6 +140,8 @@ class Store(models.Model):
     country = models.TextField(default = "n/a")
 
     dob = models.TextField(default = "n/a")
+
+    duration_start_timestamp = models.TextField(default = "n/a")
 
     duration_timestamp = models.TextField(default = "n/a")
 
@@ -189,6 +193,40 @@ class Stage(models.Model):
     stakeholder = models.ForeignKey("Stakeholder", on_delete=models.SET_NULL, related_name='+', null=True)
     user = models.ForeignKey("User", on_delete=models.SET_NULL,  null=True)
 
+class Order(models.Model):
+
+    product = models.TextField()
+
+    title = models.TextField()
+
+    body = models.TextField()
+
+    price = models.IntegerField()
+
+    quantity = models.IntegerField(null=True)
+
+    auction = models.BooleanField(null = True)
+
+    season = models.TextField(default = "n/a")
+
+    img_url = models.TextField(default = "n/a")
+
+    address = models.TextField(default = "n/a")
+
+    address_2 = models.TextField(default = "n/a")
+
+    city = models.TextField(default = "n/a")
+
+    zip_code = models.TextField(default = "n/a")
+
+    state = models.TextField(default = "n/a")
+
+    country = models.TextField(default = "n/a")
+
+    timestamp = models.TextField()
+
+    user = models.ForeignKey("User", on_delete=models.SET_NULL, null=True)
+    store = models.ForeignKey("Store", on_delete=models.SET_NULL, null=True)
 
 
 

@@ -23,12 +23,14 @@
         <link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/jquery.countdown.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
         <!-- color scheme -->
         <link id="colors" href="{% static 'css/colors/scheme-01.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/coloring.css' %}" rel="stylesheet" type="text/css" />
     </head>
 
-    <body>
+    <body onload="myLoad()">
         <div id="wrapper">
 
             <!-- header begin -->
@@ -85,16 +87,25 @@
                                 </ul>
                                 <div class="menu_side_area">
                                     <div class="de-login-menu">
-                                        <a href="create-options.html" class="btn-main"><i class="fa fa-plus"></i><span>Create</span></a>
+                                        <a href="/myapp/create/" class="btn-main"><i class="fa fa-plus"></i><span>Create</span></a>
 
                                         <span id="de-click-menu-notification" class="de-menu-notification">
                                             <span class="d-count">8</span>
                                             <i class="fa fa-bell"></i>
                                         </span>
 
-                                        <span id="de-click-menu-profile" class="de-menu-profile">                           
-                                            <img src="{% static 'images/author_single/author_thumbnail.jpg' %}" class="img-fluid" alt="">
+                                        {% if request.session.img_url  != 'n/a' %}
+                                        <span id="de-click-menu-profile" class="de-menu-profile">            
+                                            <img src="{{ request.session.img_url }}" class="img-fluid" alt="">
                                         </span>
+
+                                        {% endif %}
+                                        {% if request.session.img_url  == 'n/a' %}
+                                        <span id="de-click-menu-profile" class="de-menu-profile">            
+                                            <img src="{% static 'images/author/user.jpg' %}" class="img-fluid" alt="">
+                                        </span>
+
+                                        {% endif %}
 
                                         <div id="de-submenu-notification" class="de-submenu">
                                             <div class="de-flex">
@@ -153,93 +164,124 @@
 
                                         <div id="de-submenu-profile" class="de-submenu">
                                             <div class="d-name">
-                                                <h4>Monica Lucas</h4>
-                                                <a href="profile.html">Set display name</a>
+                                             <div class="d-name">
+                                                <h4>{{request.session.username}}</h4>
+                                                <a href="#">user name</a>
                                             </div>
-                                            <div class="spacer-10"></div>
-                                            <div class="d-balance">
-                                                <h4>Balance</h4>
-                                                12.858 ETH
-                                            </div>
-                                            <div class="spacer-10"></div>
-                                            <div class="d-wallet">
-                                                <h4>My Wallet</h4>
-                                                <span id="wallet" class="d-wallet-address">DdzFFzCqrhshMSxb9oW3mRo4MJrQkusV3fGFSTwaiu4wPBqMryA9DYVJCkW9n7twCffG5f5wX2sSkoDXGiZB1HPa7K7f865Kk4LqnrME</span>
-                                                <button id="btn_copy" title="Copy Text">Copy</button>
-                                            </div>
+                                        </div>
+                                        <div class="spacer-10"></div>
+                                        <div class="d-balance">
+                                            <h4>Balance</h4>
+                                            12.858 ETH
+                                        </div>
+                                        <div class="spacer-10"></div>
+                                        <div class="d-wallet">
+                                            <h4>My Wallet</h4>
+                                            <span id="wallet" class="d-wallet-address">DdzFFzCqrhshMSxb9oW3mRo4MJrQkusV3fGFSTwaiu4wPBqMryA9DYVJCkW9n7twCffG5f5wX2sSkoDXGiZB1HPa7K7f865Kk4LqnrME</span>
+                                            <button id="btn_copy" title="Copy Text">Copy</button>
+                                        </div>
 
-                                            <div class="d-line"></div>
+                                        <div class="d-line"></div>
 
-                                            <ul class="de-submenu-profile">
-                                                <li><a href="author.html"><i class="fa fa-user"></i> My profile</a>
-                                                    <li><a href="profile.html"><i class="fa fa-pencil"></i> Edit profile</a>
-                                                        <li><a href="#"><i class="fa fa-sign-out"></i> Sign out</a>
-                                                        </ul>
-                                                    </div>
-                                                    <span id="menu-btn"></span>
+                                        <ul class="de-submenu-profile">
+                                            <li><a href="/myapp/myprofile/"><i class="fa fa-user"></i> My profile</a>
+                                                <li><a href="/myapp/editprofile/"><i class="fa fa-pencil"></i> Edit profile</a>
+                                                    <li><a href="/myapp/logoff"><i class="fa fa-sign-out"></i> Sign out</a>
+                                                    </ul>
                                                 </div>
+                                                <span id="menu-btn"></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </header>
-                    <!-- header close -->
-                    <!-- content begin -->
-                    <div class="no-bottom no-top" id="content">
-                        <div id="top"></div>
+                    </div>
+                </header>
+                <!-- header close -->
+                <!-- content begin -->
+                <div class="no-bottom no-top" id="content">
+                    <div id="top"></div>
 
-                        <!-- section begin -->
-                        <section id="subheader" class="text-light" data-bgimage="url({% static 'images/background/subheader.jpg' %} ) top">
-                            <div class="center-y relative text-center">
-                                <div class="container">
-                                    <div class="row">
+                    <!-- section begin -->
+                    <section id="subheader" class="text-light" data-bgimage="url({% static 'images/background/subheader.jpg' %} ) top">
+                        <div class="center-y relative text-center">
+                            <div class="container">
+                                <div class="row">
 
-                                        <div class="col-md-12 text-center">
-                                         <h1>Create Single Collectible</h1>
-                                     </div>
-                                     <div class="clearfix"></div>
+                                    <div class="col-md-12 text-center">
+                                     <h1>Create Snapwork Store Item</h1>
                                  </div>
+                                 <div class="clearfix"></div>
                              </div>
                          </div>
-                     </section>
-                     <!-- section close -->
+                     </div>
+                 </section>
+                 <!-- section close -->
 
 
-                     <!-- section begin -->
-                     <section aria-label="section">
-                        <div class="container">
-                            <div class="row wow fadeIn">
-                                <div class="col-lg-7 offset-lg-1">
-                                    <form id="form-create-item" class="form-border" method="post" action="email.php">
-                                        <div class="field-set">
-                                            <h5>Upload file</h5>
+                 <!-- section begin -->
+                 <section aria-label="section">
+                    <div class="container">
+                        <div class="row wow fadeIn">
+                            <div class="col-lg-7 offset-lg-1">
+                                <form id="form-create-item" class="form-border" enctype="multipart/form-data" method="POST" action="">
+                                    {% csrf_token %}
 
-                                            <div class="d-create-file">
-                                                <p id="file_name">PNG, JPG, GIF, WEBP or MP4. Max 200mb.</p>
-                                                <input type="button" id="get_file" class="btn-main" value="Browse">
-                                                <input type="file" id="upload_file">
-                                            </div>
+                                    <input type="hidden" name="user_id" value="{{request.session.user_id}}">
 
-                                            <div class="spacer-40"></div>
 
-                                            <h5>Select method</h5>
-                                            <div class="de_tab tab_methods">
-                                                <ul class="de_nav">
-                                                    <li class="active"><span><i class="fa fa-tag"></i>Fixed price</span>
+
+                                    {% for key, value in error.items %}
+
+                                    <h7 style="color: red">{{value}}!</h7>
+
+                                    {% endfor %}
+
+
+                                    {% for key, value in success.items %}
+
+                                    <h7 style="color: green">{{value}}!</h7>
+
+                                    {% endfor %}
+
+                                    <div class="field-set">
+                                        <h5>Upload file</h5>
+
+                                        <div class="d-create-file">
+                                            <p id="file_name">PNG, JPG, GIF, WEBP or MP4. Max 200mb.</p>
+                                            <input type="button" id="get_file" class="btn-main" value="Browse">
+                                            <input type="file" id="upload_file" name="upload_file">
+                                        </div>
+
+                                        <div class="spacer-40"></div>
+
+                                        <h5>Select type</h5>
+                                        <div class="de_tab tab_methods">
+                                            <ul class="de_nav" id="item_input_type" onclick="myType()">
+
+                                             <li class="active"><span><i class="fa fa-tag custom_item_select"></i>Product</span>
+
+                                                 <li><span><i class="fa fa-hourglass-1 custom_item_select"></i>Contract</span>
+
+                                                    <li><span><i class="fa fa-users custom_item_select"></i>Service</span>
                                                     </li>
-                                                    <li><span><i class="fa fa-hourglass-1"></i>Timed auction</span>
+
+                                                    <li><span><i class="fa fa-film custom_item_select"></i>Content</span>
                                                     </li>
-                                                    <li><span><i class="fa fa-users"></i>Open for bids</span>
-                                                    </li>
+
                                                 </ul>
+
+                                                <input type="hidden" name="item_type" id="item_type"/>
 
                                                 <div class="de_tab_content">
 
+
+
                                                     <div id="tab_opt_1">
-                                                        <h5>Price</h5>
-                                                        <input type="text" name="item_price" id="item_price" class="form-control" placeholder="enter price for one item (ETH)" />
+
+
+
                                                     </div>
 
                                                     <div id="tab_opt_2">
@@ -251,59 +293,102 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <h5>Starting date</h5>
-                                                                <input type="date" name="bid_starting_date" id="bid_starting_date" class="form-control" min="1997-01-01" />
+                                                                <input type="date" name="starting_date_contract" id="starting_date_contract" class="form-control" min="1997-01-01" />
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <h5>Expiration date</h5>
-                                                                <input type="date" name="bid_expiration_date" id="bid_expiration_date" class="form-control" />
+                                                                <input onchange="myDateContract()" type="date" name="expiration_date_contract" id="expiration_date_contract" class="form-control" />
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                     <div id="tab_opt_3">
+
+                                                      <div class="col-md-6">
+                                                        <h5>Date of Birth</h5>
+                                                        <input type="date" name="item_birth_date" class="form-control" />
+                                                    </div>
+
+
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <h5>Starting date</h5>
+                                                            <input type="date" name="starting_date_service" id="starting_date_service" class="form-control" min="1997-01-01" />
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <h5>Expiration date</h5>
+                                                            <input onchange="myDateService()" type="date" name="expiration_date_service" id="expiration_date_service" class="form-control" />
+                                                        </div>
                                                     </div>
 
                                                 </div>
 
+                                                <div id="tab_opt_4">
+
+                                                  <div class="col-md-6">
+                                                    <h5>Date of Birth</h5>
+                                                    <input type="date" name="item_birth_date"  class="form-control" />
+                                                </div>
                                             </div>
 
-                                            <div class="spacer-20"></div>
 
-                                            <div class="switch-with-title">
-                                                <h5><i class="fa fa- fa-unlock-alt id-color-2 icon_padlock"></i>Unlock once purchased</h5>
-                                                <div class="de-switch">
-                                                  <input type="checkbox" id="switch-unlock" class="checkbox">
-                                                  <label for="switch-unlock"></label>
-                                              </div>
-                                              <div class="clearfix"></div>
-                                              <p class="p-info">Unlock content after successful transaction.</p>
 
-                                              <div class="hide-content">
+
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="spacer-20"></div>
+
+                                    <h5>Price</h5>
+                                    <input type="text" name="item_price" onchange="myPrice()" id="item_price" class="form-control" placeholder="enter price for one item (USD)" />
+
+                                    <h5>Quantity</h5>
+                                    <input type="number" name="item_quantity" id="item_quantity " class="form-control" placeholder="enter quantity for the item" />
+
+                                    <div class="spacer-20"></div>
+
+                                    <div class="switch-with-title">
+                                        <h5><i class="fa fa- fa-money id-color-2 icon_padlock"></i>Bid once uploaded</h5>
+                                        <div class="de-switch">
+                                          <input type="checkbox" id="switch-unlock" class="checkbox" name="item_bid" onchange="myAuction()">
+                                          <label for="switch-unlock"></label>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                      <p class="p-info">Bid after successful upload.</p>
+
+                                           <!--    <div class="hide-content">
                                                 <input type="text" name="item_unlock" id="item_unlock" class="form-control" placeholder="Access key, code to redeem or link to a file..." />             
-                                            </div>
+                                            </div> -->
                                         </div>
 
                                         <div class="spacer-20"></div>
 
-                                        <h5>Choose collection</h5>
-                                        <p class="p-info">This is the collection where your item will appear.</p>
+                                        <h5>Choose season</h5>
+                                        <p class="p-info">This is the season where your item will appear.</p>
 
-                                        <div id="item_collection" class="dropdown fullwidth mb20">
-                                            <a href="#" class="btn-selector">Select Collection</a>
-                                            <ul>
-                                                <li><span>Abstraction</span></li>
-                                                <li><span>Patternlicious</span></li>
-                                                <li><span>Skecthify</span></li>
-                                                <li><span>Cartoonism</span></li>
-                                                <li><span>Virtuland</span></li>
-                                                <li><span>Papercut</span></li>
+                                        <div id="item_collection" class="target dropdown fullwidth mb20">
+                                            <a href="#" class="btn-selector target" id="item_input_season">Select Season</a>
+                                            <ul onclick="mySeason()">
+                                                <li><span>Spring</span></li>
+                                                <li><span>Summer</span></li>
+                                                <li><span>Fall</span></li>
+                                                <li><span>Winter</span></li>
+                                                <li><span>Spring - Summer</span></li>
+                                                <li><span>Fall - Winter</span></li>
+                                                <li><span>All seasons</span></li>
                                             </ul>
                                         </div>
 
+                                        <input type="hidden" name="item_season" id="season"/>
+
+
                                         <div class="spacer-20"></div>
 
+
                                         <h5>Title</h5>
-                                        <input type="text" name="item_title" id="item_title" class="form-control" placeholder="e.g. 'Crypto Funk" />
+                                        <input type="text" name="item_title" id="item_title" onchange="myTitle()" class="form-control" placeholder="e.g. 'Crypto Funk" />
 
                                         <div class="spacer-20"></div>
 
@@ -312,12 +397,40 @@
 
                                         <div class="spacer-20"></div>
 
-                                        <h5>Royalties</h5>
-                                        <input type="text" name="item_royalties" id="item_royalties" class="form-control" placeholder="suggested: 0, 10%, 20%, 30%. Maximum is 70%" />
+                                      <!--   <h5>Royalties</h5>
+                                        <input type="text" name="item_royalties" id="item_royalties" class="form-control" placeholder="suggested: 0, 10%, 20%, 30%. Maximum is 70%" /> -->
+
+                                        <h5>Address </h5><small>Your address is safe with us. We don't share without your permission.</small>
+                                        <input name="item_address" id="item_address" class="form-control" />
+
+                                        <div class="spacer-20"></div>
+
+                                        <h5>Address 2</h5>
+                                        <textarea data-autoresize name="item_address_2" id="item_address_2" class="form-control" placeholder="Apt. Suite. etc.."></textarea>
+
+                                        <div class="spacer-20"></div>
+
+                                        <h5>City</h5>
+                                        <textarea data-autoresize name="item_city" id="item_city" class="form-control" placeholder="City"></textarea>
+
+                                        <div class="spacer-20"></div>
+
+                                        <h5>State</h5>
+                                        <textarea data-autoresize name="item_state" id="item_state" class="form-control" placeholder="State"></textarea>
+
+                                        <div class="spacer-20"></div>
+
+                                        <h5>Country</h5>
+                                        <textarea data-autoresize name="item_country" id="item_country" class="form-control" placeholder="Country"></textarea>
+
+                                        <h5>Zip Code</h5>
+                                        <textarea data-autoresize name="item_zip_code" id="item_zip" class="form-control" placeholder="Zip code"></textarea>
+
+                                        <div class="spacer-20"></div>
 
                                         <div class="spacer-single"></div>
 
-                                        <input type="button" id="submit" class="btn-main" value="Create Item">
+                                        <input type="submit" name="create_item" id="submit" class="btn-main" value="Create Item">
                                         <div class="spacer-single"></div>
                                     </div>
                                 </form>
@@ -326,33 +439,44 @@
                             <div class="col-lg-3 col-sm-6 col-xs-12">
                                 <h5>Preview item</h5>
                                 <div class="nft__item">
-                                    <div class="de_countdown" data-year="2022" data-month="2" data-day="16" data-hour="8"></div>
+
+                                  <!--   <div class="de_countdown" data-year="2022" data-month="2" data-day="16" data-hour="8" ></div> -->
+
                                     <div class="author_list_pp">
-                                        <a href="#">                                    
-                                            <img class="lazy" src="{% static 'images/author/author-1.jpg' %}" alt="">
-                                            <i class="fa fa-check"></i>
+                                        <a href="#">  
+
+                                            {% if request.session.img_url  != 'n/a' %}
+                                            <img class="lazy" src="{{ request.session.img_url }}" alt="">
+                                            {% endif %}
+                                            {% if request.session.img_url  == 'n/a' %}
+
+                                            <img class="lazy" src="{% static 'images/author/user.jpg' %}" alt="">
+                                            {% endif %}   
+
+                                            
+                                            <!-- <i class="fa fa-check"></i> -->
                                         </a>
                                     </div>
                                     <div class="nft__item_wrap">
                                         <a href="#">
-                                            <img src="{% static 'images/collections/coll-item-3.jpg' %}" id="get_file_2" class="lazy nft__item_preview" alt="">
+                                            <img id="preview_image" src="{% static 'images/collections/coll-item-3.jpg' %}" class="lazy nft__item_preview" alt="">
                                         </a>
                                     </div>
                                     <div class="nft__item_info">
                                         <a href="#">
-                                            <h4>Pinky Ocean</h4>
+                                            <h4 id="preview_title">Pinky Ocean</h4>
                                         </a>
                                         <div class="nft__item_click">
                                             <span></span>
                                         </div>
                                         <div class="nft__item_price">
-                                            0.08 ETH<span>1/20</span>
+                                            <div style="display:inline-block;" id="preview_price">0.00 USD</div><span id="preview_duration_timestamp">1/20</span>
                                         </div>
                                         <div class="nft__item_action">
-                                            <a href="#">Place a bid</a>
+                                            <a href="#" id="preview_auction">Place a bid</a>
                                         </div>
-                                        <div class="nft__item_like">
-                                            <i class="fa fa-heart"></i><span>50</span>
+                                        <div class="nft__item_like" style="pointer-events:none;">
+                                            <i class="fa fa-heart"></i><span>0</span>
                                         </div>                            
                                     </div> 
                                 </div>
@@ -458,6 +582,8 @@
     
     <!-- Javascript Files
         ================================================== -->
+
+        <script src="{% static 'js/custom.js' %}"></script>
         <script src="{% static 'js/jquery.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>

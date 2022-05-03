@@ -101,7 +101,7 @@ def signup(request):
 			# Create user and save to the database
 			max_id = User.objects.last().id
 			max_id = max_id +1
-			create_user = User.create_user(self=User.objects,id=max_id,user_name=user_name,username=username,email=email,password=password,phone=phone_number,license="n/a",img_license_front_url="n/a",img_license_back_url="n/a", img_url="images/author/user.jpg",background_img_url="images/background/subheader.jpg",verified_identity=False,background_check_status ="n/a",quality_rank =0.0, timestamp=time_stamp)
+			create_user = User.create_user(self=User.objects,id=max_id,user_name=user_name,username=username,email=email,password=password,phone=phone_number,license="n/a",img_license_front_url="n/a",img_license_back_url="n/a", img_url="n/a",background_img_url="n/a",verified_identity=False,background_check_status ="n/a",quality_rank =0.0, timestamp=time_stamp)
 			create_user.save()
 			create_user.last_login = timezone.now()
 			create_user.save(update_fields=['last_login'])
@@ -109,7 +109,8 @@ def signup(request):
 			request.session['id'] = max_id;
 			request.session['username'] = username;
 			request.session['email'] = email;
-			request.session['img_url'] = 'images/author/user.jpg';
+			request.session['img_url'] = 'n/a';
+			request.session['background_img_url'] = 'n/a'
 			request.session['quality_rank'] = 0.0;
 
 			return redirect('/myapp/myprofile')
@@ -143,10 +144,32 @@ def login(request):
 			user.save(update_fields=['last_login'])
 			# auth_login(request,user)
 			user = User.objects.get(username=username)
+
+			if user.img_url != 'n/a':
+				key_profile_img = str(user.img_url)
+				request.session['img_url']  = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': key_profile_img,
+                                },                                  
+                                ExpiresIn=3600)
+			else:
+				request.session['img_url'] = user.img_url;
+
+			if user.background_img_url != 'n/a':
+				key_banner_img  = str(user.background_img_url)
+				request.session['background_img_url']  = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': key_banner_img ,
+                                },                                  
+                                ExpiresIn=3600)
+			else:
+				request.session['background_img_url'] = user.background_img_url;
+
 			request.session['id'] = user.id
 			request.session['username'] = user.username
 			request.session['email'] = user.email
-			request.session['img_url'] = user.img_url;
 			request.session['quality_rank'] = user.quality_rank
 			return redirect('/myapp/myprofile')
 		else:
@@ -170,6 +193,7 @@ def logout_request(request):
 	del request.session['username'];
 	del request.session['email'];
 	del request.session['img_url'];
+	del request.session['background_img_url']
 	del request.session['quality_rank'];
 	logout(request)
 
@@ -192,6 +216,8 @@ def profile_auth(request):
 			store_obj = Store.objects.filter(user_id=owner_obj.id)
 			follow_obj = Follow.objects.filter(user_follower_id=owner_obj.id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
 			follower_obj = Follow.objects.filter(user_id=owner_obj.id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
+		
+
 			context = {
         		"products": store_obj,
         		"user": owner_obj,
@@ -205,9 +231,213 @@ def profile_auth(request):
 	except:
 		return redirect('/myapp/login')
 
-
+@requires_csrf_token
 def profile_create_auth(request):
-	return render(request,'create.html')
+
+	error = []
+	success = []
+
+	# validate authorize user route request
+	try:
+		if request.session['id']:
+			pass
+	except:
+		return redirect('/myapp/login')
+
+
+	# REQUEST item UPLOAD
+
+	query = request.POST.get('create_item')
+
+	if query:
+		user_id = request.session['id'] # generate user store on successful upload
+		valid = True
+
+		product = ''
+		title = ''
+		body =  ''
+		price = 0.0
+		minimum_bid = 0.0
+		quantity = ''
+		auction =  request.POST.get('item_bid', False)
+		season = ''
+		upload_img =''
+		file_name =''
+		key_img =''
+		address= ''
+		address_2 = ''
+		city = ''
+		state = ''
+		country = ''
+		zip_code = ''
+
+		#input validator 
+		if request.POST['item_type']:
+			product = request.POST['item_title']
+		else:
+			error= {'1':'missing item type'}
+			valid = False
+
+		if request.POST['item_title']:
+				title = request.POST['item_title']
+		else:
+			error= {'2':'missing title'}
+			valid = False
+
+		if request.POST['item_desc']:
+				body =  request.POST['item_desc']
+		else:
+			error= {'3':'missing description'}
+			valid = False
+
+		if request.POST['item_price']: # float value 
+				price = request.POST['item_price']
+				price = float(price)
+		else:
+			error= {'4':'missing price'}
+			valid = False
+
+
+		if request.POST['item_quantity']: # integer value
+				quantity = request.POST['item_quantity']
+		else:
+			error= {'5':'missing quantity'}
+			valid = False
+
+		if request.POST['item_season']:
+				season = request.POST['item_season']
+		else:
+			error= {'6':'missing seasons'}
+			valid = False
+
+		
+		if request.FILES['upload_file']: # valid for .PNG, .JPG, .GIF, .WEBP or .MP4
+			upload_img = request.FILES['upload_file']
+			file_name = upload_img
+			key_img = "images/items/"+str(user_id)+ str(upload_img)
+		else:
+			error= {'7':'missing image'}
+			valid = False
+
+		if request.POST['item_address']:
+			address = request.POST['item_address']
+		else:
+			error = {'8': 'missing address'}
+			valid = False
+
+		if request.POST['item_address_2']:
+			address_2 = request.POST['item_address_2']
+
+		if request.POST['item_city']:
+			city =request.POST['item_city']
+		else:
+			error = {'9': 'missing city'}
+			valid = False
+
+		if request.POST['item_state']:
+			state = request.POST['item_state']
+		else:
+			error = {'10': 'missing state'}
+			valid = False
+		if request.POST['item_country']:
+			country = request.POST['item_country']
+		else:
+			error = {'11': 'missing country'}
+			valid = False
+
+		if request.POST['item_zip_code']:
+			zip_code = request.POST['item_zip_code']
+		else:
+			error = {'12': 'missing zip code'}
+			valid = False
+
+
+		if valid == True:
+
+			product_type = 'n/a'
+			contract_type = 'n/a'
+			service_type = 'n/a'
+			data_type = 'n/a'
+			dob = 'n/a'
+			duration_start_timestamp = 'n/a'
+			duration_timestamp = 'n/a'
+
+
+			if request.POST['item_type'] == 'Product':
+				product_type = 'product'
+			elif request.POST['item_type'] == 'Contract':
+				contract_type = 'contract'
+				if request.POST['starting_date_contract']:
+					duration_start_timestamp = request.POST['starting_date_contract']
+				else:
+					error= {'13':'missing start date'}
+					valid = False
+				if request.POST['expiration_date_contract']:
+					duration_timestamp = request.POST['expiration_date_contract']
+				else:
+					error= {'14':'missing expiration date'}
+					valid = False
+				if request.POST['item_price_bid']: # integer value 
+					minimum_bid = request.POST['item_price_bid']
+					minimum_bid = float(minimum_bid)
+				else:
+					error= {'15':'missing minimum bid'}
+					valid = False
+			elif request.POST['item_type'] == 'Service':
+				service_type = 'service'
+				dob = request.POST['item_birth_date']
+				if request.POST['starting_date_service']:
+					duration_start_timestamp = request.POST['starting_date_service']
+				else:
+					error= {'16':'missing start date'}
+					valid = False
+				if request.POST['expiration_date_service']:
+					duration_timestamp = request.POST['expiration_date_service']
+				else:
+					error= {'17':'missing expiration date'}
+					valid = False
+			elif request.POST['item_type'] == 'Content':
+				data_type = 'Data'
+				dob = request.POST['item_birth_date']
+
+			if valid == True:
+				user = User.objects.get(id=user_id)
+				date = datetime.datetime.now()
+
+				time_stamp = date.strftime('%m-%d-%Y %H:%M')
+	
+				if duration_timestamp != 'n/a':
+					year = duration_timestamp[0:4]
+					month = duration_timestamp[5:7]
+					day = duration_timestamp[8:10]
+					duration_timestamp = month +'/' +day +'/'+year + ' 12:00'
+
+				if duration_start_timestamp  != 'n/a':
+					year = duration_start_timestamp[0:4]
+					month = duration_start_timestamp[5:7]
+					day = duration_start_timestamp[8:10]
+					duration_start_timestamp = month +'/' +day +'/'+year + ' 12:00' 
+				
+
+				store = Store(product=product,title=title,body=body, price=price,minimum_bid=minimum_bid,quantity=quantity,
+				auction=auction,product_type=product_type,contract_type=contract_type,
+				service_type= service_type,data_type =data_type ,season =season,img_url='',
+				address=address,address_2=address_2,city=city,zip_code =zip_code,state =state,
+				country=country,timestamp=time_stamp,duration_timestamp=duration_timestamp,
+				duration_start_timestamp=duration_start_timestamp, user =user)
+
+				store.img_url = key_img;
+				response = s3_client.upload_fileobj(file_name, settings.AWS_STORAGE_BUCKET_NAME, key_img)
+				store.save()	
+				success = {"1":"success: snapwork item has been created!"}
+
+
+	context = {
+	"error": error,
+	"success": success,
+	}
+
+	return render(request,'create.html',context)
 
 def profile_wallet_auth(request):
 	return render(request,'wallet.html')
@@ -215,17 +445,40 @@ def profile_wallet_auth(request):
 @requires_csrf_token
 def edit_profile_auth(request):
 
+	try:
+		if request.session['id']:
+			pass
+	except:
+		return redirect('/myapp/login')
+
 	error = {}
 	query =request.POST.get("submit_update_profile")
 
 	if query:
 
+		upload_profile_img = ''
+		upload_banner_img = ''
+		key_profile_img =''
+		key_banner_img =''
+
 		user_id = request.POST['user_id']
-		upload_profile_img = request.FILES['upload_profile_img']
-		# upload_banner_img = request.FILES['upload_banner_img']
-		key_profile_img = "images/author/"+ str(upload_profile_img)
-		# key_banner_img = "images/background/"+ str(upload_profile_img)
-		file_name = upload_profile_img
+
+		try:
+			if request.FILES['upload_profile_img']:
+				upload_profile_img = request.FILES['upload_profile_img']
+				profile_file_name = upload_profile_img
+				key_profile_img = "images/author/"+str(user_id)+ str(upload_profile_img)
+		except:
+			upload_profile_img = ''
+
+		try:
+			if request.FILES['upload_banner_img']:
+				upload_banner_img = request.FILES['upload_banner_img']
+				banner_file_name = upload_banner_img
+				key_banner_img = "images/background/"+str(user_id)+ str(upload_banner_img )
+		except:
+			upload_banner_img = ''
+
 
 		#try : only when profile image is changed
 		#Upload a file to an S3 bucket
@@ -239,15 +492,21 @@ def edit_profile_auth(request):
 
 		#Upload statments
 
-		if upload_profile_img:
+		if upload_profile_img != '' and upload_banner_img == '':
 	
 			try:
 				user = User.objects.get(id=user_id)
 				s3_client.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME,Key=user.img_url)
 				user.img_url = key_profile_img;
-				response = s3_client.upload_fileobj(file_name, settings.AWS_STORAGE_BUCKET_NAME, key_profile_img)
+				response = s3_client.upload_fileobj(profile_file_name, settings.AWS_STORAGE_BUCKET_NAME, key_profile_img)
 				user.save()
-				request.session['img_url'] = user.img_url
+			
+				request.session['img_url']  = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': key_profile_img,
+                                })
+
 				return render(request,'editprofile.html')
 			except ClientError as e:
 				error = {'1':"images was not uploaded succesfully"}
@@ -259,28 +518,32 @@ def edit_profile_auth(request):
 				return False
 			return True
 
+		
+		if upload_profile_img == '' and upload_banner_img != '':
+	
+			try:
+				user = User.objects.get(id=user_id)
+				s3_client.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME,Key=user.background_img_url)
+				user.background_img_url = key_banner_img;
+				response = s3_client.upload_fileobj(banner_file_name, settings.AWS_STORAGE_BUCKET_NAME, key_banner_img)
+				user.save()
+			
+				request.session['background_img_url']  = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': key_banner_img ,
+                                })
 
-		#try : only when background images is changed
-		# try:
-		# 	response = s3_client.upload_fileobj(file_name, settings.AWS_STORAGE_BUCKET_NAME, key_banner_img )
-		# 	# s3.Object(settings.AWS_STORAGE_BUCKET_NAME, 'images/author/file_name').delete() # old path 
-		# 	return render(request,'editprofile.html')
-		# except ClientError as e:
-		# 	error = {'1':"images was not uploaded succesfully"}
-		# 	context = {
-  #       		"error": error,
-  #   		}
-		# 	return render(request,'editprofile.html',context)
-		# 	logging.error(e)
-		# 	return False
-		# return True
-
-
-
-		#try : only when profile and background image is changed
-
-		# remove old path from amazon storage and database
-		# store new path in database and store images amazon storage
+				return render(request,'editprofile.html')
+			except ClientError as e:
+				error = {'1':"images was not uploaded succesfully"}
+				context = {
+        			"error": error,
+    			}
+				return render(request,'editprofile.html',context)
+				logging.error(e)
+				return False
+			return True
 
 		
 
@@ -351,6 +614,27 @@ def profile(request,uid):
 	else:
 		isFollow = False
 
+	# if follower_obj:
+	# 	for follower in follower_obj:
+	# 		if follower.user__img_url !='n/a':
+	# 			key_profile_img = "images/author/"+ str(follower.user__img_url)
+	# 			follower.user__img_url = s3_client.generate_presigned_url('get_object',
+ #                                Params={
+ #                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+ #                                    'Key': key_profile_img,
+ #                                },                                  
+ #                                ExpiresIn=3600)
+	
+
+    # loop through users and if img_url != 'n/a'
+	# follow_obj.user__img_url = s3_client.generate_presigned_url('get_object',
+    #                             Params={
+    #                                 'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+    #                                 'Key': key_profile_img,
+    #                             },                                  
+    #                             ExpiresIn=3600)
+
+
 	context = {
 
         "products": store_obj,
@@ -364,9 +648,17 @@ def profile(request,uid):
     }
 	return render(request,'profile.html',context)
 
+# @requires_csrf_token
+# def create_auth(request):
+# 	try:
+# 		if not request.session['id']:
+# 			return redirect('/myapp/login')
+# 	except:
+# 		return redirect('/myapp/login') 
+# 			# return redirect('/myapp/login')
 
-def create_auth(request):
-	return render(request,'create.html')
+
+# 	return render(request,'create.html')
 
 
 
