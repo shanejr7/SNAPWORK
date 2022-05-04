@@ -186,9 +186,20 @@
                                         </div>
                                         {% endif %}
                                         <div class="author_list_pp">
-                                            <a href="/myapp/profile/{{p.user_id}}">                                    
-                                                <img class="lazy" src="{% static '' %}{{ user.img_url}}" alt="">
-                                                <i class="fa fa-check"></i>
+                                            <a href="/myapp/profile/{{p.user_id}}">       
+
+                                                {% if request.session.img_url  != 'n/a' %}
+                                                    
+                                                          <img class="lazy" src="{{ request.session.img_url }}" alt="">
+                                                               <!-- <i class="fa fa-check"></i> -->
+                                                {% endif %}
+                                                {% if request.session.img_url  == 'n/a' %}
+                                                      <img class="lazy" src="{% static 'images/author/user.jpg' %}" alt="">
+                                                     <!--       <i class="fa fa-check"></i> -->
+                                                {% endif %}  
+
+                                           
+                                           
                                             </a>
                                         </div>
                                         <div class="nft__item_wrap">
@@ -216,6 +227,12 @@
 
                                                       {% endif %}
 
+                                                      {% if p.data_type != "n/a" and p.auction == False and p.quantity != 0 %}
+
+                                                      Buy Now
+                                                      
+                                                      {% endif %}
+
                                                       {% if p.auction == True and p.contract_type != "n/a" %}
 
                                                       Place a Bid
@@ -231,6 +248,12 @@
                                                       Place a Bid
 
                                                       {% endif %}
+
+                                                       {% if p.auction == True and p.data_type != "n/a" %}
+
+                                                      Place a Bid
+
+                                                      {% endif %}
                                                   </button>
                                                   <div class="nft__item_share">
                                                     <h4>Share</h4>
@@ -241,7 +264,7 @@
                                             </div>
                                         </div>
                                         <a href="/store/{{p.user_id}}/{{p.id}}">
-                                            <img src="{% static '' %}{{ p.img_url }}" class="lazy nft__item_preview" alt="">
+                                            <img src="{{ p.img_url }}" class="lazy nft__item_preview" alt="">
                                         </a>
                                     </div>
                                     <div class="nft__item_info">
@@ -276,6 +299,11 @@
                                         Apply Now
                                     </a>
                                     {% endif %}
+                                     {% if p.data_type != "n/a" and p.auction == False %}
+                                      <a href="/store/{{p.user_id}}/{{p.id}}" >
+                                        Buy Now
+                                    </a>
+                                    {% endif %}
                                     &nbsp;
                                     {% if p.auction == True and p.contract_type != "n/a" %}
                                     <a href="/store/{{p.user_id}}/{{p.id}}" >
@@ -288,6 +316,11 @@
                                   </a>
                                   {% endif %}
                                   {% if p.auction == True and p.product_type != "n/a" %}
+                                  <a href="/store/{{p.user_id}}/{{p.id}}" >
+                                      Place a Bid
+                                  </a>
+                                  {% endif %}
+                                   {% if p.auction == True and p.data_type != "n/a" %}
                                   <a href="/store/{{p.user_id}}/{{p.id}}" >
                                       Place a Bid
                                   </a>

@@ -6,6 +6,14 @@ from django.views.decorators.csrf import requires_csrf_token
 from django.template import RequestContext
 from django.utils.html import strip_tags
 import datetime
+import boto3
+from botocore.exceptions import ClientError
+import os
+from django.conf import settings
+
+
+s3_client = boto3.client('s3', region_name=settings.AWS_S3_REGION_NAME , aws_access_key_id=settings.AWS_ACCESS_KEY_ID ,
+                               aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY)
 
 
 # Create your views here.
@@ -33,6 +41,45 @@ def store_detail(request):
 
     user_store_top_quality_rank_obj = User.objects.filter(quality_rank__gte=80)[:8].values('id','username','img_url','email','license','quality_rank','timestamp')
 
+
+    for store in user_store_obj1:
+        store['img_url'] = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': str(store['img_url']),
+                                })
+    for store in user_store_obj2:
+        store['img_url'] = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': str(store['img_url']),
+                                })
+    for store in user_store_obj3:
+        store['img_url'] = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': str(store['img_url']),
+                                })
+    for store in user_store_obj4:
+        store['img_url'] = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': str(store['img_url']),
+                                })
+
+    for store in user_store_obj5:
+        store['img_url'] = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': str(store['img_url']),
+                                })
+    for user_store in user_store_top_quality_rank_obj:
+        if user_store['img_url'] != 'n/a':
+            user_store['img_url'] = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': str(user_store['img_url']),
+                                })
     context = {
 
         "user_store_objs1": user_store_obj1,
@@ -70,7 +117,36 @@ def user_store_detail(request, uid,sid):
 
         store_auction_history_obj = Auction.objects.filter(store_id=sid).values('store__id','store__auction','store__quantity','user__username','user__img_url','user_id','highest_bid',
             'accepted_bid','application','price','quantity','timestamp').order_by('timestamp')
+
+        if owner_obj.img_url != 'n/a':
+            owner_obj.img_url = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': str(owner_obj.img_url),
+                                })
+        for store in store_obj:
+            store.img_url = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': str(store.img_url),
+                                })
  
+
+        for auction_user in store_auction_obj:
+            if auction_user['user__img_url'] != 'n/a':
+                auction_user['user__img_url'] = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': str(auction_user['user__img_url']),
+                                })
+        for auction_user in store_auction_history_obj:
+            if auction_user['user__img_url'] != 'n/a':
+                auction_user['user__img_url'] = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': str(auction_user['user__img_url']),
+                                })
+
     else:
         error = "This page is empty. Please come back soon."
 
@@ -210,6 +286,9 @@ def activity(request):
         'id','product','title','body','price','quantity','auction','product_type', 'contract_type','service_type',
         'data_type','season','views','img_url','address', 'duration_timestamp','timestamp').order_by('user__timestamp') 
 
+    for store in store_obj:
+        store['img_url'] = s3_client.generate_presigned_url('get_object',
+            Params={'Bucket': settings.AWS_STORAGE_BUCKET_NAME,'Key': str(store['img_url'])})
   
 
     context = {
@@ -267,6 +346,10 @@ def rankings(request):
 
     user_store_top_quality_rank_obj = User.objects.values('id','username','img_url','email','license','quality_rank','timestamp')
 
+    for user_store in user_store_top_quality_rank_obj:
+        if user_store['img_url'] != 'n/a':
+            user_store['img_url'] = s3_client.generate_presigned_url('get_object',
+            Params={'Bucket': settings.AWS_STORAGE_BUCKET_NAME,'Key': str(user_store['img_url'])})
 
     context = {
 
@@ -286,6 +369,10 @@ def liveauctions(request):
     user_store_liveauctions = Store.objects.filter(auction=True).values('user__id','user__username','user__email','user__license','user__timestamp',
         'id','product','title','body','price','quantity','auction','product_type', 'contract_type','service_type',
         'data_type','season','views','img_url','address', 'duration_timestamp','timestamp').order_by('user__timestamp')
+
+    for store in user_store_liveauctions:
+        store['img_url'] = s3_client.generate_presigned_url('get_object',
+            Params={'Bucket': settings.AWS_STORAGE_BUCKET_NAME,'Key': str(store['img_url'])})
 
     context = {
 

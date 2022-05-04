@@ -116,7 +116,7 @@
                 {% for p in products %}
 
                 <div class="col-md-6 text-center">
-                    <img src="{% static '' %}{{ p.img_url }}" class="img-fluid img-rounded mb-sm-30" alt="">
+                    <img src="{{ p.img_url }}" class="img-fluid img-rounded mb-sm-30" alt="">
                 </div>
                 <div class="col-md-6">
                     <div class="item_info">
@@ -213,8 +213,16 @@
                                             <div class="item_author">                                    
                                                 <div class="author_list_pp">
                                                     <a href="/myapp/profile/{{users.id}}">
-                                                        <img class="lazy" src="{% static '' %}{{users.img_url }}" alt="">
-                                                        <i class="fa fa-check"></i>
+                                                        {% if users.img_url  != 'n/a' %}
+                                                    
+                                                          <img class="lazy" src="{{ users.img_url }}" alt="">
+                                                               <!-- <i class="fa fa-check"></i> -->
+                                                        {% endif %}
+                                                         {% if users.img_url  == 'n/a' %}
+                                                      <img class="lazy" src="{% static 'images/author/user.jpg' %}" alt="">
+                                                     <!--       <i class="fa fa-check"></i> -->
+                                                        {% endif %} 
+                                               
                                                     </a>
                                                 </div>                                  
                                                 <div class="author_list_info">
@@ -304,8 +312,15 @@
                                        
                                        <div class="p_list_pp">
                                         <a href="/myapp/profile/{{ a.user_id }}">
-                                            <img class="lazy" src="{% static '' %}{{ a.user__img_url }}" alt="">
-                                            <i class="fa fa-check"></i>
+                                            {% if a.user__img_url == 'n/a' %}
+                                               <img class="lazy" src="{% static 'images/author/user.jpg' %}" alt="">
+                                            <!-- <i class="fa fa-check"></i> -->
+                                            {% endif %}
+                                            {% if a.user__img_url != 'n/a' %}
+                                               <img class="lazy" src="{{ a.user__img_url }}" alt="">
+                                            <!-- <i class="fa fa-check"></i> -->
+                                            {% endif %}
+                                         
                                         </a>
                                     </div> 
                                     {% endif %}
@@ -313,8 +328,14 @@
                                     
                                     <div class="p_list_pp">
                                         <a href="/myapp/profile/{{ a.user_id }}">
-                                            <img class="lazy" src="{% static '' %}{{ a.user__img_url }}" alt="">
-                                            <i class="fa fa-check"></i>
+                                            {% if a.user__img_url == 'n/a' %}
+                                               <img class="lazy" src="{% static 'images/author/user.jpg' %}" alt="">
+                                            <!-- <i class="fa fa-check"></i> -->
+                                            {% endif %}
+                                            {% if a.user__img_url != 'n/a' %}
+                                               <img class="lazy" src="{{ a.user__img_url }}" alt="">
+                                            <!-- <i class="fa fa-check"></i> -->
+                                            {% endif %}
                                         </a>
                                     </div> 
                                     {% endif %}
@@ -322,8 +343,14 @@
                                     
                                     <div class="p_list_pp">
                                         <a href="/myapp/profile/{{ a.user_id }}">
-                                            <img class="lazy" src="{% static '' %}{{ a.user__img_url }}" alt="">
-                                            <i class="fa fa-check"></i>
+                                            {% if a.user__img_url == 'n/a' %}
+                                               <img class="lazy" src="{% static 'images/author/user.jpg' %}" alt="">
+                                            <!-- <i class="fa fa-check"></i> -->
+                                            {% endif %}
+                                            {% if a.user__img_url != 'n/a' %}
+                                               <img class="lazy" src="{{ a.user__img_url }}" alt="">
+                                            <!-- <i class="fa fa-check"></i> -->
+                                            {% endif %}
                                         </a>
                                     </div> 
                                     {% endif %}
@@ -331,8 +358,14 @@
                                     
                                     <div class="p_list_pp">
                                         <a href="/myapp/profile/{{ a.user_id }}">
-                                            <img class="lazy" src="{% static '' %}{{ a.user__img_url }}" alt="">
-                                            <i class="fa fa-check"></i>
+                                            {% if a.user__img_url == 'n/a' %}
+                                               <img class="lazy" src="{% static 'images/author/user.jpg' %}" alt="">
+                                            <!-- <i class="fa fa-check"></i> -->
+                                            {% endif %}
+                                            {% if a.user__img_url != 'n/a' %}
+                                               <img class="lazy" src="{{ a.user__img_url }}" alt="">
+                                            <!-- <i class="fa fa-check"></i> -->
+                                            {% endif %}
                                         </a>
                                     </div> 
                                     {% endif %}    
@@ -373,8 +406,14 @@
                                    
                                    <div class="p_list_pp">
                                     <a href="/myapp/profile/{{ a.user_id }}">
-                                        <img class="lazy" src="{% static '' %}{{ a.user__img_url }}" alt="">
-                                        <i class="fa fa-check"></i>
+                                        {% if a.user__img_url == 'n/a' %}
+                                               <img class="lazy" src="{% static 'images/author/user.jpg' %}" alt="">
+                                            <!-- <i class="fa fa-check"></i> -->
+                                            {% endif %}
+                                            {% if a.user__img_url != 'n/a' %}
+                                               <img class="lazy" src="{{ a.user__img_url }}" alt="">
+                                            <!-- <i class="fa fa-check"></i> -->
+                                            {% endif %}
                                     </a>
                                 </div> 
                                 {% endif %}
@@ -382,8 +421,14 @@
                                 
                                 <div class="p_list_pp">
                                     <a href="/myapp/profile/{{ a.user_id }}">
-                                        <img class="lazy" src="{% static '' %}{{ a.user__img_url }}" alt="">
-                                        <i class="fa fa-check"></i>
+                                        {% if a.user__img_url == 'n/a' %}
+                                               <img class="lazy" src="{% static 'images/author/user.jpg' %}" alt="">
+                                            <!-- <i class="fa fa-check"></i> -->
+                                            {% endif %}
+                                            {% if a.user__img_url != 'n/a' %}
+                                               <img class="lazy" src="{{ a.user__img_url }}" alt="">
+                                            <!-- <i class="fa fa-check"></i> -->
+                                            {% endif %}
                                     </a>
                                 </div> 
                                 {% endif %}
@@ -391,8 +436,14 @@
                                 
                                 <div class="p_list_pp">
                                     <a href="/myapp/profile/{{ a.user_id }}">
-                                        <img class="lazy" src="{% static '' %}{{ a.user__img_url }}" alt="">
-                                        <i class="fa fa-check"></i>
+                                        {% if a.user__img_url == 'n/a' %}
+                                               <img class="lazy" src="{% static 'images/author/user.jpg' %}" alt="">
+                                            <!-- <i class="fa fa-check"></i> -->
+                                            {% endif %}
+                                            {% if a.user__img_url != 'n/a' %}
+                                               <img class="lazy" src="{{ a.user__img_url }}" alt="">
+                                            <!-- <i class="fa fa-check"></i> -->
+                                            {% endif %}
                                     </a>
                                 </div> 
                                 {% endif %}
@@ -400,8 +451,14 @@
                                 
                                 <div class="p_list_pp">
                                     <a href="/myapp/profile/{{ a.user_id }}">
-                                        <img class="lazy" src="{% static '' %}{{ a.user__img_url }}" alt="">
-                                        <i class="fa fa-check"></i>
+                                        {% if a.user__img_url == 'n/a' %}
+                                               <img class="lazy" src="{% static 'images/author/user.jpg' %}" alt="">
+                                            <!-- <i class="fa fa-check"></i> -->
+                                            {% endif %}
+                                            {% if a.user__img_url != 'n/a' %}
+                                               <img class="lazy" src="{{ a.user__img_url }}" alt="">
+                                            <!-- <i class="fa fa-check"></i> -->
+                                            {% endif %}
                                     </a>
                                 </div> 
                                 {% endif %}   
@@ -468,6 +525,11 @@
                         Apply Now
                     </a>
                     {% endif %}
+                    {% if product.data_type != "n/a" and product.auction == False %}
+                       <a href="#" class="btn-main btn-lg product" data-bs-toggle="modal" data-bs-target="#buy_now">
+                        Buy Now
+                    </a>
+                    {% endif %}
                     &nbsp;
                     {% if product.auction == True and product.contract_type != "n/a" %}
                     <a href="#" class="btn-main btn-lg btn-light applicationBid" data-bs-toggle="modal" data-bs-target="#place_a_bid_application">
@@ -481,6 +543,12 @@
                   {% endif %}
 
                   {% if product.auction == True and product.product_type != "n/a" %}
+                  <a href="#" class="btn-main btn-lg btn-light productBid" data-bs-toggle="modal" data-bs-target="#place_a_bid">
+                      Place a Bid
+                  </a>
+                  {% endif %}
+
+                   {% if product.auction == True and product.data_type != "n/a" %}
                   <a href="#" class="btn-main btn-lg btn-light productBid" data-bs-toggle="modal" data-bs-target="#place_a_bid">
                       Place a Bid
                   </a>

@@ -178,8 +178,17 @@
                             <tr>
                               <th scope="row"><a href="/myapp/profile/{{user.id}}">
                                   <div class="coll_list_pp">
-                                    <img class="lazy" src="{% static '' %}{{user.img_url}}" alt="">
-                                    <!--       <i class="fa fa-check"></i> -->
+
+                                    {% if user.img_url != 'n/a' %}
+                                    <img src="{{user.img_url}}" alt="">
+                                               <!--       <i class="fa fa-check"></i> -->
+                                    {% endif %}
+                                    {% if user.img_url == 'n/a' %}
+                                    <img src="{% static 'images/author/user.jpg' %}" alt="">
+                                               <!--       <i class="fa fa-check"></i> -->
+                                    {% endif %}
+                                
+                         
                                 </div>  
                             {{user.username}}</a></th>
                             <!-- <td>15,225.87</td> -->

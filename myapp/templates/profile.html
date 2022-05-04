@@ -108,7 +108,13 @@
             <div id="top"></div>
             
             <!-- section begin -->
-            <section id="profile_banner" aria-label="section" class="text-light" data-bgimage="url({% static '' %}{{user.background_img_url}}) top">
+            {% if users.background_img_url != 'n/a' %}
+             <section id="profile_banner" aria-label="section" class="text-light" data-bgimage="url({{user.background_img_url}}) top">
+            {% endif %}
+            {% if users.background_img_url == 'n/a' %}
+             <section id="profile_banner" aria-label="section" class="text-light" data-bgimage="url({% static '' %}) top">
+            {% endif %}
+           
 
             </section>
             <!-- section close -->
@@ -121,8 +127,8 @@
                          <div class="d_profile">
                             <div class="profile_avatar">
                                 <div class="d_profile_img" style="margin-bottom:2em;">
-                                    <img src="{% static '' %}{{ user.img_url }}" alt="">
-                                    <i class="fa fa-check"></i>
+                                    <img src="{{ user.img_url }}" alt="">
+                                    <!-- <i class="fa fa-check"></i> -->
                                 </div>
 
                                 <div class="profile_name">
@@ -200,14 +206,15 @@
                                     {% endif %}
                                     <div class="author_list_pp">
                                         <a href="/myapp/profile/{{p.user_id}}">                                    
-                                            <img class="lazy" src="{% static '' %}{{ user.img_url}}" alt="">
-                                            <i class="fa fa-check"></i>
+                                            <img class="lazy" src="{{ user.img_url}}" alt="">
+                                            <!-- <i class="fa fa-check"></i> -->
                                         </a>
                                     </div>
                                     <div class="nft__item_wrap">
                                         <div class="nft__item_extra">
                                             <div class="nft__item_buttons">
                                                 <button onclick="location.href='/store/{{p.user_id}}/{{p.id}}'">
+
                                                   {% if p.product_type != "n/a" and p.auction == False and p.quantity != 0 %}
 
                                                   Buy Now
@@ -244,6 +251,21 @@
                                                   Place a Bid
 
                                                   {% endif %}
+
+
+                                                 {% if p.data_type != "n/a" and p.auction == False and p.quantity != 0 %}
+
+                                                  Buy Now
+
+                                                  {% endif %}
+
+                                                  {% if p.auction == True and p.data_type != "n/a" %}
+
+                                                  Place a Bid
+
+                                                  {% endif %}
+
+                                            
                                               </button>
                                               <div class="nft__item_share">
                                                 <h4>Share</h4>
@@ -254,7 +276,7 @@
                                         </div>
                                     </div>
                                     <a href="/store/{{p.user_id}}/{{p.id}}">
-                                        <img src="{% static '' %}{{ p.img_url }}" class="lazy nft__item_preview" alt="">
+                                        <img src="{{ p.img_url }}" class="lazy nft__item_preview" alt="">
                                     </a>
                                 </div>
                                 <div class="nft__item_info">
@@ -289,7 +311,17 @@
                                     Apply Now
                                 </a>
                                 {% endif %}
+                                  {% if p.data_type != "n/a" and p.auction == False %}
+                                  <a href="/store/{{p.user_id}}/{{p.id}}" >
+                                    Buy Now
+                                </a>
+                                {% endif %}
                                 &nbsp;
+                                {% if p.auction == True and p.data_type != "n/a" %}
+                                <a href="/store/{{p.user_id}}/{{p.id}}" >
+                                  Place a Bid
+                              </a>
+                              {% endif %}
                                 {% if p.auction == True and p.contract_type != "n/a" %}
                                 <a href="/store/{{p.user_id}}/{{p.id}}" >
                                   Place a Bid

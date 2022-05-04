@@ -139,7 +139,7 @@
                     {% if stores.product_type != 'n/a' %}
 
                     <li class="act_sale">
-                        <img src="{% static '' %}{{stores.img_url}}" alt="">
+                        <img src="{{stores.img_url}}" alt="">
                         <div class="act_list_text">
                             <h4>{{stores.title}}</h4>
                             {{stores.body}} by <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> for ${{stores.price}}
@@ -154,7 +154,7 @@
                     {% if stores.contract_type != 'n/a' %}
 
                     <li class="act_offer">
-                        <img src="{% static '' %}{{stores.img_url}}" alt="">
+                        <img src="{{stores.img_url}}" alt="">
                         <div class="act_list_text">
                             <h4>{{stores.title}}</h4>
                             <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> offered ${{stores.price}}
@@ -169,7 +169,7 @@
                    {% if stores.service_type != 'n/a'  %}
 
                    <li class="act_offer">
-                    <img src="{% static '' %}{{stores.img_url}}" alt="">
+                    <img src="{{stores.img_url}}" alt="">
                     <div class="act_list_text">
                         <h4>{{stores.title}}</h4>
                         <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> offered ${{stores.price}}
@@ -184,7 +184,7 @@
                {% if stores.data_type != 'n/a' %}
 
                <li class="act_sale">
-                <img src="{% static '' %}{{stores.img_url}}" alt="">
+                <img src="{{stores.img_url}}" alt="">
                 <div class="act_list_text">
                     <h4>{{stores.title}}</h4>
                     <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> offered ${{stores.price}}

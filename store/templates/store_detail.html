@@ -38,177 +38,177 @@
                                 <div class="de-flex-col">
                                     <div class="de-flex-col">
                                         <!-- logo begin -->
-                                    <div id="logo">
-                                        <a href="/">
-                                            <img  style="width: 2em" alt="" class="logo-2" src="{% static 'images/logo.png' %}" />
-                                        </a>
+                                        <div id="logo">
+                                            <a href="/">
+                                                <img  style="width: 2em" alt="" class="logo-2" src="{% static 'images/logo.png' %}" />
+                                            </a>
+                                        </div>
+                                        <!-- logo close -->
                                     </div>
-                                    <!-- logo close -->
+                                    <div class="de-flex-col">
+                                        <input id="quick_search" class="xs-hide style-2" name="quick_search" placeholder="search item here..." type="text" />
+                                    </div>
                                 </div>
-                                <div class="de-flex-col">
-                                    <input id="quick_search" class="xs-hide style-2" name="quick_search" placeholder="search item here..." type="text" />
+                                <div class="de-flex-col header-col-mid">
+                                    <!-- mainmenu begin -->
+                                    <ul id="mainmenu">
+                                        <li>
+                                            <a href="/store/" class="active">Home<span></span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Explore<span></span></a>
+                                            <ul>
+                                                <li><a href="/liveauctions/">Live Auction</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">Pages<span></span></a>
+                                            <ul>
+                                                {% if request.session.username != None %}
+                                                <li><a href="/myapp/myprofile/">Profile</a></li>
+                                                <li><a href="/myapp/wallet/">Wallet</a></li>
+                                                <li><a href="/myapp/create/">Create</a></li>
+                                                {% endif %}
+                                                {% if request.session.username == None %}
+                                                <li><a href="/myapp/login/">Login</a></li>
+                                                {% endif %}
+                                                {% if request.session.username == None %}
+                                                <li><a href="/myapp/signup">Signup</a></li>
+                                                {% endif %}
+                                                {% if request.session.username != None %}
+                                                <li><a href="/myapp/logoff">Log Off</a></li>
+                                                {% endif %}
+                                            </ul>
+                                        </li>                                    
+                                        <li>
+                                            <a href="#">Stats<span></span></a>
+                                            <ul>
+                                                <li><a href="/store/activity/">Activity</a></li>
+                                                <li><a href="/store/rankings/">Rankings</a></li>
+                                            </ul>
+                                        </li>
+
+                                    </ul>
+                                    {% if request.session.username != None %}
+                                    <div class="menu_side_area">
+                                        <a href="/myapp/wallet/" class="btn-main btn-wallet"><i class="icon_wallet_alt"></i><span>Connect Wallet</span></a>
+                                        <span id="menu-btn"></span>
+                                    </div>
+                                    {% endif %}
                                 </div>
-                            </div>
-                            <div class="de-flex-col header-col-mid">
-                                <!-- mainmenu begin -->
-                                <ul id="mainmenu">
-                                    <li>
-                                        <a href="/store/" class="active">Home<span></span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Explore<span></span></a>
-                                        <ul>
-                                            <li><a href="/liveauctions/">Live Auction</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Pages<span></span></a>
-                                        <ul>
-                                            {% if request.session.username != None %}
-                                            <li><a href="/myapp/myprofile/">Profile</a></li>
-                                            <li><a href="/myapp/wallet/">Wallet</a></li>
-                                            <li><a href="/myapp/create/">Create</a></li>
-                                            {% endif %}
-                                            {% if request.session.username == None %}
-                                            <li><a href="/myapp/login/">Login</a></li>
-                                            {% endif %}
-                                            {% if request.session.username == None %}
-                                            <li><a href="/myapp/signup">Signup</a></li>
-                                            {% endif %}
-                                            {% if request.session.username != None %}
-                                            <li><a href="/myapp/logoff">Log Off</a></li>
-                                            {% endif %}
-                                        </ul>
-                                    </li>                                    
-                                    <li>
-                                        <a href="#">Stats<span></span></a>
-                                        <ul>
-                                            <li><a href="/store/activity/">Activity</a></li>
-                                            <li><a href="/store/rankings/">Rankings</a></li>
-                                        </ul>
-                                    </li>
-                                    
-                                </ul>
-                                {% if request.session.username != None %}
-                                <div class="menu_side_area">
-                                    <a href="/myapp/wallet/" class="btn-main btn-wallet"><i class="icon_wallet_alt"></i><span>Connect Wallet</span></a>
-                                    <span id="menu-btn"></span>
-                                </div>
-                                {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </header>
-        <!-- header close -->
-        <!-- content begin -->
-        <div class="no-bottom no-top" id="content">
-            <div id="top"></div>
-            <section id="section-hero" class="no-bottom" aria-label="section">
+            </header>
+            <!-- header close -->
+            <!-- content begin -->
+            <div class="no-bottom no-top" id="content">
+                <div id="top"></div>
+                <section id="section-hero" class="no-bottom" aria-label="section">
 
-                <div class="d-carousel">
-                    <div id="item-carousel-big" class="owl-carousel nft_alt_slider wow fadeIn">
+                    <div class="d-carousel">
+                        <div id="item-carousel-big" class="owl-carousel nft_alt_slider wow fadeIn">
 
-                     <div class="nft_pic nft_multi">
+                           <div class="nft_pic nft_multi">
 
 
-                      {% for object in user_store_objs1 %}
-                      
+                              {% for object in user_store_objs1 %}
+
+                              <a href="/store/{{object.user__id}}/{{object.id}}">
+
+                                <div class="nft_pic_title text-dark">
+                                    <h4 style="background-color: white; border-radius: 3px;" >{{ object.title }}</h4>
+                                    <span style="background-color: white; border-radius: 3px; color: #9a9a9a;" class="nft_pic_by">@{{ object.user__username }}</span>
+                                </div>
+                                <img src="{{ object.img_url }}" class="lazy img-fluid" alt="">
+                            </a>
+
+                            {% endfor %}
+
+                        </div>
+
+                        {% for object in user_store_objs2 %}
+
+                        <div class="nft_pic ">                            
+                            <a href="/store/{{object.user__id}}/{{object.id}}">
+                                <span class="nft_pic_info">
+                                    <span style="background-color: white; border-radius: 3px;" class="nft_pic_title text-dark">{{ object.title }}</span>
+                                    <span style="background-color: white; border-radius: 3px; color: #9a9a9a;" class="nft_pic_by">@{{ object.user__username }}</span>
+                                </span>
+
+                            </a>
+                            <div class="nft_pic_wrap">
+                                <img src="{{ object.img_url }}" class="lazy img-fluid" alt="">
+                            </div>
+                        </div>
+
+                        {% endfor %}
+
+
+
+                        <div class="nft_pic nft_multi">
+
+
+                          {% for object in user_store_objs3 %}
+
+                          <a href="/store/{{object.user__id}}/{{object.id}}">
+                            <div class="nft_pic_title text-dark">
+                                <h4 style="background-color: white; border-radius: 3px;" >{{ object.title }}</h4>
+                                <span style="background-color: white; border-radius: 3px; color: #9a9a9a;" class="nft_pic_by">@{{ object.user__username }}</span>
+                            </div>
+                            <img src="{{ object.img_url }}" class="lazy img-fluid" alt="">
+
+                        </a>
+
+                        {% endfor %}
+
+                    </div>
+
+                    {% for object in user_store_objs4 %}
+
+                    <div class="nft_pic">                            
+                        <a href="/store/{{object.user__id}}/{{object.id}}">
+                            <span class="nft_pic_info">
+                                <span style="background-color: white; border-radius: 3px;" class="nft_pic_title text-dark">{{ object.title }}</span>
+                                <span style="background-color: white; border-radius: 3px; color: #9a9a9a;" class="nft_pic_by">@{{ object.user__username }}</span>
+                            </span>
+                        </a>
+                        <div class="nft_pic_wrap">
+                            <img src="{{ object.img_url }}" class="lazy img-fluid" alt="">
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+
+
+                    <div class="nft_pic nft_multi">
+
+
+                      {% for object in user_store_objs5 %}
+
                       <a href="/store/{{object.user__id}}/{{object.id}}">
-
                         <div class="nft_pic_title text-dark">
                             <h4 style="background-color: white; border-radius: 3px;" >{{ object.title }}</h4>
                             <span style="background-color: white; border-radius: 3px; color: #9a9a9a;" class="nft_pic_by">@{{ object.user__username }}</span>
                         </div>
-                        <img src="{% static '' %}{{ object.img_url }}" class="lazy img-fluid" alt="">
+                        <img src="{{ object.img_url }}" class="lazy img-fluid" alt="">
                     </a>
 
                     {% endfor %}
 
                 </div>
 
-                {% for object in user_store_objs2 %}
-
-                <div class="nft_pic ">                            
-                    <a href="/store/{{object.user__id}}/{{object.id}}">
-                        <span class="nft_pic_info">
-                            <span style="background-color: white; border-radius: 3px;" class="nft_pic_title text-dark">{{ object.title }}</span>
-                            <span style="background-color: white; border-radius: 3px; color: #9a9a9a;" class="nft_pic_by">@{{ object.user__username }}</span>
-                        </span>
-                        
-                    </a>
-                    <div class="nft_pic_wrap">
-                        <img src="{% static '' %}{{ object.img_url }}" class="lazy img-fluid" alt="">
-                    </div>
-                </div>
-
-                {% endfor %}
-
-
-
-                <div class="nft_pic nft_multi">
-
-
-                  {% for object in user_store_objs3 %}
-                  
-                  <a href="/store/{{object.user__id}}/{{object.id}}">
-                    <div class="nft_pic_title text-dark">
-                        <h4 style="background-color: white; border-radius: 3px;" >{{ object.title }}</h4>
-                        <span style="background-color: white; border-radius: 3px; color: #9a9a9a;" class="nft_pic_by">@{{ object.user__username }}</span>
-                    </div>
-                    <img src="{% static '' %}{{ object.img_url }}" class="lazy img-fluid" alt="">
-                    
-                </a>
-
-                {% endfor %}
 
             </div>
-
-            {% for object in user_store_objs4 %}
-
-            <div class="nft_pic">                            
-                <a href="/store/{{object.user__id}}/{{object.id}}">
-                    <span class="nft_pic_info">
-                        <span style="background-color: white; border-radius: 3px;" class="nft_pic_title text-dark">{{ object.title }}</span>
-                        <span style="background-color: white; border-radius: 3px; color: #9a9a9a;" class="nft_pic_by">@{{ object.user__username }}</span>
-                    </span>
-                </a>
-                <div class="nft_pic_wrap">
-                    <img src="{% static '' %}{{ object.img_url }}" class="lazy img-fluid" alt="">
-                </div>
-            </div>
-
-            {% endfor %}
-
-
-            
-            <div class="nft_pic nft_multi">
-
-
-              {% for object in user_store_objs5 %}
-              
-              <a href="/store/{{object.user__id}}/{{object.id}}">
-                <div class="nft_pic_title text-dark">
-                    <h4 style="background-color: white; border-radius: 3px;" >{{ object.title }}</h4>
-                    <span style="background-color: white; border-radius: 3px; color: #9a9a9a;" class="nft_pic_by">@{{ object.user__username }}</span>
-                </div>
-                <img src="{% static '' %}{{ object.img_url }}" class="lazy img-fluid" alt="">
-            </a>
-
-            {% endfor %}
-
+            <div class="d-arrow-left"><i class="fa fa-angle-left"></i></div>
+            <div class="d-arrow-right"><i class="fa fa-angle-right"></i></div>
         </div>
+    </section>
 
-
-    </div>
-    <div class="d-arrow-left"><i class="fa fa-angle-left"></i></div>
-    <div class="d-arrow-right"><i class="fa fa-angle-right"></i></div>
-</div>
-</section>
-
-<section id="section-collections" class="pt30">
-    <div class="container">
+    <section id="section-collections" class="pt30">
+        <div class="container">
 
                            <!--  <div class="spacer-single"></div>
                             
@@ -684,17 +684,28 @@
                                             <li>                                    
                                                 <div class="author_list_pp">
                                                     <a href="/myapp/profile/{{object.id}}">
-                                                        <img class="lazy" src="{% static '' %}{{object.img_url}}" alt="">
-                                                        <i class="fa fa-check"></i>
-                                                    </a>
-                                                </div>                                    
-                                                <div class="author_list_info">
-                                                    <a href="/myapp/profile/{{object.id}}">{{object.username}}</a>
-                                                    <span>Quality: {{object.quality_rank}}%</span>
-                                                </div>
-                                            </li>                                                 
 
-                                            {% endfor %}
+                                                      {% if object.img_url  != 'n/a' %}
+
+                                                      <img class="lazy" src="{{ object.img_url }}" alt="">
+                                                      <!-- <i class="fa fa-check"></i> -->
+                                                      {% endif %}
+                                                      {% if object.img_url  == 'n/a' %}
+                                                      <img class="lazy" src="{% static 'images/author/user.jpg' %}" alt="">
+                                                      <!--       <i class="fa fa-check"></i> -->
+                                                      {% endif %} 
+     
+
+
+                                                  </a>
+                                              </div>                                    
+                                              <div class="author_list_info">
+                                                <a href="/myapp/profile/{{object.id}}">{{object.username}}</a>
+                                                <span>Quality: {{object.quality_rank}}%</span>
+                                            </div>
+                                        </li>                                                 
+
+                                        {% endfor %}
 
 
                                           <!-- 
@@ -906,7 +917,7 @@
                                     <div class="col-md-12">
                                         <div class="de-flex">
                                             <div class="de-flex-col">
-                                               <a href="https://www.aeravi.io" target="_blank">
+                                             <a href="https://www.aeravi.io" target="_blank">
                                                 <!-- <img alt="" class="f-logo" src="images/logo.png" /> --><span class="copy">&copy; Copyright - Aeravi Technologies LLC</span>
                                             </a>
                                         </div>

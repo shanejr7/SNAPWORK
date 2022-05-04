@@ -217,7 +217,12 @@ def profile_auth(request):
 			follow_obj = Follow.objects.filter(user_follower_id=owner_obj.id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
 			follower_obj = Follow.objects.filter(user_id=owner_obj.id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
 		
-
+			for store in store_obj:
+				store.img_url = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': str(store.img_url),
+                                })
 			context = {
         		"products": store_obj,
         		"user": owner_obj,
@@ -404,7 +409,7 @@ def profile_create_auth(request):
 				user = User.objects.get(id=user_id)
 				date = datetime.datetime.now()
 
-				time_stamp = date.strftime('%m-%d-%Y %H:%M')
+				time_stamp = date.strftime('%m/%d/%Y %H:%M')
 	
 				if duration_timestamp != 'n/a':
 					year = duration_timestamp[0:4]
@@ -577,6 +582,27 @@ def profile(request,uid):
 	if int(uid):
 		owner_obj = User.objects.get(pk=uid)
 		store_obj = Store.objects.filter(user_id=owner_obj.id)
+
+		if owner_obj.img_url != 'n/a':
+			owner_obj.img_url  = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': str(owner_obj.img_url),
+                                })
+		if owner_obj.background_img_url != 'n/a':
+			owner_obj.background_img_url  = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': str(owner_obj.background_img_url),
+                                })
+
+		for store in store_obj:
+			store.img_url  = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': str(store.img_url),
+                                })
+
 	
 		try:
 			follower_obj = Follower.objects.filter(user_follower_id=owner_obj.id).values('user__id','user__username','user__email','user__img_url','user__timestamp')

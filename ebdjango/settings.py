@@ -99,28 +99,28 @@ WSGI_APPLICATION = 'ebdjango.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'postgres',
-#         'USER': 'postgres',
-#         'DB':'postgres2',
-#         'PASSWORD': 'php123',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5433',
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
-        'USER': 'dbmasteruser',
-        'DB':'postgres',
-        'PASSWORD': '{YO_YY4#a~5^pn!U6XkrL5m{1w5t7nRK',
-        'HOST': 'ls-2554945fb962f9ccecafc4464452adffe814abbc.cm5gc7q4k5dt.us-east-2.rds.amazonaws.com',
-        'PORT': '5432',
+        'USER': 'postgres',
+        'DB':'postgres2',
+        'PASSWORD': 'php123',
+        'HOST': '127.0.0.1',
+        'PORT': '5433',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': 'dbmasteruser',
+#         'DB':'postgres',
+#         'PASSWORD': '{YO_YY4#a~5^pn!U6XkrL5m{1w5t7nRK',
+#         'HOST': 'ls-2554945fb962f9ccecafc4464452adffe814abbc.cm5gc7q4k5dt.us-east-2.rds.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
 
 
 
