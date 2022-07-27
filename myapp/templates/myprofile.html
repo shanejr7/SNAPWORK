@@ -422,14 +422,14 @@
                                         </div>
                                         {% endif %}
                                         <div class="author_list_pp">
-                                            <a href="/myapp/profile/{{p.user_id}}">       
+                                            <a href="/myapp/profile/{{p.store__user_id}}">  
 
-                                                {% if request.session.img_url  != 'n/a' %}
+                                                {% if p.store__user_img_url  != 'n/a' %}
                                                     
-                                                          <img class="lazy" src="{{ request.session.img_url }}" alt="">
+                                                          <img class="lazy" src="{{ p.store__user__img_url }}" alt="">
                                                                <!-- <i class="fa fa-check"></i> -->
                                                 {% endif %}
-                                                {% if request.session.img_url  == 'n/a' %}
+                                                {% if p.store__user_img_url  == 'n/a' %}
                                                       <img class="lazy" src="{% static 'images/author/user.jpg' %}" alt="">
                                                      <!--       <i class="fa fa-check"></i> -->
                                                 {% endif %}  
@@ -468,7 +468,7 @@
                                         <div class="nft__item_action">
                                
                                          <a href="/store/{{p.store__user_id}}/{{p.store__id}}" >
-                                          Check Status
+                                          Check Application
                                       </a>
                                   
                                     
