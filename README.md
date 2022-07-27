@@ -2,7 +2,7 @@
 
 # Framework: (Django - Python)
 # Geo localizations functions: (GCP) 
-# Cloud data: (AWS - PGSQL)
+# Cloud data: (LightSail - PGSQL)
 # PaaS: (AWS EC2)
 
 # Algorithm design & data structure 
@@ -13,6 +13,7 @@
 # Social community API
 # Payment API
 # S3 bucket API
+# 53 domain routing
 # Open CV facial reconginition
 
 
