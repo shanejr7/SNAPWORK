@@ -142,7 +142,7 @@
                         <img src="{{stores.img_url}}" alt="">
                         <div class="act_list_text">
                             <h4>{{stores.title}}</h4>
-                            {{stores.body}} by <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> for ${{stores.price}}
+                            {{stores.body}} by <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> for ${{stores.price|floatformat:"2"}}
                             <span class="act_list_date">
                                 {{stores.timestamp}}
                             </span>
@@ -157,7 +157,7 @@
                         <img src="{{stores.img_url}}" alt="">
                         <div class="act_list_text">
                             <h4>{{stores.title}}</h4>
-                            <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> offered ${{stores.price}}
+                            <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> offered ${{stores.price|floatformat:"2"}}
                             <span class="act_list_date">
                                {{stores.timestamp}}
                            </span>
@@ -172,7 +172,7 @@
                     <img src="{{stores.img_url}}" alt="">
                     <div class="act_list_text">
                         <h4>{{stores.title}}</h4>
-                        <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> offered ${{stores.price}}
+                        <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> offered ${{stores.price|floatformat:"2"}}
                         <span class="act_list_date">
                            {{stores.timestamp}}
                        </span>
@@ -187,7 +187,7 @@
                 <img src="{{stores.img_url}}" alt="">
                 <div class="act_list_text">
                     <h4>{{stores.title}}</h4>
-                    <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> offered ${{stores.price}}
+                    <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> offered ${{stores.price|floatformat:"2"}}
                     <span class="act_list_date">
                        {{stores.timestamp}}
                    </span>

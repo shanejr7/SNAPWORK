@@ -294,7 +294,7 @@
                                         <span></span>
                                     </div>
                                     <div class="nft__item_price">
-                                        ${{p.price}} USD<span>{{ p.timestamp|slice:'0:2' }}/{{ p.timestamp|slice:'3:5'   }}</span>
+                                        ${{p.price|floatformat:"2"}} USD<span>{{ p.timestamp|slice:'0:2' }}/{{ p.timestamp|slice:'3:5'   }}</span>
                                     </div>
                                     <div class="nft__item_action">
                                      {% if p.product_type != "n/a" and p.auction == False and p.quantity != 0 %}

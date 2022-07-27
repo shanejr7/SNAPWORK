@@ -380,11 +380,11 @@
                                         <span>by <b>{{a.user__username}}</b> at {{ a.timestamp}}</span>
                                         {% endif %}
                                         {% if a.accepted_bid == True and a.application == False  %}
-                                        Bid accepted <b>${{a.price}} USD</b>
+                                        Bid accepted <b>${{a.price|floatformat:"2"}} USD</b>
                                         <span>by <b>{{a.user__username}}</b> at {{ a.timestamp}}</span>
                                         {% endif %}
                                         {% if a.accepted_bid == False and a.application == False  %}
-                                        Bid <b>${{a.price}} USD</b>
+                                        Bid <b>${{a.price|floatformat:"2"}} USD</b>
                                         <span>by <b>{{a.user__username}}</b> at {{ a.timestamp}}</span>
 
                                         {% endif %}
@@ -473,17 +473,17 @@
                                     <span>by <b>{{a.user__username}}</b> at {{ a.timestamp}}</span>
                                     {% endif %}
                                     {% if a.store__auction == True and a.accepted_bid == True and a.application == False %}
-                                    Bid accepted <b>${{a.price}} USD</b>
+                                    Bid accepted <b>${{a.price|floatformat:"2"}} USD</b>
                                     <span>by <b>{{a.user__username}}</b> at {{ a.timestamp}}</span>
                                     {% endif %}
                                     {% if a.store__auction == True and a.accepted_bid == False and a.application == False %}
-                                    Bid <b>${{a.price}} USD</b>
+                                    Bid <b>${{a.price|floatformat:"2"}} USD</b>
                                     <span>by <b>{{a.user__username}}</b> at {{ a.timestamp}}</span>
 
                                     {% endif %}
 
                                     {% if a.store__auction == False and a.accepted_bid == False and a.application == False %}
-                                    Bought <b>${{a.price}} USD</b>
+                                    Bought <b>${{a.price|floatformat:"2"}} USD</b>
                                     <span>by <b>{{a.user__username}}</b> at {{ a.timestamp}}</span>
 
                                     {% endif %}
@@ -502,7 +502,7 @@
                     {% for product in products %}
                     <div class="nft-item-price" id="price">
                         <!-- <img src="{% static 'images/misc/ethereum.svg' %}" alt=""> -->
-                        <span>USD (${{ product.price }})</span>
+                        <span>USD (${{ product.price|floatformat:"2"}})</span>
                         <!-- </span>()</div> -->
                         <!-- Button trigger modal -->
                         {% if product.product_type != "n/a" and product.auction == False and product.quantity != 0 %}
@@ -602,7 +602,7 @@
     </div>
     <script type="text/javascript">
 
-        var price={% for price in products %}{{ price.price }}{% endfor %};
+        var price={% for price in products %}{{ price.price|floatformat:"2" }}{% endfor %};
 
         price = parseFloat(price);
 
