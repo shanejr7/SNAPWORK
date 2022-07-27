@@ -450,12 +450,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <a href="/store/{{p.user_id}}/{{p.id}}">
-                                            <img src="{{ p.img_url }}" class="lazy nft__item_preview" alt="">
+                                        <a href="/store/{{p.store__user_id}}/{{p.store__id}}">
+                                            <img src="{{ p.store__img_url }}" class="lazy nft__item_preview" alt="">
                                         </a>
                                     </div>
                                     <div class="nft__item_info">
-                                        <a href="/store/{{p.user_id}}/{{p.id}}">
+                                        <a href="/store/{{p.store__user_id}}/{{p.store__id}}">
                                             <h4>{{ p.store__title }}</h4>
                                         </a>
 
@@ -466,11 +466,11 @@
                                             ${{p.store__price|floatformat:"2"}} USD<span>{{ p.store__timestamp|slice:'0:2' }}/{{ p.store__timestamp|slice:'3:5'   }}</span>
                                         </div>
                                         <div class="nft__item_action">
-                                         {% if p.store__product_type != "n/a" and p.store__auction == False and p.store__quantity != 0 %}
+                               
                                          <a href="/store/{{p.store__user_id}}/{{p.store__id}}" >
-                                          Buy Now
+                                          Check Status
                                       </a>
-                                      {% endif %}
+                                  
                                     
                               </div>
                              <!--  <div class="nft__item_like">

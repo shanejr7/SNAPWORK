@@ -226,9 +226,8 @@ def profile_auth(request):
 			owner_obj = User.objects.get(pk=uid)
 			store_obj = Store.objects.filter(user_id=owner_obj.id)
 			#jobs
-			#applications
 			applications = Auction.objects.filter(user_id=uid).values('user__id','user__username','user__email','user__license','user__timestamp',
-        'store__id','store__product','store__title','store__body','store__price','store__quantity','store__auction','store__product_type', 'store__contract_type','store__service_type',
+        'store__id','store__user_id','store__product','store__title','store__body','store__price','store__quantity','store__auction','store__product_type', 'store__contract_type','store__service_type',
         'store__data_type','store__season','store__views','store__img_url','store__address', 'store__duration_timestamp','store__timestamp').order_by('user__timestamp') 
 			#likes
 			follower_obj = Follower.objects.filter(user_follower_id=owner_obj.id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
@@ -239,6 +238,13 @@ def profile_auth(request):
                                 Params={
                                     'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
                                     'Key': str(store.img_url),
+                                })
+
+			for application in applications:
+				application['store__img_url']= s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': str(application['store__img_url']),
                                 })
 
 			if follow_obj:
