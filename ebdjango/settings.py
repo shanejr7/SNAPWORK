@@ -25,7 +25,7 @@ SECRET_KEY = '$9z($fy!(hd+9(_w61##-u)_u^j1-(%#1^u#st&b9#fucaxv0c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['django-env-snapwork.eba-pud3miaw.us-west-2.elasticbeanstalk.com','127.0.0.1','snapwork.org']
+ALLOWED_HOSTS = ['django-env-snapwork.eba-pud3miaw.us-west-2.elasticbeanstalk.com','127.0.0.1','snapwork.org','44.228.20.11','34.212.128.62']
 
 
 # Application definition
@@ -99,28 +99,18 @@ WSGI_APPLICATION = 'ebdjango.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
-        'USER': 'postgres',
-        'DB':'postgres2',
-        'PASSWORD': 'php123',
-        'HOST': '127.0.0.1',
-        'PORT': '5433',
+        'USER': 'dbmasteruser',
+        'DB':'postgres',
+        'PASSWORD': '{YO_YY4#a~5^pn!U6XkrL5m{1w5t7nRK',
+        'HOST': 'ls-2554945fb962f9ccecafc4464452adffe814abbc.cm5gc7q4k5dt.us-east-2.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'postgres',
-#         'USER': 'dbmasteruser',
-#         'DB':'postgres',
-#         'PASSWORD': '{YO_YY4#a~5^pn!U6XkrL5m{1w5t7nRK',
-#         'HOST': 'ls-2554945fb962f9ccecafc4464452adffe814abbc.cm5gc7q4k5dt.us-east-2.rds.amazonaws.com',
-#         'PORT': '5432',
-#     }
-# }
 
 
 

@@ -108,11 +108,11 @@
             <div id="top"></div>
             
             <!-- section begin -->
-            {% if users.background_img_url != 'n/a' %}
+            {% if user.background_img_url != 'n/a' %}
              <section id="profile_banner" aria-label="section" class="text-light" data-bgimage="url({{user.background_img_url}}) top">
             {% endif %}
-            {% if users.background_img_url == 'n/a' %}
-             <section id="profile_banner" aria-label="section" class="text-light" data-bgimage="url({% static '' %}) top">
+            {% if user.background_img_url == 'n/a' %}
+             <section id="profile_banner" aria-label="section" class="text-light" data-bgimage="url({% static 'images/background/subheader.jpg' %}) top">
             {% endif %}
            
 
@@ -127,15 +127,21 @@
                          <div class="d_profile">
                             <div class="profile_avatar">
                                 <div class="d_profile_img" style="margin-bottom:2em;">
+                                    {% if user.img_url  != 'n/a' %}
                                     <img src="{{ user.img_url }}" alt="">
+                                    {% endif %}
+                                    {% if user.img_url  == 'n/a' %}
+                                    <img src="{% static 'images/author/user.jpg' %}" alt="">
+                                    {% endif %}
+
                                     <!-- <i class="fa fa-check"></i> -->
                                 </div>
 
                                 <div class="profile_name">
                                     <h4>
-                                       {{user.username}}                                            
+                                       {{user.username}}                                
                                        <div class="clearfix"></div>
-                                       <span id="wallet" class="profile_wallet">http://127.0.0.1:8000/myapp/profile/{{user.id}}</span>
+                                       <span id="wallet" class="profile_wallet">http://snapwork.org/myapp/profile/{{user.id}}</span>
                                        <button id="btn_copy" title="Copy Text">Copy</button>
                                    </h4>
                                </div>
@@ -159,7 +165,7 @@
 
                             <li><span>{{follower_tracker.count}}  followers</span></li>
                             <li><span>{{follow_tracker.count}} following</span></li>
-                            {% if request.session.id != Null %}
+                            {% if request.session.id != Null and request.session.id != user.id %}
                             <form id="myForm" method="POST" style="display:inline-block;">
                                {% csrf_token %}
                                {{ session_follower.user__id }}
@@ -421,8 +427,14 @@
             <div class="col-lg-3 col-md-6">
                 <div class="nft__item">
                     <div class="author_list_pp">
-                        <a href="/myapp/profile/{{follow.user__id}}">                                    
-                            <img class="lazy" src="{% static '' %}{{ follow.user__img_url }}" alt="">
+                        <a href="/myapp/profile/{{follow.user__id}}"> 
+                          {% if follow.user__img_url  != 'n/a' %}
+                            <img class="lazy" src="{{ follow.user__img_url }}" alt="">
+                          {% endif %}
+                          {% if follow.user__img_url == 'n/a' %}
+                              <img class="lazy" src="{% static 'images/author/user.jpg' %}" alt="">
+                          {% endif %}                                   
+                          
                             <!-- <i class="fa fa-check"></i> -->
                         </a>
                     </div>
@@ -456,15 +468,22 @@
             </div>
 
             <div class="tab-4">
-                <div class="row">
 
+                <div class="row">
+                  
                     {% for follow in follow_tracker %}
+
                     <!-- nft item begin -->
                     <div class="col-lg-3 col-md-6">
                         <div class="nft__item">
                             <div class="author_list_pp">
-                                <a href="/myapp/profile/{{follow.user__id}}">                                    
-                                    <img class="lazy" src="{% static '' %}{{ follow.user__img_url }}" alt="">
+                                <a href="/myapp/profile/{{follow.user__id}}"> 
+                                 {% if follow.user__img_url  != 'n/a' %}
+                                    <img class="lazy" src="{{ follow.user__img_url }}" alt="">
+                                 {% endif %}
+                                 {% if follow.user__img_url  == 'n/a' %}
+                                    <img class="lazy" src="{% static 'images/author/user.jpg' %}" alt="">
+                                 {% endif %}                                     
                                     <!-- <i class="fa fa-check"></i> -->
                                 </a>
                             </div>

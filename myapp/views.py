@@ -99,8 +99,13 @@ def signup(request):
 
 		if user_name != None and email != None and username != None and phone_number != None and password != None and valid == True :
 			# Create user and save to the database
-			max_id = User.objects.last().id
-			max_id = max_id +1
+			max_id = 0
+			try:
+				max_id = User.objects.last().id
+				max_id = max_id +1
+			except:
+				max_id = 1
+
 			create_user = User.create_user(self=User.objects,id=max_id,user_name=user_name,username=username,email=email,password=password,phone=phone_number,license="n/a",img_license_front_url="n/a",img_license_back_url="n/a", img_url="n/a",background_img_url="n/a",verified_identity=False,background_check_status ="n/a",quality_rank =0.0, timestamp=time_stamp)
 			create_user.save()
 			create_user.last_login = timezone.now()
@@ -189,12 +194,12 @@ def login(request):
 
 def logout_request(request):
 
-	del request.session['id'];
-	del request.session['username'];
-	del request.session['email'];
-	del request.session['img_url'];
+	del request.session['id']
+	del request.session['username']
+	del request.session['email']
+	del request.session['img_url']
 	del request.session['background_img_url']
-	del request.session['quality_rank'];
+	del request.session['quality_rank']
 	logout(request)
 
 	return redirect('/myapp/login')
@@ -214,8 +219,8 @@ def profile_auth(request):
 			uid = request.session['id']
 			owner_obj = User.objects.get(pk=uid)
 			store_obj = Store.objects.filter(user_id=owner_obj.id)
+			follower_obj = Follower.objects.filter(user_follower_id=owner_obj.id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
 			follow_obj = Follow.objects.filter(user_follower_id=owner_obj.id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
-			follower_obj = Follow.objects.filter(user_id=owner_obj.id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
 		
 			for store in store_obj:
 				store.img_url = s3_client.generate_presigned_url('get_object',
@@ -223,6 +228,29 @@ def profile_auth(request):
                                     'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
                                     'Key': str(store.img_url),
                                 })
+
+			if follow_obj:
+				for follow in follow_obj:
+					if follow['user__img_url'] !='n/a':
+						key_profile_img = str(follow['user__img_url'])
+						follow['user__img_url'] = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': key_profile_img,
+                                },                                  
+                                ExpiresIn=3600)
+
+			if follower_obj:
+				for follower in follower_obj:
+					if follower['user__img_url'] !='n/a':
+						key_profile_img = str(follower['user__img_url'])
+						follower['user__img_url'] = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': key_profile_img,
+                                },                                  
+                                ExpiresIn=3600)
+
 			context = {
         		"products": store_obj,
         		"user": owner_obj,
@@ -265,6 +293,12 @@ def profile_create_auth(request):
 		minimum_bid = 0.0
 		quantity = ''
 		auction =  request.POST.get('item_bid', False)
+
+		if auction == 'on':
+			auction == True
+		else:
+			auction == False
+
 		season = ''
 		upload_img =''
 		file_name =''
@@ -501,7 +535,11 @@ def edit_profile_auth(request):
 	
 			try:
 				user = User.objects.get(id=user_id)
-				s3_client.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME,Key=user.img_url)
+				try:
+					s3_client.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME,Key=user.img_url)
+				except:
+					user.img_url = key_profile_img;
+
 				user.img_url = key_profile_img;
 				response = s3_client.upload_fileobj(profile_file_name, settings.AWS_STORAGE_BUCKET_NAME, key_profile_img)
 				user.save()
@@ -514,7 +552,7 @@ def edit_profile_auth(request):
 
 				return render(request,'editprofile.html')
 			except ClientError as e:
-				error = {'1':"images was not uploaded succesfully"}
+				error = {'1':"profile images was not uploaded succesfully"}
 				context = {
         			"error": error,
     			}
@@ -528,7 +566,10 @@ def edit_profile_auth(request):
 	
 			try:
 				user = User.objects.get(id=user_id)
-				s3_client.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME,Key=user.background_img_url)
+				try:
+					s3_client.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME,Key=user.background_img_url)
+				except:
+					user.background_img_url = key_banner_img;
 				user.background_img_url = key_banner_img;
 				response = s3_client.upload_fileobj(banner_file_name, settings.AWS_STORAGE_BUCKET_NAME, key_banner_img)
 				user.save()
@@ -541,7 +582,7 @@ def edit_profile_auth(request):
 
 				return render(request,'editprofile.html')
 			except ClientError as e:
-				error = {'1':"images was not uploaded succesfully"}
+				error = {'1':"banner images was not uploaded succesfully"}
 				context = {
         			"error": error,
     			}
@@ -577,8 +618,8 @@ def profile(request,uid):
 		session_id = request.session['id']
 	except:
 		redirect 
+		
 
- 
 	if int(uid):
 		owner_obj = User.objects.get(pk=uid)
 		store_obj = Store.objects.filter(user_id=owner_obj.id)
@@ -621,8 +662,8 @@ def profile(request,uid):
 	if request.POST:
 
 		if follow_session_obj:
-			Follower.objects.filter(user_follower_id=owner_obj.id).delete()
-			Follow.objects.filter(user_follower_id=session_id).delete()
+			Follower.objects.filter(user_follower_id=owner_obj.id,user_id=session_id).delete()
+			Follow.objects.filter(user_follower_id=session_id,user_id=owner_obj.id).delete()
 
 		else:
 			follow_session_obj = Follow(user_id=owner_obj.id, user_follower_id =session_id)
@@ -640,25 +681,28 @@ def profile(request,uid):
 	else:
 		isFollow = False
 
-	# if follower_obj:
-	# 	for follower in follower_obj:
-	# 		if follower.user__img_url !='n/a':
-	# 			key_profile_img = "images/author/"+ str(follower.user__img_url)
-	# 			follower.user__img_url = s3_client.generate_presigned_url('get_object',
- #                                Params={
- #                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
- #                                    'Key': key_profile_img,
- #                                },                                  
- #                                ExpiresIn=3600)
-	
+	if follow_obj:
+		for follow in follow_obj:
+			if follow['user__img_url'] !='n/a':
+				key_profile_img = str(follow['user__img_url'])
+				follow['user__img_url'] = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': key_profile_img,
+                                },                                  
+                                ExpiresIn=3600)
 
-    # loop through users and if img_url != 'n/a'
-	# follow_obj.user__img_url = s3_client.generate_presigned_url('get_object',
-    #                             Params={
-    #                                 'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
-    #                                 'Key': key_profile_img,
-    #                             },                                  
-    #                             ExpiresIn=3600)
+	if follower_obj:
+		for follower in follower_obj:
+			if follower['user__img_url'] !='n/a':
+				key_profile_img = str(follower['user__img_url'])
+				follower['user__img_url'] = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': key_profile_img,
+                                },                                  
+                                ExpiresIn=3600)
+	
 
 
 	context = {
