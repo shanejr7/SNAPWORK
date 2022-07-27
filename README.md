@@ -3,7 +3,7 @@
 # Framework: (Django - Python)
 # Geo localizations functions: (GCP) 
 # Cloud data: (AWS - PGSQL)
-# PaaS: (AWS)
+# PaaS: (AWS EC2)
 
 # Algorithm design & data structure 
 # Transient functions with queue
