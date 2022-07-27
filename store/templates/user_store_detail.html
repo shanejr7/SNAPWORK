@@ -640,7 +640,7 @@
         <div class="modal-body">
             <div class="p-3 form-border">
                 <h3>Application</h3>
-                You are about to apply for <b> {% for product in products %}{{product.title}}{% endfor %}</b> from <b>{{ users.name }}</b>
+                You are about to apply for <b> {% for product in products %}{{product.title}}{% endfor %}</b> from <b>{{ users.username }}</b>
                 <div class="spacer-single"></div>
                 <h6><span class="id-color-2">{% for product in products %}{{product.product}}{% endfor %} available</span></h6>
                 <h6><span class="id-color-2">{% for product in products %}{{product.body}}{% endfor %} available</span></h6>
