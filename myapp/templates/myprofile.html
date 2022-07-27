@@ -148,7 +148,10 @@
                         <ul class="de_nav">
                             <!-- <li class="active"><span>On Sale</span></li> -->
                             <li class="active"><span>Created</span></li>
-                            <li><span>Liked</span></li>
+                            <li><span>0 Jobs</span></li>
+                            <li><span>0 Applications</span></li>
+                            <li><span>0 Orders</span></li>
+                            <!-- <li><span>Liked</span></li> -->
                             <li><span>{{follower_tracker.count}}  Followers</span></li>
                             <li><span>{{follow_tracker.count}} Following</span></li>
                         </ul>
@@ -326,9 +329,9 @@
                                   </a>
                                   {% endif %}
                               </div>
-                              <div class="nft__item_like">
-                                <i class="fa fa-heart"></i><span>50</span>
-                            </div>                            
+                             <!--  <div class="nft__item_like">
+                                <i class="fa fa-heart"></i><span>{{p.like}}</span>
+                            </div>   -->                          
                         </div> 
                     </div>
                 </div>    
@@ -391,7 +394,166 @@
 
             </div>
         </div>
+    
         <div class="tab-3">
+            <div class="row">
+
+                <!-- nft item begin -->
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="nft__item">
+                        <div class="author_list_pp">
+                            <a href="author.html">                                    
+                                <img class="lazy" src="{% static 'images/author/author-1.jpg' %}" alt="">
+                                <i class="fa fa-check"></i>
+                            </a>
+                        </div>
+                        <div class="nft__item_wrap">
+                            <div class="nft__item_extra">
+                                <div class="nft__item_buttons">
+                                    <button onclick="location.href='item-details.html'">Buy Now</button>
+                                    <div class="nft__item_share">
+                                        <h4>Share</h4>
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://gigaland.io" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
+                                        <a href="https://twitter.com/intent/tweet?url=https://gigaland.io" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
+                                        <a href="mailto:?subject=I wanted you to see this site&amp;body=Check out this site https://gigaland.io"><i class="fa fa-envelope fa-lg"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="item-details.html">
+                                <img src="{% static 'images/collections/coll-item-3.jpg' %}" class="lazy nft__item_preview" alt="">
+                            </a>
+                        </div>
+                        <div class="nft__item_info">
+                            <a href="item-details.html">
+                                <h4>Abstraction #256</h4>
+                            </a>
+                            <div class="nft__item_click">
+                                <span></span>
+                            </div>
+                            <div class="nft__item_price">
+                                0.05 ETH<span>1/11</span>
+                            </div>
+                            <div class="nft__item_action">
+                                <a href="#">Place a bid</a>
+                            </div>
+                            <div class="nft__item_like">
+                                <i class="fa fa-heart"></i><span>97</span>
+                            </div>                                 
+                        </div> 
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <div class="tab-4">
+            <div class="row">
+
+                <!-- nft item begin -->
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="nft__item">
+                        <div class="author_list_pp">
+                            <a href="author.html">                                    
+                                <img class="lazy" src="{% static 'images/author/author-1.jpg' %}" alt="">
+                                <i class="fa fa-check"></i>
+                            </a>
+                        </div>
+                        <div class="nft__item_wrap">
+                            <div class="nft__item_extra">
+                                <div class="nft__item_buttons">
+                                    <button onclick="location.href='item-details.html'">Buy Now</button>
+                                    <div class="nft__item_share">
+                                        <h4>Share</h4>
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://gigaland.io" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
+                                        <a href="https://twitter.com/intent/tweet?url=https://gigaland.io" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
+                                        <a href="mailto:?subject=I wanted you to see this site&amp;body=Check out this site https://gigaland.io"><i class="fa fa-envelope fa-lg"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="item-details.html">
+                                <img src="{% static 'images/collections/coll-item-3.jpg' %}" class="lazy nft__item_preview" alt="">
+                            </a>
+                        </div>
+                        <div class="nft__item_info">
+                            <a href="item-details.html">
+                                <h4>Abstraction #256</h4>
+                            </a>
+                            <div class="nft__item_click">
+                                <span></span>
+                            </div>
+                            <div class="nft__item_price">
+                                0.05 ETH<span>1/11</span>
+                            </div>
+                            <div class="nft__item_action">
+                                <a href="#">Place a bid</a>
+                            </div>
+                            <div class="nft__item_like">
+                                <i class="fa fa-heart"></i><span>97</span>
+                            </div>                                 
+                        </div> 
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+<!-- 
+        <div class="tab-2">
+            <div class="row">
+
+                nft item begin
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="nft__item">
+                        <div class="author_list_pp">
+                            <a href="author.html">                                    
+                                <img class="lazy" src="{% static 'images/author/author-1.jpg' %}" alt="">
+                                <i class="fa fa-check"></i>
+                            </a>
+                        </div>
+                        <div class="nft__item_wrap">
+                            <div class="nft__item_extra">
+                                <div class="nft__item_buttons">
+                                    <button onclick="location.href='item-details.html'">Buy Now</button>
+                                    <div class="nft__item_share">
+                                        <h4>Share</h4>
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://gigaland.io" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
+                                        <a href="https://twitter.com/intent/tweet?url=https://gigaland.io" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
+                                        <a href="mailto:?subject=I wanted you to see this site&amp;body=Check out this site https://gigaland.io"><i class="fa fa-envelope fa-lg"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="item-details.html">
+                                <img src="{% static 'images/collections/coll-item-3.jpg' %}" class="lazy nft__item_preview" alt="">
+                            </a>
+                        </div>
+                        <div class="nft__item_info">
+                            <a href="item-details.html">
+                                <h4>Abstraction #256</h4>
+                            </a>
+                            <div class="nft__item_click">
+                                <span></span>
+                            </div>
+                            <div class="nft__item_price">
+                                0.05 ETH<span>1/11</span>
+                            </div>
+                            <div class="nft__item_action">
+                                <a href="#">Place a bid</a>
+                            </div>
+                            <div class="nft__item_like">
+                                <i class="fa fa-heart"></i><span>97</span>
+                            </div>                                 
+                        </div> 
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div> -->
+        <div class="tab-5">
             <div class="row">
 
                 {% for follow in follower_tracker %}
@@ -440,7 +602,7 @@
             </div>
 
             
-            <div class="tab-4">
+            <div class="tab-6">
                 <div class="row">
 
                     {% for follow in follow_tracker %}

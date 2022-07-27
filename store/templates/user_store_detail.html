@@ -659,7 +659,7 @@
                         <!--  <div id="showBill"></div> -->
                     </div>
                     <div class="spacer-single"></div>
-                    <a href="#" target="_blank" data-storeid="{% for product in products %}{{product.id}}{% endfor %}" data-ownerid="{{ users.id }}"  data-userauctionid="1" data-csrf='{% csrf_token %}' class="btn-main btn-fullwidth create_application" data-bs-dismiss="modal">Submit application</a>
+                    <a href="#" target="_blank" data-storeid="{% for product in products %}{{product.id}}{% endfor %}" data-ownerid="{{ users.id }}"  data-userauctionid="{{request.session.id}}" data-csrf='{% csrf_token %}' class="btn-main btn-fullwidth create_application" data-bs-dismiss="modal">Submit application</a>
                 </div>
             </div>
         </div>

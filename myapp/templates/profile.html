@@ -161,7 +161,7 @@
 
                             <!-- <li class="active"><span>On Sale</span></li> -->
                             <li class="active"><span>Created</span></li>
-                            <li><span>Liked</span></li>
+                            <!-- <li><span>Liked</span></li> -->
 
                             <li><span>{{follower_tracker.count}}  followers</span></li>
                             <li><span>{{follow_tracker.count}} following</span></li>
@@ -345,14 +345,14 @@
                               {% endif %}
                           </div>
                           {% if request.session.id != Null %}
-                          <div class="nft__item_like">
+                     <!--      <div class="nft__item_like">
                             <i class="fa fa-heart"></i><span>50</span>
-                        </div> 
+                        </div>  -->
                         {% endif %}
                         {% if request.session.id == Null %}
-                        <div class="nft__item_like" style="pointer-events:none;">
+                     <!--    <div class="nft__item_like" style="pointer-events:none;">
                             <i class="fa fa-heart"></i><span>50</span>
-                        </div> 
+                        </div>  -->
                         {% endif %}
 
                     </div> 
@@ -365,10 +365,10 @@
         </div>
     </div>
 
-    <div class="tab-2">
+   <!--  <div class="tab-2">
         <div class="row">
 
-            <!-- nft item begin -->
+            nft item begin
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                 <div class="nft__item">
                     <div class="author_list_pp">
@@ -417,7 +417,7 @@
 
         </div>
     </div>
-
+ -->
 
     <div class="tab-3">
         <div class="row">

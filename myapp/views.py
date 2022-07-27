@@ -6,6 +6,7 @@ from store.models import Store
 from store.models import User
 from store.models import Follow
 from store.models import Follower
+from store.models import Like
 from django.utils.html import strip_tags
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
@@ -209,6 +210,7 @@ def profile_auth(request):
 
 	owner_obj = []
 	store_obj = []
+	store_obj_likes = []
 	follow_session_obj = []
 	error = []
 
@@ -219,6 +221,7 @@ def profile_auth(request):
 			uid = request.session['id']
 			owner_obj = User.objects.get(pk=uid)
 			store_obj = Store.objects.filter(user_id=owner_obj.id)
+			# store_obj_likes = Like.objects.filter(store.user_id==owner_obj.id)
 			follower_obj = Follower.objects.filter(user_follower_id=owner_obj.id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
 			follow_obj = Follow.objects.filter(user_follower_id=owner_obj.id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
 		
