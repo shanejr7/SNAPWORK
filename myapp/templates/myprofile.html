@@ -396,6 +396,90 @@
     
         <div class="tab-3">
             <div class="row">
+                {% for p in applicants %}
+
+                                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="nft__item">
+                                           {% if p.store__duration_timestamp != "n/a" and p.store__auction == True %}
+                                           <div>
+                                            Auctions ends in <div class="de_countdown" data-year="{{ p.store__duration_timestamp|slice:'6:10' }}" data-month="{{ p.store__duration_timestamp|slice:'0:2' }}" data-day="{{ p.store__duration_timestamp|slice:'3:5'   }}" data-hour="{{ p.store__duration_timestamp|slice:'11:13' }}"></div>
+                                        </div>
+                                        {% endif %}
+                                        {% if p.store__duration_timestamp != "n/a" and p.store__auction == False and p.store__product_type != "n/a" %}
+                                        <div>
+                                            Product ends in <div class="de_countdown" data-year="{{ p.store__duration_timestamp|slice:'6:10' }}" data-month="{{ p.store__duration_timestamp|slice:'0:2' }}" data-day="{{ p.store__duration_timestamp|slice:'3:5'   }}" data-hour="{{ p.store__duration_timestamp|slice:'11:13' }}"></div>
+                                        </div>
+                                        {% endif %}
+                                        {% if p.store__duration_timestamp != "n/a" and p.store__auction == False and p.store__contract_type != "n/a" %}
+                                        <div>
+                                            Contract request ends in <div class="de_countdown" data-year="{{ p.store__duration_timestamp|slice:'6:10' }}" data-month="{{ p.store__duration_timestamp|slice:'0:2' }}" data-day="{{ p.store__duration_timestamp|slice:'3:5'   }}" data-hour="{{ p.store__duration_timestamp|slice:'11:13' }}"></div>
+                                        </div>
+                                        {% endif %}
+                                        {% if p.store__duration_timestamp != "n/a" and p.store__auction == False and p.store__service_type != "n/a" %}
+                                        <div>
+                                            Service request ends in <div class="de_countdown" data-year="{{ p.store__duration_timestamp|slice:'6:10' }}" data-month="{{ p.store__duration_timestamp|slice:'0:2' }}" data-day="{{ p.store__duration_timestamp|slice:'3:5'   }}" data-hour="{{ p.store__duration_timestamp|slice:'11:13' }}"></div>
+                                        </div>
+                                        {% endif %}
+                                        <div class="author_list_pp">
+                                            <a href="/myapp/profile/{{p.store__user_id}}">  
+
+                                                {% if p.store__user_img_url  != 'n/a' %}
+                                                    
+                                                          <img class="lazy" src="{{ p.store__user__img_url }}" alt="">
+                                                               <!-- <i class="fa fa-check"></i> -->
+                                                {% endif %}
+                                                {% if p.store__user_img_url  == 'n/a' %}
+                                                      <img class="lazy" src="{% static 'images/author/user.jpg' %}" alt="">
+                                                     <!--       <i class="fa fa-check"></i> -->
+                                                {% endif %}  
+
+                                           
+                                           
+                                            </a>
+                                        </div>
+                                        <div class="nft__item_wrap">
+                                            <div class="nft__item_extra">
+                                                <div class="nft__item_buttons">
+                                               
+                                                  <div class="nft__item_share">
+                                                    <h4>Share</h4>
+                                                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://gigaland.io" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
+                                                    <a href="https://twitter.com/intent/tweet?url=https://gigaland.io" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
+                                                    <a href="mailto:?subject=I wanted you to see this site&amp;body=Check out this site https://gigaland.io"><i class="fa fa-envelope fa-lg"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="/store/{{p.store__user_id}}/{{p.store__id}}">
+                                            <img src="{{ p.store__img_url }}" class="lazy nft__item_preview" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="nft__item_info">
+                                        <a href="/store/{{p.store__user_id}}/{{p.store__id}}">
+                                            <h4>{{ p.store__title }}</h4>
+                                        </a>
+
+                                        <div class="nft__item_click">
+                                            <span></span>
+                                        </div>
+                                        <div class="nft__item_price">
+                                            ${{p.store__price|floatformat:"2"}} USD<span>{{ p.store__timestamp|slice:'0:2' }}/{{ p.store__timestamp|slice:'3:5'   }}</span>
+                                        </div>
+                                        <div class="nft__item_action">
+                               
+                                         <a href="/store/{{p.store__user_id}}/{{p.store__id}}" >
+                                          Application Pending
+                                      </a>
+                                  
+                                    
+                              </div>
+                             <!--  <div class="nft__item_like">
+                                <i class="fa fa-heart"></i><span>{{p.like}}</span>
+                            </div>   -->                          
+                        </div> 
+                    </div>
+                </div>    
+
+                {% endfor %} 
                   {% for p in applications %}
 
                                     <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">

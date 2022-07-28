@@ -245,6 +245,17 @@ def profile_auth(request):
                                     'Key': str(store.img_url),
                                 })
 
+			for applicant in applicants:
+				applicant['store__img_url']= s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': str(applicant['store__img_url']),
+                                })
+				applicant['store__user__img_url'] = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': str(applicant['store__user__img_url']),
+                                })
 
 			for application in applications:
 				application['store__img_url']= s3_client.generate_presigned_url('get_object',
