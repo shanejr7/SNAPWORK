@@ -149,13 +149,12 @@
                             <!-- <li class="active"><span>On Sale</span></li> -->
                             <li class="active"><span>Created</span></li>
                             <li><span>0 Jobs</span></li>
-                            <li><span>{{applications.count}} Applications</span></li>
+                            <li><span>{{applications.count|add:applicants.count}} Applications</span></li>
                             <li><span>0 Orders</span></li>
                             <!-- <li><span>Liked</span></li> -->
                             <li><span>{{follower_tracker.count}}  Followers</span></li>
                             <li><span>{{follow_tracker.count}} Following</span></li>
                         </ul>
-
 
 
                         <div class="de_tab_content">
@@ -468,7 +467,7 @@
                                         <div class="nft__item_action">
                                
                                          <a href="/store/{{p.store__user_id}}/{{p.store__id}}" >
-                                          Check Application
+                                          Application Pending
                                       </a>
                                   
                                     

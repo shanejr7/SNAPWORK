@@ -148,6 +148,7 @@ class Store(models.Model):
     timestamp = models.TextField()
 
     user = models.ForeignKey("User", on_delete=models.SET_NULL, null=True)
+  
 
 
 class Auction(models.Model):
