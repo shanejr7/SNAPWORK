@@ -421,19 +421,19 @@
                                         </div>
                                         {% endif %}
                                         <div class="author_list_pp">
-                                            <a href="/myapp/profile/{{p.store__user_id}}">  
+                                            <h4>{{p.user__username}}</h4>
 
-                                                {% if p.store__user_img_url  != 'n/a' %}
+                                            <a href="/myapp/profile/{{p.user__id}}">  
+
+                                                {% if p.user__img_url != 'n/a' %}
                                                     
-                                                          <img class="lazy" src="{{ p.store__user__img_url }}" alt="">
+                                                          <img class="lazy" src="{{ p.user__img_url }}" alt="">
                                                                <!-- <i class="fa fa-check"></i> -->
                                                 {% endif %}
-                                                {% if p.store__user_img_url  == 'n/a' %}
+                                                {% if p.user__img_url  == 'n/a' %}
                                                       <img class="lazy" src="{% static 'images/author/user.jpg' %}" alt="">
                                                      <!--       <i class="fa fa-check"></i> -->
                                                 {% endif %}  
-
-                                           
                                            
                                             </a>
                                         </div>
@@ -466,8 +466,8 @@
                                         </div>
                                         <div class="nft__item_action">
                                
-                                         <a href="/store/{{p.store__user_id}}/{{p.store__id}}" >
-                                          Application Pending
+                                         <a href="#" >
+                                          Applicant Pending
                                       </a>
                                   
                                     
@@ -505,6 +505,7 @@
                                         </div>
                                         {% endif %}
                                         <div class="author_list_pp">
+                                            <h4>{{p.store__user__username}}</h4>
                                             <a href="/myapp/profile/{{p.store__user_id}}">  
 
                                                 {% if p.store__user_img_url  != 'n/a' %}
@@ -550,7 +551,7 @@
                                         </div>
                                         <div class="nft__item_action">
                                
-                                         <a href="/store/{{p.store__user_id}}/{{p.store__id}}" >
+                                         <a href="#" >
                                           Application Pending
                                       </a>
                                   
