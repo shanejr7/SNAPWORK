@@ -464,11 +464,20 @@
                                         <div class="nft__item_price">
                                             ${{p.store__price|floatformat:"2"}} USD<span>{{ p.store__timestamp|slice:'0:2' }}/{{ p.store__timestamp|slice:'3:5'   }}</span>
                                         </div>
+
                                         <div class="nft__item_action">
-                               
-                                         <a href="#" >
+
+                                        {% if p.accepted_bid == False %}
+                                        <a href="#" >
                                           Applicant Pending
-                                      </a>
+                                        </a>
+                                        {% endif %}
+
+                                        {% if p.accepted_bid == True %}
+                                        <a href="#" >
+                                          Applicant Accepted
+                                        </a>
+                                        {% endif %}
                                   
                                     
                               </div>
@@ -551,9 +560,18 @@
                                         </div>
                                         <div class="nft__item_action">
                                
-                                         <a href="#" >
+                                        {% if p.accepted_bid == False %}
+                                        <a href="#" >
                                           Application Pending
-                                      </a>
+                                        </a>
+                                        {% endif %}
+
+
+                                        {% if p.accepted_bid == True %}
+                                        <a href="#" >
+                                          Application Accepted
+                                        </a>
+                                        {% endif %}
                                   
                                     
                               </div>

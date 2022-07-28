@@ -229,10 +229,10 @@ def profile_auth(request):
 			#jobs
 			applicants = Auction.objects.filter(store__user__id=uid).values('user__id','user__img_url','user__username','user__email','user__license','user__timestamp',
         'store__id','store__user_id','store__user__img_url','store__product','store__title','store__body','store__price','store__quantity','store__auction','store__product_type', 'store__contract_type','store__service_type',
-        'store__data_type','store__season','store__views','store__img_url','store__address', 'store__duration_timestamp','store__timestamp').order_by('user__timestamp') 
+        'store__data_type','store__season','store__views','store__img_url','store__address', 'store__duration_timestamp','store__timestamp','accepted_bid').order_by('user__timestamp') 
 			applications = Auction.objects.filter(user_id=uid).values('user__id','user__username','user__email','user__license','user__timestamp',
         'store__id','store__user_id','store__user__username','store__user__img_url','store__product','store__title','store__body','store__price','store__quantity','store__auction','store__product_type', 'store__contract_type','store__service_type',
-        'store__data_type','store__season','store__views','store__img_url','store__address', 'store__duration_timestamp','store__timestamp').order_by('user__timestamp') 
+        'store__data_type','store__season','store__views','store__img_url','store__address', 'store__duration_timestamp','store__timestamp','accepted_bid').order_by('user__timestamp') 
 			#order
 			#likes
 			follower_obj = Follower.objects.filter(user_follower_id=owner_obj.id).values('user__id','user__username','user__email','user__img_url','user__timestamp')
