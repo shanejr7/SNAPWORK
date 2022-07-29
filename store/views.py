@@ -2,6 +2,8 @@ from django.shortcuts import render
 from store.models import Store, User, Auction, Stakeholder
 from django.db.models import F
 from django.http import HttpResponse
+from django.http import JsonResponse
+from django.core import serializers
 from django.views.decorators.csrf import requires_csrf_token
 from django.template import RequestContext
 from django.utils.html import strip_tags
@@ -291,6 +293,8 @@ def approve_applicant(request):
 
     store_auction_obj = Auction.objects.get(store_id=store_id,user_id=user_auction_id)
 
+     # add json response
+
 
     if  int(store_id) and  int(owner_id) and  int(user_auction_id):
         date = datetime.datetime.now()
@@ -300,15 +304,8 @@ def approve_applicant(request):
         store_auction_obj.save()
 
     else:
-        error = "Applicant was approved."
+        error = "Applicant was not approved."
 
-    # context = {
-
-    #     "products": store_obj,
-    #     "users": owner_obj,
-    #     "error": error,
-
-    # }
 
     return render(request, "myprofile.html")
 
@@ -325,6 +322,8 @@ def decline_applicant(request):
 
     store_auction_obj = Auction.objects.get(store_id=store_id,user_id=user_auction_id)
 
+    # add json response
+
 
     if  int(store_id) and  int(owner_id) and  int(user_auction_id):
         date = datetime.datetime.now()
@@ -334,15 +333,8 @@ def decline_applicant(request):
         store_auction_obj.save()
 
     else:
-        error = "Applicant was declined."
+        error = "Applicant was not declined."
 
-    # context = {
-
-    #     "products": store_obj,
-    #     "users": owner_obj,
-    #     "error": error,
-
-    # }
 
     return render(request, "myprofile.html")
 
