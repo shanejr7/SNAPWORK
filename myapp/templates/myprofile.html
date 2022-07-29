@@ -441,23 +441,26 @@
                                             <div class="nft__item_extra">
                                                 <div class="nft__item_buttons">
 
-                                                    <button>
+                                               
+                                                  
                                                         <!-- form to approve or decline here -->
 
                                                 {% if p.accepted_bid == False %}
-                                              
+                                                      <button onclick="accept_applicant()">
                                                         Accept Applicant
+                                                    </button>
                              
                                                 {% endif %}
 
                                                 {% if p.accepted_bid == True %}
-                             
+                                                         <button onclick="decline_applicant()">
                                                         Decline Applicant
+                                                    </button>
                         
                                                 {% endif %}
                                               
                                                         
-                                                    </button>
+                                      
                                                <h4>{{p.user__user_name}}</h4>
                                                <h4>Identity Verified: {{p.user__verified_identity}}</h4>
                                                <h4>Background Check: {{p.user__background_check_status}}</h4>
@@ -930,6 +933,83 @@
         <script src="{% static 'js/jquery.lazy.min.js' %}"></script>
         <script src="{% static 'js/jquery.lazy.plugins.min.js' %}"></script>
         <script src="{% static 'js/designesia.js' %}"></script>
+
+            {% csrf_token %}
+        <script>
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        </script>
+
+                <script type="text/javascript">
+
+            $(document).on('click', '.accept_applicant', function (e) {
+
+                e.preventDefault();
+                var storeID=$(this).data("storeid");
+                var ownerID=$(this).data("ownerid");
+                var userAuctionID=$(this).data("userauctionid");
+
+                fetch_sql_applicant_approve_bid(csrftoken,storeID,ownerID,userAuctionID);
+
+                function fetch_sql_applicant_approve_bid(csrftoken,storeID,ownerID,userAuctionID){
+
+                    $.ajax({
+                        url: "/add-here/",
+                        headers: {'X-CSRFToken': csrftoken},
+                        mode: 'same-origin', 
+                        method:"POST",
+                        data : {
+                            storeID : storeID,
+                            ownerID : ownerID,
+                            userAuctionID : userAuctionID,
+                        },
+                        success: function (data) {
+                            if (data) {
+                              
+                            }
+                        }
+                    })
+                }
+
+            });
+
+        </script>
+
+
+
+                <script type="text/javascript">
+
+            $(document).on('click', '.decline_applicant', function (e) {
+
+                e.preventDefault();
+                var storeID=$(this).data("storeid");
+                var ownerID=$(this).data("ownerid");
+                var userAuctionID=$(this).data("userauctionid");
+
+                fetch_sql_create_auction_bid(csrftoken,storeID,ownerID,userAuctionID);
+
+                function fetch_sql_create_auction_bid(csrftoken,storeID,ownerID,userAuctionID){
+
+                    $.ajax({
+                        url: "/add-here/",
+                        headers: {'X-CSRFToken': csrftoken},
+                        mode: 'same-origin', 
+                        method:"POST",
+                        data : {
+                            storeID : storeID,
+                            ownerID : ownerID,
+                            userAuctionID : userAuctionID,
+                        },
+                        success: function (data) {
+                            if (data) {
+                              
+                            }
+                        }
+                    })
+                }
+
+            });
+
+        </script>
 
     </body>
 
