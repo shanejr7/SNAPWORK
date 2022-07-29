@@ -25,6 +25,7 @@
         <!-- color scheme -->
         <link id="colors" href="{% static 'css/colors/scheme-01.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/coloring.css' %}" rel="stylesheet" type="text/css" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     </head>
 
     <body>
@@ -446,14 +447,14 @@
                                                         <!-- form to approve or decline here -->
 
                                                 {% if p.accepted_bid == False %}
-                                                      <button  data-storeid="{{p.store__id}}" data-ownerid="{{ p.store__user_id }}"  data-userauctionid="{{p.user__id}}" data-csrf='{% csrf_token %}' onclick="accept_applicant()">
+                                                    <button  data-storeid="{{p.store__id}}" data-ownerid="{{ p.store__user_id }}"  data-userauctionid="{{p.user__id}}" data-csrf='{% csrf_token %}' class="accept_applicant">
                                                         Accept Applicant
                                                     </button>
                              
                                                 {% endif %}
 
                                                 {% if p.accepted_bid == True %}
-                                                         <button data-storeid="{{p.store__id}}" data-ownerid="{{ p.store__user_id }}"  data-userauctionid="{{p.user__id}}" data-csrf='{% csrf_token %}' onclick="decline_applicant()">
+                                                    <button data-storeid="{{p.store__id}}" data-ownerid="{{ p.store__user_id }}"  data-userauctionid="{{p.user__id}}" data-csrf='{% csrf_token %}' class="decline_applicant">
                                                         Decline Applicant
                                                     </button>
                         
@@ -964,7 +965,7 @@
                         },
                         success: function (data) {
                             if (data) {
-                              
+                              // load new data without refrsh
                             }
                         }
                     })
@@ -1001,7 +1002,7 @@
                         },
                         success: function (data) {
                             if (data) {
-                              
+                              // load new data without refrsh
                             }
                         }
                     })

@@ -302,15 +302,15 @@ def approve_applicant(request):
     else:
         error = "Applicant was approved."
 
-    context = {
+    # context = {
 
-        "products": store_obj,
-        "users": owner_obj,
-        "error": error,
+    #     "products": store_obj,
+    #     "users": owner_obj,
+    #     "error": error,
 
-    }
+    # }
 
-    return render(request, "myprofile.html", context)
+    return render(request, "myprofile.html")
 
 @requires_csrf_token
 def decline_applicant(request):
@@ -336,15 +336,15 @@ def decline_applicant(request):
     else:
         error = "Applicant was declined."
 
-    context = {
+    # context = {
 
-        "products": store_obj,
-        "users": owner_obj,
-        "error": error,
+    #     "products": store_obj,
+    #     "users": owner_obj,
+    #     "error": error,
 
-    }
+    # }
 
-    return render(request, "myprofile.html", context)
+    return render(request, "myprofile.html")
 
 def activity(request):
 

@@ -991,6 +991,7 @@
                                 $("#bid_fee").append(bidFee.toFixed(2));
                                 $("#bid_total").empty();
                                 $("#bid_total").append(bidTotal.toFixed(2));
+                    // load new data to url without refrsh
                     // alert(data);
                     // call function to do something with data
                     // $('#bids').html(data);
@@ -1034,6 +1035,7 @@
                                 $("#bid_input_value_application").val('');
                                 $("#bid_balance_application").empty();
                                 $("#bid_balance_application").append(bidBalance.toFixed(2));
+                    // load new data to url without refrsh
                     // alert(data);
                     // call function to do something with data
                     // $('#bids').html(data);
@@ -1072,7 +1074,7 @@
                         },
                         success: function (data) {
                             if (data) {
-                             
+                    // load new data to url without refrsh
                     // alert(data);
                     // call function to do something with data
                     // $('#bids').html(data);
@@ -1112,7 +1114,7 @@
                         },
                         success: function (data) {
                             if (data) {
-                              
+                              // load new data to url without refrsh
                             }
                         }
                     })
