@@ -446,14 +446,14 @@
                                                         <!-- form to approve or decline here -->
 
                                                 {% if p.accepted_bid == False %}
-                                                      <button onclick="accept_applicant()">
+                                                      <button  data-storeid="{{p.store__id}}" data-ownerid="{{ p.store__user_id }}"  data-userauctionid="{{p.user__id}}" data-csrf='{% csrf_token %}' onclick="accept_applicant()">
                                                         Accept Applicant
                                                     </button>
                              
                                                 {% endif %}
 
                                                 {% if p.accepted_bid == True %}
-                                                         <button onclick="decline_applicant()">
+                                                         <button data-storeid="{{p.store__id}}" data-ownerid="{{ p.store__user_id }}"  data-userauctionid="{{p.user__id}}" data-csrf='{% csrf_token %}' onclick="decline_applicant()">
                                                         Decline Applicant
                                                     </button>
                         
@@ -953,7 +953,7 @@
                 function fetch_sql_applicant_approve_bid(csrftoken,storeID,ownerID,userAuctionID){
 
                     $.ajax({
-                        url: "/add-here/",
+                        url: "/approve-applicant/",
                         headers: {'X-CSRFToken': csrftoken},
                         mode: 'same-origin', 
                         method:"POST",
@@ -985,12 +985,12 @@
                 var ownerID=$(this).data("ownerid");
                 var userAuctionID=$(this).data("userauctionid");
 
-                fetch_sql_create_auction_bid(csrftoken,storeID,ownerID,userAuctionID);
+                fetch_sql_applicant_decline_bid(csrftoken,storeID,ownerID,userAuctionID);
 
-                function fetch_sql_create_auction_bid(csrftoken,storeID,ownerID,userAuctionID){
+                function fetch_sql_applicant_decline_bid(csrftoken,storeID,ownerID,userAuctionID){
 
                     $.ajax({
-                        url: "/add-here/",
+                        url: "/decline-applicant/",
                         headers: {'X-CSRFToken': csrftoken},
                         mode: 'same-origin', 
                         method:"POST",
