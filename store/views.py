@@ -283,13 +283,13 @@ def apply(request):
 @requires_csrf_token
 def approve_applicant(request):
 
+    data = []
+    applicants = []
     error = []
 
     store_id = strip_tags(request.POST.get('storeID'))
     owner_id = strip_tags(request.POST.get('ownerID'))
     user_auction_id = strip_tags(request.POST.get('userAuctionID'))
-
-    owner_obj = User.objects.get(pk=owner_id)
 
     store_auction_obj = Auction.objects.get(store_id=store_id,user_id=user_auction_id)
 
@@ -302,12 +302,14 @@ def approve_applicant(request):
         store_auction_obj.timestamp = time_stamp
         store_auction_obj.accepted_bid = True
         store_auction_obj.save()
-
+        applicants = Auction.objects.filter(store__user__id=owner_id).only('user__id','user__img_url','user__username','user__user_name','user__email','user__license','user__timestamp','user__verified_identity',
+                'user__background_check_status','store__id','store__user_id','store__user__img_url','store__product','store__title','store__body','store__price','store__quantity','store__auction','store__product_type', 'store__contract_type','store__service_type',
+        'store__data_type','store__season','store__views','store__img_url','store__address', 'store__duration_timestamp','store__timestamp','accepted_bid').order_by('user__timestamp')
+        data = serializers.serialize('json',applicants)
     else:
         error = "Applicant was not approved."
 
-
-    return render(request, "myprofile.html")
+    return HttpResponse(data, content_type='application/json')
 
 @requires_csrf_token
 def decline_applicant(request):
@@ -318,7 +320,6 @@ def decline_applicant(request):
     owner_id = strip_tags(request.POST.get('ownerID'))
     user_auction_id = strip_tags(request.POST.get('userAuctionID'))
 
-    owner_obj = User.objects.get(pk=owner_id)
 
     store_auction_obj = Auction.objects.get(store_id=store_id,user_id=user_auction_id)
 
@@ -331,12 +332,15 @@ def decline_applicant(request):
         store_auction_obj.timestamp = time_stamp
         store_auction_obj.accepted_bid = False
         store_auction_obj.save()
+        applicants = Auction.objects.filter(store__user__id=owner_id).only('user__id','user__img_url','user__username','user__user_name','user__email','user__license','user__timestamp','user__verified_identity',
+                'user__background_check_status','store__id','store__user_id','store__user__img_url','store__product','store__title','store__body','store__price','store__quantity','store__auction','store__product_type', 'store__contract_type','store__service_type',
+        'store__data_type','store__season','store__views','store__img_url','store__address', 'store__duration_timestamp','store__timestamp','accepted_bid').order_by('user__timestamp')
+        data = serializers.serialize('json',applicants)
 
     else:
         error = "Applicant was not declined."
 
-
-    return render(request, "myprofile.html")
+    return HttpResponse(data, content_type='application/json')
 
 def activity(request):
 
