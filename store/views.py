@@ -312,6 +312,40 @@ def approve_applicant(request):
 
     return render(request, "myprofile.html", context)
 
+@requires_csrf_token
+def decline_applicant(request):
+
+    error = []
+
+    store_id = strip_tags(request.POST.get('storeID'))
+    owner_id = strip_tags(request.POST.get('ownerID'))
+    user_auction_id = strip_tags(request.POST.get('userAuctionID'))
+
+    owner_obj = User.objects.get(pk=owner_id)
+
+    store_auction_obj = Auction.objects.get(store_id=store_id,user_id=user_auction_id)
+
+
+    if  int(store_id) and  int(owner_id) and  int(user_auction_id):
+        date = datetime.datetime.now()
+        time_stamp = date.strftime('%m-%d-%Y %H:%M')
+        store_auction_obj.timestamp = time_stamp
+        store_auction_obj.accepted_bid = False
+        store_auction_obj.save()
+
+    else:
+        error = "Applicant was declined."
+
+    context = {
+
+        "products": store_obj,
+        "users": owner_obj,
+        "error": error,
+
+    }
+
+    return render(request, "myprofile.html", context)
+
 def activity(request):
 
     store_obj = []
