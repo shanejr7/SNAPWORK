@@ -235,7 +235,9 @@ def profile_auth(request):
 				'user__background_check_status','store__id','store__user_id','store__user__img_url','store__product','store__title','store__body','store__price','store__quantity','store__auction','store__product_type','store__contract_type','store__service_type',
 				'store__data_type','store__season','store__views','store__img_url','store__address','store__duration_timestamp','store__timestamp').order_by('user__timestamp')
 
-			job = Stakeholder.objects.filter(user_id=uid)
+			job = Stakeholder.objects.filter(user_id=uid).values('user__id','user__img_url','user__username','user__user_name','user__email','user__license','user__timestamp','user__verified_identity',
+				'user__background_check_status','store__user__username','store__id','store__user_id','store__user__img_url','store__product','store__title','store__body','store__price','store__quantity','store__auction','store__product_type','store__contract_type','store__service_type',
+				'store__data_type','store__season','store__views','store__img_url','store__address','store__duration_timestamp','store__timestamp').order_by('user__timestamp')
 
 			applicants = Auction.objects.filter(store__user__id=uid).values('user__id','user__img_url','user__username','user__user_name','user__email','user__license','user__timestamp','user__verified_identity',
 				'user__background_check_status','store__id','store__user_id','store__user__img_url','store__product','store__title','store__body','store__price','store__quantity','store__auction','store__product_type','store__contract_type','store__service_type',
@@ -266,6 +268,18 @@ def profile_auth(request):
                                 Params={
                                     'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
                                     'Key': str(j['user__img_url']),
+                                })
+			for j in job:
+				j['store__img_url']= s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': str(j['store__img_url']),
+                                })
+				if j['store__user__img_url'] !='n/a':
+					j['store__user__img_url'] = s3_client.generate_presigned_url('get_object',
+                                Params={
+                                    'Bucket': settings.AWS_STORAGE_BUCKET_NAME,
+                                    'Key': str(j['store__user__img_url']),
                                 })
 
 			for applicant in applicants:
