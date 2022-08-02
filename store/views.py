@@ -11,6 +11,7 @@ import datetime
 import boto3
 from botocore.exceptions import ClientError
 import os
+import json
 from django.conf import settings
 
 
@@ -285,6 +286,7 @@ def approve_applicant(request):
 
     data = []
     applicants = []
+    jobs = []
     error = []
 
     store_id = strip_tags(request.POST.get('storeID'))
@@ -293,19 +295,32 @@ def approve_applicant(request):
 
     store_auction_obj = Auction.objects.get(store_id=store_id,user_id=user_auction_id)
 
-     # add json response
-
-
     if  int(store_id) and  int(owner_id) and  int(user_auction_id):
+
         date = datetime.datetime.now()
         time_stamp = date.strftime('%m-%d-%Y %H:%M')
+
         store_auction_obj.timestamp = time_stamp
         store_auction_obj.accepted_bid = True
         store_auction_obj.save()
+
+        Store.objects.filter(user_id=owner_id,id=store_id).update(quantity=F('quantity')-1)
+
+        jobs = Stakeholder(price=store_auction_obj.price,quantity=store_auction_obj.quantity,user_id=user_auction_id,store_id=store_id,timestamp=time_stamp)
+        jobs.save()
+
+        jobs = Stakeholder.objects.filter(store__user__id=owner_id).only('user__id','user__img_url','user__username','user__user_name','user__email','user__license','user__timestamp','user__verified_identity',
+            'user__background_check_status','store__id','store__user_id','store__user__img_url','store__product','store__title','store__body','store__price','store__quantity','store__auction','store__product_type', 'store__contract_type','store__service_type',
+            'store__data_type','store__season','store__views','store__img_url','store__address', 'store__duration_timestamp','store__timestamp','accepted_bid').order_by('user__timestamp')
+
         applicants = Auction.objects.filter(store__user__id=owner_id).only('user__id','user__img_url','user__username','user__user_name','user__email','user__license','user__timestamp','user__verified_identity',
                 'user__background_check_status','store__id','store__user_id','store__user__img_url','store__product','store__title','store__body','store__price','store__quantity','store__auction','store__product_type', 'store__contract_type','store__service_type',
         'store__data_type','store__season','store__views','store__img_url','store__address', 'store__duration_timestamp','store__timestamp','accepted_bid').order_by('user__timestamp')
-        data = serializers.serialize('json',applicants)
+        
+        data = [applicants, jobs]
+        data = json.dumps(data)
+        data = serializers.serialize('json',data)
+
     else:
         error = "Applicant was not approved."
 
@@ -314,6 +329,9 @@ def approve_applicant(request):
 @requires_csrf_token
 def decline_applicant(request):
 
+    data = []
+    applicants = []
+    jobs = []
     error = []
 
     store_id = strip_tags(request.POST.get('storeID'))
@@ -323,19 +341,31 @@ def decline_applicant(request):
 
     store_auction_obj = Auction.objects.get(store_id=store_id,user_id=user_auction_id)
 
-    # add json response
-
-
     if  int(store_id) and  int(owner_id) and  int(user_auction_id):
+
         date = datetime.datetime.now()
         time_stamp = date.strftime('%m-%d-%Y %H:%M')
+
         store_auction_obj.timestamp = time_stamp
         store_auction_obj.accepted_bid = False
         store_auction_obj.save()
+
+        Store.objects.filter(user_id=owner_id,id=store_id).update(quantity=F('quantity')+1)
+
+        Stakeholder.objects.filter(user_id=user_auction_id,store_id=store_id).delete()
+
+        jobs = Stakeholder.objects.filter(store__user__id=owner_id).only('user__id','user__img_url','user__username','user__user_name','user__email','user__license','user__timestamp','user__verified_identity',
+            'user__background_check_status','store__id','store__user_id','store__user__img_url','store__product','store__title','store__body','store__price','store__quantity','store__auction','store__product_type', 'store__contract_type','store__service_type',
+            'store__data_type','store__season','store__views','store__img_url','store__address', 'store__duration_timestamp','store__timestamp','accepted_bid').order_by('user__timestamp')
+
         applicants = Auction.objects.filter(store__user__id=owner_id).only('user__id','user__img_url','user__username','user__user_name','user__email','user__license','user__timestamp','user__verified_identity',
                 'user__background_check_status','store__id','store__user_id','store__user__img_url','store__product','store__title','store__body','store__price','store__quantity','store__auction','store__product_type', 'store__contract_type','store__service_type',
         'store__data_type','store__season','store__views','store__img_url','store__address', 'store__duration_timestamp','store__timestamp','accepted_bid').order_by('user__timestamp')
-        data = serializers.serialize('json',applicants)
+        
+
+        data = [applicants, jobs]
+        data = json.dumps(data)
+        data = serializers.serialize('json',data)
 
     else:
         error = "Applicant was not declined."

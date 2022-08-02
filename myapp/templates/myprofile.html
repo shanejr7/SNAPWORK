@@ -149,7 +149,7 @@
                         <ul class="de_nav">
                             <!-- <li class="active"><span>On Sale</span></li> -->
                             <li class="active"><span>Created</span></li>
-                            <li><span>0 Jobs</span></li>
+                            <li><span>{{jobs.count|add:job.count}} Jobs</span></li>
                             <li><span>{{applications.count|add:applicants.count}} Applications</span></li>
                             <li><span>0 Orders</span></li>
                             <!-- <li><span>Liked</span></li> -->
@@ -344,53 +344,102 @@
 
         <div class="tab-2">
             <div class="row">
-
+                {% for j in jobs %}
                 <!-- nft item begin -->
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="nft__item">
-                        <div class="author_list_pp">
-                            <a href="author.html">                                    
-                                <img class="lazy" src="{% static 'images/author/author-1.jpg' %}" alt="">
-                                <i class="fa fa-check"></i>
-                            </a>
-                        </div>
-                        <div class="nft__item_wrap">
-                            <div class="nft__item_extra">
-                                <div class="nft__item_buttons">
-                                    <button onclick="location.href='item-details.html'">Buy Now</button>
-                                    <div class="nft__item_share">
-                                        <h4>Share</h4>
-                                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://gigaland.io" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
-                                        <a href="https://twitter.com/intent/tweet?url=https://gigaland.io" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
-                                        <a href="mailto:?subject=I wanted you to see this site&amp;body=Check out this site https://gigaland.io"><i class="fa fa-envelope fa-lg"></i></a>
+                         <div class="author_list_pp">
+                                            <h4>{{j.user__username}}</h4>
+
+                                            <a href="/myapp/profile/{{j.user__id}}">  
+
+                                                {% if j.user__img_url != 'n/a' %}
+                                                    
+                                                          <img class="lazy" src="{{ j.user__img_url }}" alt="">
+                                                               <!-- <i class="fa fa-check"></i> -->
+                                                {% endif %}
+                                                {% if j.user__img_url  == 'n/a' %}
+                                                      <img class="lazy" src="{% static 'images/author/user.jpg' %}" alt="">
+                                                     <!--       <i class="fa fa-check"></i> -->
+                                                {% endif %}  
+                                           
+                                            </a>
+                                        </div>
+                       <div class="nft__item_wrap">
+                                            <div class="nft__item_extra">
+                                                <div class="nft__item_buttons">
+
+                                               
+                                                  
+                                                        <!-- form to approve or decline here -->
+
+                                                {% if j.accepted_bid == False %}
+                                                    <button  data-storeid="{{j.store__id}}" data-ownerid="{{ j.store__user_id }}"  data-userauctionid="{{j.user__id}}" data-csrf='{% csrf_token %}' class="accept_applicant">
+                                                        Accept Applicant
+                                                    </button>
+                             
+                                                {% endif %}
+
+                                                {% if j.accepted_bid == True %}
+                                                    <button data-storeid="{{j.store__id}}" data-ownerid="{{ j.store__user_id }}"  data-userauctionid="{{j.user__id}}" data-csrf='{% csrf_token %}' class="decline_applicant">
+                                                        Decline Applicant
+                                                    </button>
+                        
+                                                {% endif %}
+                                              
+                                                        
+                                      
+                                               <h4>{{j.user__user_name}}</h4>
+                                               <h4>Identity Verified: {{j.user__verified_identity}}</h4>
+                                               <h4>Background Check: {{j.user__background_check_status}}</h4>
+                                               <!--    <div class="nft__item_share">
+                                                    <h4>Share</h4>
+                                                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://gigaland.io" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
+                                                    <a href="https://twitter.com/intent/tweet?url=https://gigaland.io" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
+                                                    <a href="mailto:?subject=I wanted you to see this site&amp;body=Check out this site https://gigaland.io"><i class="fa fa-envelope fa-lg"></i></a>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <a href="/store/{{j.store__user_id}}/{{j.store__id}}">
+                                            <img src="{{ j.store__img_url }}" class="lazy nft__item_preview" alt="">
+                                        </a>
                                     </div>
-                                </div>
-                            </div>
-                            <a href="item-details.html">
-                                <img src="{% static 'images/collections/coll-item-3.jpg' %}" class="lazy nft__item_preview" alt="">
-                            </a>
-                        </div>
-                        <div class="nft__item_info">
-                            <a href="item-details.html">
-                                <h4>Abstraction #256</h4>
-                            </a>
-                            <div class="nft__item_click">
-                                <span></span>
-                            </div>
-                            <div class="nft__item_price">
-                                0.05 ETH<span>1/11</span>
-                            </div>
-                            <div class="nft__item_action">
-                                <a href="#">Place a bid</a>
-                            </div>
-                            <div class="nft__item_like">
-                                <i class="fa fa-heart"></i><span>97</span>
-                            </div>                                 
+                          <div class="nft__item_info">
+                                        <a href="/store/{{j.store__user_id}}/{{j.store__id}}">
+                                            <h4>{{ j.store__title }}</h4>
+                                        </a>
+
+                                        <div class="nft__item_click">
+                                            <span></span>
+                                        </div>
+                                        <div class="nft__item_price">
+                                            ${{j.store__price|floatformat:"2"}} USD<span>{{ j.store__timestamp|slice:'0:2' }}/{{ j.store__timestamp|slice:'3:5'   }}</span>
+                                        </div>
+
+                                        <div class="nft__item_action">
+
+                                        {% if j.accepted_bid == False %}
+                                        <a href="#" >
+                                          Applicant Pending
+                                        </a>
+                                        {% endif %}
+
+                                        {% if j.accepted_bid == True %}
+                                        <a href="#" >
+                                          Applicant Accepted
+                                        </a>
+                                        {% endif %}
+                                  
+                                    
+                              </div>
+                             <!--  <div class="nft__item_like">
+                                <i class="fa fa-heart"></i><span>{{p.like}}</span>
+                            </div>   -->                          
                         </div> 
                     </div>
                 </div>
 
-
+                {% endfor %}
 
             </div>
         </div>
