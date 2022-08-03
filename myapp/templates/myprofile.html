@@ -13,18 +13,20 @@
     <!-- CSS Files
         ================================================== -->
         <link id="bootstrap" href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
-        <link id="bootstrap-grid" href="{% static 'css/bootstrap-grid.min.css' %}" rel="stylesheet" type="text/css" />
+<!--         <link id="bootstrap-grid" href="{% static 'css/bootstrap-grid.min.css' %}" rel="stylesheet" type="text/css" />
         <link id="bootstrap-reboot" href="{% static 'css/bootstrap-reboot.min.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/animate.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/owl.carousel.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/owl.theme.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/owl.transitions.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'css/jquery.countdown.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/jquery.countdown.css' %}" rel="stylesheet" type="text/css" /> -->
         <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+        <link href="css/plugins.css" rel="stylesheet" type="text/css" />    
         <!-- color scheme -->
-        <link id="colors" href="{% static 'css/colors/scheme-01.css' %}" rel="stylesheet" type="text/css" />
+        <link id="colors" href="{% static 'css/colors/scheme-08.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/coloring.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/coloring-gradient.css' %}" rel="stylesheet" type="text/css" />
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     </head>
 
@@ -40,12 +42,12 @@
                                 <div class="de-flex-col">
                                     <div class="de-flex-col">
                                         <!-- logo begin -->
-                                 <!--    <div id="logo">
-                                        <a href="index.html">
-                                            <img alt="" class="logo" src="images/logo-light.png" />
-                                            <img alt="" class="logo-2" src="images/logo.png" />
-                                        </a>
-                                    </div> -->
+                                <div id="logo">
+                                      <a href="/">
+                                                <img  style="width: 2em" alt="" class="logo" src="{% static 'images/logo.png' %}" />
+                                                <img  style="width: 2em" alt="" class="logo-2" src="{% static 'images/logo.png' %}" />
+                                            </a>
+                                    </div>
                                     <!-- logo close -->
                                 </div>
                                 <div class="de-flex-col">
@@ -82,10 +84,114 @@
                                         </ul>
                                     </li>
                                 </ul>
-                                <div class="menu_side_area">
-                                    <a href="wallet.html" class="btn-main btn-wallet"><i class="icon_wallet_alt"></i><span>Connect Wallet</span></a>
-                                    <span id="menu-btn"></span>
-                                </div>
+                                 <div class="menu_side_area">
+                                    <div class="de-login-menu">
+                                        <a href="/myapp/create/" class="btn-main"><i class="fa fa-plus"></i><span>Create</span></a>
+
+                                        <span id="de-click-menu-notification" class="de-menu-notification">
+                                            <span class="d-count">8</span>
+                                            <i class="fa fa-bell"></i>
+                                        </span>
+
+                                      <!--   {% if request.session.img_url  != 'n/a' %}
+                                        <span id="de-click-menu-profile" class="de-menu-profile">            
+                                            <img src="{{ request.session.img_url }}" class="img-fluid" alt="">
+                                        </span>
+
+                                        {% endif %}
+                                        {% if request.session.img_url  == 'n/a' %}
+                                        <span id="de-click-menu-profile" class="de-menu-profile">            
+                                            <img src="{% static 'images/author/user.jpg' %}" class="img-fluid" alt="">
+                                        </span>
+
+                                        {% endif %}
+ -->
+                                        <div id="de-submenu-notification" class="de-submenu">
+                                            <div class="de-flex">
+                                                <div><h4>Notifications</h4></div>
+                                                <a href="#">Show all</a>
+                                            </div>
+
+                                            <ul>
+                                                <li>
+                                                    <a href="#">
+                                                        <img class="lazy" src="{% static 'images/author/author-2.jpg' %}" alt="">
+                                                        <div class="d-desc">
+                                                            <span class="d-name"><b>Mamie Barnett</b> started following you</span>
+                                                            <span class="d-time">1 hour ago</span>
+                                                        </div>
+                                                    </a>  
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img class="lazy" src="{% static 'images/author/author-3.jpg' %}" alt="">
+                                                        <div class="d-desc">
+                                                            <span class="d-name"><b>Nicholas Daniels</b> liked your item</span>
+                                                            <span class="d-time">2 hours ago</span>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img class="lazy" src="{% static 'images/author/author-4.jpg' %}" alt="">
+                                                        <div class="d-desc">
+                                                            <span class="d-name"><b>Lori Hart</b> started following you</span>
+                                                            <span class="d-time">18 hours ago</span>
+                                                        </div>
+                                                    </a>    
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img class="lazy" src="{% static 'images/author/author-5.jpg' %}" alt="">
+                                                        <div class="d-desc">
+                                                            <span class="d-name"><b>Jimmy Wright</b> liked your item</span>
+                                                            <span class="d-time">1 day ago</span>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img class="lazy" src="{% static 'images/author/author-6.jpg' %}" alt="">
+                                                        <div class="d-desc">
+                                                            <span class="d-name"><b>Karla Sharp</b> started following you</span>
+                                                            <span class="d-time">3 days ago</span>
+                                                        </div>
+                                                    </a>    
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                    <!--     <div id="de-submenu-profile" class="de-submenu">
+                                            <div class="d-name">
+                                             <div class="d-name">
+                                                <a href="#" style="display:inline-block">Account: </a>
+                                                <h4 style="display:inline-block">{{request.session.username}}</h4>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="spacer-10"></div>
+                                        <div class="d-balance">
+                                            <h4>Balance</h4>
+                                           $ 100,000.00 USD
+                                        </div>
+                                        <div class="spacer-10"></div>
+                                        <div class="d-wallet">
+                                            <h4>My Wallet</h4>
+                                            <span id="wallet" class="d-wallet-address">DdzFFzCqrhshMSxb9oW3mRo4MJrQkusV3fGFSTwaiu4wPBqMryA9DYVJCkW9n7twCffG5f5wX2sSkoDXGiZB1HPa7K7f865Kk4LqnrME</span>
+                                            <button id="btn_copy" title="Copy Text">Copy</button>
+                                        </div>
+
+                                        <div class="d-line"></div>
+
+                                        <ul class="de-submenu-profile">
+                                                <li><a href="/myapp/editprofile/"><i class="fa fa-pencil"></i> Edit profile</a>
+                                                    <li><a href="/myapp/logoff"><i class="fa fa-sign-out"></i> Sign out</a>
+                                                    </ul>
+                                                </div> -->
+                                                <span id="menu-btn"></span>
+                                            </div>
+                                        </div>
+
                             </div>
                         </div>
                     </div>
@@ -164,6 +270,7 @@
                                 <div class="row">
                                     <!-- nft item begin -->
 
+
                                     {% for p in products %}
 
                                     <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
@@ -189,7 +296,9 @@
                                         </div>
                                         {% endif %}
                                         <div class="author_list_pp">
-                                            <a href="/myapp/profile/{{p.user_id}}">       
+                                            <a href="/myapp/profile/{{p.user_id}}">    
+
+                                                <h4>{{request.session.username}}</h4>   
 
                                                 {% if request.session.img_url  != 'n/a' %}
                                                     
@@ -267,9 +376,10 @@
                                             </div>
                                         </div>
                                         <a href="/store/{{p.user_id}}/{{p.id}}">
-                                            <img src="{{ p.img_url }}" class="lazy nft__item_preview" alt="">
+                                            <img src="{{ p.img_url }}" class="lazy " alt="">
                                         </a>
                                     </div>
+
                                     <div class="nft__item_info">
                                         <a href="/store/{{p.user_id}}/{{p.id}}">
                                             <h4>{{ p.title }}</h4>
@@ -394,14 +504,14 @@
                                                <h4>Background Check: {{j.user__background_check_status}}</h4>
                                                  <div class="nft__item_share">
                                                     <h4>Job Portal</h4>
-                                                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://gigaland.io" target="_blank"><i class="fa fa-camera fa-lg"></i></a>
-                                                    <a href="https://twitter.com/intent/tweet?url=https://gigaland.io" target="_blank"><i class="fa fa-calendar-times-o fa-lg"></i></a>
-                                                    <a href="mailto:?subject=I wanted you to see this site&amp;body=Check out this site https://gigaland.io"><i class="fa fa-envelope fa-lg"></i></a>
+                                                    <button href="#" target="_blank" class="view_image">Snapwork <i class="fa fa-camera fa-lg"></i></button>
+                                                    <button href="#" target="_blank" class="view_timesheet">Timesheet <i class="fa fa-calendar-times-o fa-lg"></i></button>
+                                                    <button href="#" class="view_message">Messenger <i class="fa fa-envelope fa-lg"></i></button>
                                                 </div>
                                             </div>
                                         </div>
                                         <a href="/store/{{j.store__user_id}}/{{j.store__id}}">
-                                            <img src="{{ j.store__img_url }}" class="lazy nft__item_preview" alt="">
+                                            <img src="{{ j.store__img_url }}" class="lazy " alt="">
                                         </a>
                                     </div>
                           <div class="nft__item_info">
@@ -489,14 +599,14 @@
                                           
                                                   <div class="nft__item_share">
                                                     <h4>Job Portal</h4>
-                                                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://gigaland.io" target="_blank"><i class="fa fa-camera fa-lg"></i></a>
-                                                    <a href="https://twitter.com/intent/tweet?url=https://gigaland.io" target="_blank"><i class="fa fa-calendar-times-o fa-lg"></i></a>
-                                                    <a href="mailto:?subject=I wanted you to see this site&amp;body=Check out this site https://gigaland.io"><i class="fa fa-envelope fa-lg"></i></a>
+                                                    <button href="#" target="_blank" class="submit_image">Snapwork <i class="fa fa-camera fa-lg"></i></button>
+                                                    <button href="#" target="_blank" class="submit_timesheet">Timesheet <i class="fa fa-calendar-times-o fa-lg"></i></button>
+                                                    <button href="#" class="submit_message">Messenger <i class="fa fa-envelope fa-lg"></i></button>
                                                 </div>
                                             </div>
                                         </div>
                                         <a href="/store/{{j.store__user_id}}/{{j.store__id}}">
-                                            <img src="{{ j.store__img_url }}" class="lazy nft__item_preview" alt="">
+                                            <img src="{{ j.store__img_url }}" class="lazy " alt="">
                                         </a>
                                     </div>
                           <div class="nft__item_info">
@@ -619,7 +729,7 @@
                                             </div>
                                         </div>
                                         <a href="/store/{{p.store__user_id}}/{{p.store__id}}">
-                                            <img src="{{ p.store__img_url }}" class="lazy nft__item_preview" alt="">
+                                            <img src="{{ p.store__img_url }}" class="lazy " alt="">
                                         </a>
                                     </div>
                                     <div class="nft__item_info">
@@ -713,7 +823,7 @@
                                             </div>
                                         </div>
                                         <a href="/store/{{p.store__user_id}}/{{p.store__id}}">
-                                            <img src="{{ p.store__img_url }}" class="lazy nft__item_preview" alt="">
+                                            <img src="{{ p.store__img_url }}" class="lazy " alt="">
                                         </a>
                                     </div>
                                     <div class="nft__item_info">
@@ -781,7 +891,7 @@
                                 </div>
                             </div>
                             <a href="item-details.html">
-                                <img src="{% static 'images/collections/coll-item-3.jpg' %}" class="lazy nft__item_preview" alt="">
+                                <img src="{% static 'images/collections/coll-item-3.jpg' %}" class="lazy " alt="">
                             </a>
                         </div>
                         <div class="nft__item_info">
@@ -972,89 +1082,85 @@
 <a href="#" id="back-to-top"></a>
 
 <!-- footer begin -->
-<footer class="footer-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-1">
-                <div class="widget">
-                    <h5>Marketplace</h5>
-                    <ul>
-                        <li><a href="#">All NFTs</a></li>
-                        <li><a href="#">Art</a></li>
-                        <li><a href="#">Music</a></li>
-                        <li><a href="#">Domain Names</a></li>
-                        <li><a href="#">Virtual World</a></li>
-                        <li><a href="#">Collectibles</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-1">
-                <div class="widget">
-                    <h5>Resources</h5>
-                    <ul>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Partners</a></li>
-                        <li><a href="#">Suggestions</a></li>
-                        <li><a href="#">Discord</a></li>
-                        <li><a href="#">Docs</a></li>
-                        <li><a href="#">Newsletter</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-1">
-                <div class="widget">
-                    <h5>Community</h5>
-                    <ul>
-                        <li><a href="#">Community</a></li>
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">Brand Assets</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Forum</a></li>
-                        <li><a href="#">Mailing List</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-1">
-                <div class="widget">
-                    <h5>Newsletter</h5>
-                    <p>Signup for our newsletter to get the latest news in your inbox.</p>
-                    <form action="blank.php" class="row form-dark" id="form_subscribe" method="post" name="form_subscribe">
-                        <div class="col text-center">
-                            <input class="form-control" id="txt_subscribe" name="txt_subscribe" placeholder="enter your email" type="text" /> <a href="#" id="btn-subscribe"><i class="arrow_right bg-color-secondary"></i></a>
-                            <div class="clearfix"></div>
+  <footer class="footer-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-1">
+                        <div class="widget">
+                            <h5>Marketplace</h5>
+                            <ul>
+                                <li><a href="#">Universal Temp Agency</a></li>
+                      <!--           <li><a href="#">Art</a></li>
+                                <li><a href="#">Music</a></li>
+                                <li><a href="#">Domain Names</a></li>
+                                <li><a href="#">Virtual World</a></li>
+                                <li><a href="#">Collectibles</a></li> -->
+                            </ul>
                         </div>
-                    </form>
-                    <div class="spacer-10"></div>
-                    <small>Your email is safe with us. We don't spam.</small>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="subfooter">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="de-flex">
-                     <div class="de-flex-col">
-                       <a href="https://www.aeravi.io" target="_blank">
-                        <!-- <img alt="" class="f-logo" src="images/logo.png" /> --><span class="copy">&copy; Copyright - Aeravi Technologies LLC</span>
-                    </a>
-                </div>
-                <div class="de-flex-col">
-                    <div class="social-icons">
-                        <a href="#"><i class="fa fa-facebook fa-lg"></i></a>
-                        <a href="#"><i class="fa fa-twitter fa-lg"></i></a>
-                        <a href="#"><i class="fa fa-linkedin fa-lg"></i></a>
-                        <a href="#"><i class="fa fa-pinterest fa-lg"></i></a>
-                        <a href="#"><i class="fa fa-rss fa-lg"></i></a>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-1">
+                        <div class="widget">
+                            <h5>Resources</h5>
+                            <ul>
+                                <li><a href="#">Help Center</a></li>
+                          <!--       <li><a href="#">Partners</a></li>
+                                <li><a href="#">Suggestions</a></li>
+                                <li><a href="#">Discord</a></li>
+                                <li><a href="#">Docs</a></li>
+                                <li><a href="#">Newsletter</a></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-1">
+                        <div class="widget">
+                            <h5>Community</h5>
+                            <ul>
+                                <li><a href="#">Community</a></li>
+                          <!--       <li><a href="#">Documentation</a></li>
+                                <li><a href="#">Brand Assets</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Forum</a></li>
+                                <li><a href="#">Mailing List</a></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-1">
+                        <div class="widget">
+                            <h5>Newsletter</h5>
+                            <p>Signup for our newsletter to get the latest news in your inbox.</p>
+                            <form action="blank.php" class="row form-dark" id="form_subscribe" method="post" name="form_subscribe">
+                                <div class="col text-center">
+                                    <input class="form-control" id="txt_subscribe" name="txt_subscribe" placeholder="enter your email" type="text" /> <a href="#" id="btn-subscribe"><i class="arrow_right bg-color-secondary"></i></a>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </form>
+                            <div class="spacer-10"></div>
+                            <small>Your email is safe with us. We don't spam.</small>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-</div>
-</footer>
+            <div class="subfooter">
+                <div class="container">
+                    <div class="row">
+                         <div class="col-md-12">
+                                        <div class="de-flex">
+                                            <div class="de-flex-col">
+                                             <a href="https://www.instagram.com/aeravi.io/?hl=en" target="_blank">
+                                                <!-- <img alt="" class="f-logo" src="images/logo.png" /> --><span class="copy">&copy; Copyright - Aeravi Technologies LLC</span>
+                                            </a>
+                                        </div>
+                                        <div class="de-flex-col">
+                                            <div class="social-icons">
+                                                <a href="https://www.instagram.com/aeravi.io/?hl=en"><i class="fa fa-instagram fa-lg"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
 <!-- footer close -->
 
 </div>
@@ -1079,6 +1185,8 @@
         <script src="{% static 'js/jquery.lazy.min.js' %}"></script>
         <script src="{% static 'js/jquery.lazy.plugins.min.js' %}"></script>
         <script src="{% static 'js/designesia.js' %}"></script>
+        <script src="js/plugins.js"></script>
+
 
             {% csrf_token %}
         <script>

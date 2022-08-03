@@ -16,12 +16,15 @@ body.dark-scheme.de-grey #content,
 .dark-scheme.de-grey .dropdown li span,
 .dark-scheme.de-grey .dropdown li span:hover,
 .dark-scheme .owl-prev, .dark-scheme .owl-next,
-.dark-scheme.de-grey .modal-content{
+.dark-scheme.de-grey .modal-content,
+.dark-scheme #mainmenu ul,
+#mainmenu li ul.mega .menu-content,
+#mainmenu li ul ul li a{
     background: #212428;
 }
 
 .dark-scheme.de-grey header.smaller,
-.dark-scheme.de-grey #mainmenu ul{
+.dark-scheme.de-grey #mainmenu ul ul{
     background: rgba(33, 36, 40, .9);
 }
 
@@ -35,10 +38,16 @@ body.dark-scheme.de-grey #content,
     box-shadow: 0 4px 20px 0 rgba(10,10,10, .8);
 }
 
-.dark-scheme.de-grey #mainmenu ul{
+.dark-scheme.de-grey #mainmenu ul:not(.mega){
     -webkit-box-shadow: 0 4px 20px 0 rgba(10,10,10, .4);
     -moz-box-shadow: 0 4px 20px 0 rgba(10,10,10, .4);
     box-shadow: 0 4px 20px 0 rgba(10,10,10, .4);
+}
+
+.dark-scheme.de-grey #mainmenu .mega ul{
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 .dark-scheme.de-grey .nft__item.style-2,
@@ -151,6 +160,10 @@ input[type=button].btn-main,
 .dark-scheme.de-grey .de-menu-notification{
     background: rgba(255, 255, 255, .2);
     color: #ffffff;
+}
+
+#mainmenu ul li a strong{
+    border: none;
 }
 
 @media only screen and (max-width: 992px) {

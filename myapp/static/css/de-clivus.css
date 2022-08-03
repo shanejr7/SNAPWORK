@@ -1,3 +1,7 @@
+h2{
+    font-size: 32px;
+}
+
 .dark-scheme.de-clivus,
 .dark-scheme.de-clivus footer,
 .dark-scheme.de-clivus footer a,
@@ -18,7 +22,7 @@ body.dark-scheme.de-clivus #content,
 .dark-scheme.de-clivus .owl-prev,
 .dark-scheme.de-clivus .owl-next,
 .dark-scheme.de-clivus .modal-content{
-    background: #14141F;
+    background: #1A1A25;
 }
 
 .dark-scheme.de-clivus header.smaller,
@@ -64,7 +68,7 @@ body.dark-scheme.de-clivus #content,
 .dark-scheme.de-clivus .feature-box.f-boxed.style-3,
 .dark-scheme.de-clivus .nft__item .de_countdown,
 .box-url.style-2 .box-url-inner{
-    background: #343445;
+    background: #242435;
 }
 
 .dark-scheme.de-clivus .box-url.style-2,
@@ -90,11 +94,15 @@ body.dark-scheme.de-clivus #content,
 .dark-scheme.de-clivus .de_tab .de_nav li span,
 .dark-scheme.de-clivus .de-submenu{
     border: solid 1px rgba(255, 255, 255, .1);
-    background: #14141F;
+    background: #1A1A25;
 }
 
 .dark-scheme.de-clivus .de_tab.de_steps .de_nav li.active{
     background: rgba(255, 255, 255, .3);
+}
+
+.dark-scheme.de-clivus .d-carousel .nft_pic{
+    background: none;
 }
 
 header a.btn-main,

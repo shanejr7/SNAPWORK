@@ -13,17 +13,19 @@
     <!-- CSS Files
         ================================================== -->
         <link id="bootstrap" href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
-        <link id="bootstrap-grid" href="{% static 'css/bootstrap-grid.min.css' %}" rel="stylesheet" type="text/css" />
+<!--         <link id="bootstrap-grid" href="{% static 'css/bootstrap-grid.min.css' %}" rel="stylesheet" type="text/css" />
         <link id="bootstrap-reboot" href="{% static 'css/bootstrap-reboot.min.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/animate.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/owl.carousel.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/owl.theme.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/owl.transitions.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'css/jquery.countdown.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/jquery.countdown.css' %}" rel="stylesheet" type="text/css" /> -->
         <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
         <!-- color scheme -->
-        <link id="colors" href="{% static 'css/colors/scheme-01.css' %}" rel="stylesheet" type="text/css" />
+        <link id="colors" href="{% static 'css/colors/scheme-08.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/coloring.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/coloring-gradient.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/coloring.css' %}" rel="stylesheet" type="text/css" />
     </head>
 
@@ -38,13 +40,12 @@
                             <div class="de-flex sm-pt10">
                                 <div class="de-flex-col">
                                     <div class="de-flex-col">
-                                        <!-- logo begin -->
-                                 <!--    <div id="logo">
-                                        <a href="index.html">
-                                            <img alt="" class="logo" src="images/logo-light.png" />
-                                            <img alt="" class="logo-2" src="images/logo.png" />
-                                        </a>
-                                    </div> -->
+                                       <div id="logo">
+                                      <a href="/">
+                                                <img  style="width: 2em" alt="" class="logo" src="{% static 'images/logo.png' %}" />
+                                                <img  style="width: 2em" alt="" class="logo-2" src="{% static 'images/logo.png' %}" />
+                                            </a>
+                                    </div>
                                     <!-- logo close -->
                                 </div>
                                 <div class="de-flex-col">
@@ -139,7 +140,10 @@
 
                                 <div class="profile_name">
                                     <h4>
-                                       {{user.username}}                                
+                                       {{user.username}} -       
+                                       {% if user.id == request.session.id %}
+                                       Profile View
+                                       {% endif %}                          
                                        <div class="clearfix"></div>
                                        <span id="wallet" class="profile_wallet">http://snapwork.org/myapp/profile/{{user.id}}</span>
                                        <button id="btn_copy" title="Copy Text">Copy</button>
@@ -211,9 +215,18 @@
                                     </div>
                                     {% endif %}
                                     <div class="author_list_pp">
-                                        <a href="/myapp/profile/{{p.user_id}}">                                    
-                                            <img class="lazy" src="{{ user.img_url}}" alt="">
-                                            <!-- <i class="fa fa-check"></i> -->
+                                        <a href="/myapp/profile/{{p.user_id}}">  
+                                                <h4>{{ user.username}}</h4>                                     
+                                                 {% if user.img_url != 'n/a' %}
+                                                    
+                                                          <img class="lazy" src="{{ user.img_url }}" alt="">
+                                                               <!-- <i class="fa fa-check"></i> -->
+                                                {% endif %}
+                                                {% if user.img_url  == 'n/a' %}
+                                                      <img class="lazy" src="{% static 'images/author/user.jpg' %}" alt="">
+                                                     <!--       <i class="fa fa-check"></i> -->
+                                                {% endif %}  
+
                                         </a>
                                     </div>
                                     <div class="nft__item_wrap">
@@ -282,7 +295,7 @@
                                         </div>
                                     </div>
                                     <a href="/store/{{p.user_id}}/{{p.id}}">
-                                        <img src="{{ p.img_url }}" class="lazy nft__item_preview" alt="">
+                                        <img src="{{ p.img_url }}" class="lazy" alt="">
                                     </a>
                                 </div>
                                 <div class="nft__item_info">
@@ -532,88 +545,84 @@
 
 <!-- footer begin -->
 <footer class="footer-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-1">
-                <div class="widget">
-                    <h5>Marketplace</h5>
-                    <ul>
-                        <li><a href="#">All NFTs</a></li>
-                        <li><a href="#">Art</a></li>
-                        <li><a href="#">Music</a></li>
-                        <li><a href="#">Domain Names</a></li>
-                        <li><a href="#">Virtual World</a></li>
-                        <li><a href="#">Collectibles</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-1">
-                <div class="widget">
-                    <h5>Resources</h5>
-                    <ul>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Partners</a></li>
-                        <li><a href="#">Suggestions</a></li>
-                        <li><a href="#">Discord</a></li>
-                        <li><a href="#">Docs</a></li>
-                        <li><a href="#">Newsletter</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-1">
-                <div class="widget">
-                    <h5>Community</h5>
-                    <ul>
-                        <li><a href="#">Community</a></li>
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">Brand Assets</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Forum</a></li>
-                        <li><a href="#">Mailing List</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-1">
-                <div class="widget">
-                    <h5>Newsletter</h5>
-                    <p>Signup for our newsletter to get the latest news in your inbox.</p>
-                    <form action="blank.php" class="row form-dark" id="form_subscribe" method="post" name="form_subscribe">
-                        <div class="col text-center">
-                            <input class="form-control" id="txt_subscribe" name="txt_subscribe" placeholder="enter your email" type="text" /> <a href="#" id="btn-subscribe"><i class="arrow_right bg-color-secondary"></i></a>
-                            <div class="clearfix"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-1">
+                        <div class="widget">
+                            <h5>Marketplace</h5>
+                            <ul>
+                                <li><a href="#">Universal Temp Agency</a></li>
+                      <!--           <li><a href="#">Art</a></li>
+                                <li><a href="#">Music</a></li>
+                                <li><a href="#">Domain Names</a></li>
+                                <li><a href="#">Virtual World</a></li>
+                                <li><a href="#">Collectibles</a></li> -->
+                            </ul>
                         </div>
-                    </form>
-                    <div class="spacer-10"></div>
-                    <small>Your email is safe with us. We don't spam.</small>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="subfooter">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="de-flex">
-                     <div class="de-flex-col">
-                       <a href="https://www.aeravi.io" target="_blank">
-                        <!-- <img alt="" class="f-logo" src="images/logo.png" /> --><span class="copy">&copy; Copyright - Aeravi Technologies LLC</span>
-                    </a>
-                </div>
-                <div class="de-flex-col">
-                    <div class="social-icons">
-                        <a href="#"><i class="fa fa-facebook fa-lg"></i></a>
-                        <a href="#"><i class="fa fa-twitter fa-lg"></i></a>
-                        <a href="#"><i class="fa fa-linkedin fa-lg"></i></a>
-                        <a href="#"><i class="fa fa-pinterest fa-lg"></i></a>
-                        <a href="#"><i class="fa fa-rss fa-lg"></i></a>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-1">
+                        <div class="widget">
+                            <h5>Resources</h5>
+                            <ul>
+                                <li><a href="#">Help Center</a></li>
+                          <!--       <li><a href="#">Partners</a></li>
+                                <li><a href="#">Suggestions</a></li>
+                                <li><a href="#">Discord</a></li>
+                                <li><a href="#">Docs</a></li>
+                                <li><a href="#">Newsletter</a></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-1">
+                        <div class="widget">
+                            <h5>Community</h5>
+                            <ul>
+                                <li><a href="#">Community</a></li>
+                          <!--       <li><a href="#">Documentation</a></li>
+                                <li><a href="#">Brand Assets</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Forum</a></li>
+                                <li><a href="#">Mailing List</a></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-1">
+                        <div class="widget">
+                            <h5>Newsletter</h5>
+                            <p>Signup for our newsletter to get the latest news in your inbox.</p>
+                            <form action="blank.php" class="row form-dark" id="form_subscribe" method="post" name="form_subscribe">
+                                <div class="col text-center">
+                                    <input class="form-control" id="txt_subscribe" name="txt_subscribe" placeholder="enter your email" type="text" /> <a href="#" id="btn-subscribe"><i class="arrow_right bg-color-secondary"></i></a>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </form>
+                            <div class="spacer-10"></div>
+                            <small>Your email is safe with us. We don't spam.</small>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-</div>
-</footer>
+            <div class="subfooter">
+                <div class="container">
+                    <div class="row">
+                         <div class="col-md-12">
+                                        <div class="de-flex">
+                                            <div class="de-flex-col">
+                                             <a href="https://www.instagram.com/aeravi.io/?hl=en" target="_blank">
+                                                <!-- <img alt="" class="f-logo" src="images/logo.png" /> --><span class="copy">&copy; Copyright - Aeravi Technologies LLC</span>
+                                            </a>
+                                        </div>
+                                        <div class="de-flex-col">
+                                            <div class="social-icons">
+                                                <a href="https://www.instagram.com/aeravi.io/?hl=en"><i class="fa fa-instagram fa-lg"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
 <!-- footer close -->
 
 </div>

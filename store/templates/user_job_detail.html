@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -14,26 +13,28 @@
     <!-- CSS Files
         ================================================== -->
         <link id="bootstrap" href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
-   <!--      <link id="bootstrap-grid" href="{% static 'css/bootstrap-grid.min.css' %}" rel="stylesheet" type="text/css" />
+        <link id="bootstrap-grid" href="{% static 'css/bootstrap-grid.min.css' %}" rel="stylesheet" type="text/css" />
         <link id="bootstrap-reboot" href="{% static 'css/bootstrap-reboot.min.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/animate.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/owl.carousel.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/owl.theme.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/owl.transitions.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'css/jquery.countdown.css' %}" rel="stylesheet" type="text/css" /> -->
+        <link href="{% static 'css/jquery.countdown.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
         <!-- color scheme -->
-        <link id="colors" href="{% static 'css/colors/scheme-08.css' %}" rel="stylesheet" type="text/css" />
+        <link id="colors" href="{% static 'css/colors/scheme-01.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/coloring.css' %}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'css/coloring-gradient.css' %}" rel="stylesheet" type="text/css" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
     </head>
 
-    <body>
-        <div id="wrapper">
+<body>
+    <div id="wrapper">
 
-            <!-- header begin -->
-     <header class="transparent">
+        <!-- header begin -->
+           <!-- header begin -->
+            <header class="transparent header-light scroll-light border-bottom">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
@@ -41,12 +42,12 @@
                                 <div class="de-flex-col">
                                     <div class="de-flex-col">
                                         <!-- logo begin -->
-                                    <div id="logo">
-                                      <a href="/">
-                                                <img  style="width: 2em" alt="" class="logo" src="{% static 'images/logo.png' %}" />
-                                                <img  style="width: 2em" alt="" class="logo-2" src="{% static 'images/logo.png' %}" />
-                                            </a>
-                                    </div>
+                                  <!--   <div id="logo">
+                                        <a href="index.html">
+                                            <img alt="" class="logo" src="images/logo-light.png" />
+                                            <img alt="" class="logo-2" src="images/logo.png" />
+                                        </a>
+                                    </div> -->
                                     <!-- logo close -->
                                 </div>
                                 <div class="de-flex-col">
@@ -86,7 +87,7 @@
                                      </ul>
                                  </li>                                    
                                  <li>
-                                    <a class="active" href="#">Stats<span></span></a>
+                                    <a href="#">Stats<span></span></a>
                                     <ul>
                                        <li><a href="/store/activity/">Activity</a></li>
                                        <li><a href="/store/rankings/">Rankings</a></li>
@@ -103,144 +104,143 @@
         </div>
     </div>
 </header>
-    <!-- header close -->
-    <!-- content begin -->
-    <div class="no-bottom no-top" id="content">
-        <div id="top"></div>
-
-        <!-- section begin -->
-        <section id="subheader" class="text-light" data-bgimage="url({% static 'images/background/subheader.jpg' %}) top">
-            <div class="center-y relative text-center">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-md-12 text-center">
-                           <h1>Activity</h1>
-                       </div>
-                       <div class="clearfix"></div>
-                   </div>
-               </div>
-           </div>
-       </section>
-       <!-- section close -->
-
-
-       <!-- section begin -->
-       <section aria-label="section">
-        <div class="container">
-           <div class="row">
-
-              <div class="col-md-12">
-                <ul class="activity-list">
-
-                    {% for stores in store %}
-                    <a href="/store/{{stores.user__id}}/{{stores.id}}"> 
-                    {% if stores.product_type != 'n/a' %}
-
-                    <li class="act_sale">
-                        <img src="{{stores.img_url}}" alt="">
-                        <div class="act_list_text">
-                            <h4>{{stores.title}}</h4>
-                            {{stores.body}} by <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> for ${{stores.price|floatformat:"2"}}
-                            <span class="act_list_date">
-                                {{stores.timestamp}}
-                            </span>
+        <!-- header close -->
+        <!-- content begin -->
+        <div class="no-bottom no-top" id="content">
+            <div id="top"></div>
+            
+            <!-- section begin -->
+            <section id="subheader" class="text-light" data-bgimage="url(images/background/subheader.jpg) top">
+                    <div class="center-y relative text-center">
+                        <div class="container">
+                            <div class="row">
+                                
+                                <div class="col-md-12 text-center">
+									<h1>Gallery</h1>
+									<p>Anim pariatur cliche reprehenderit</p>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
                         </div>
-                    </li>
-
-                    {% endif %}
-
-                    {% if stores.contract_type != 'n/a' %}
-
-                    <li class="act_offer">
-                        <img src="{{stores.img_url}}" alt="">
-                        <div class="act_list_text">
-                            <h4>{{stores.title}}</h4>
-                            <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> offered ${{stores.price|floatformat:"2"}}
-                            <span class="act_list_date">
-                               {{stores.timestamp}}
-                           </span>
-                       </div>
-                   </li>
-
-                   {% endif %}
-
-                   {% if stores.service_type != 'n/a'  %}
-
-                   <li class="act_offer">
-                    <img src="{{stores.img_url}}" alt="">
-                    <div class="act_list_text">
-                        <h4>{{stores.title}}</h4>
-                        <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> offered ${{stores.price|floatformat:"2"}}
-                        <span class="act_list_date">
-                           {{stores.timestamp}}
-                       </span>
-                   </div>
-               </li>
-
-               {% endif %}
-
-               {% if stores.data_type != 'n/a' %}
-
-               <li class="act_sale">
-                <img src="{{stores.img_url}}" alt="">
-                <div class="act_list_text">
-                    <h4>{{stores.title}}</h4>
-                    <a href="/store/{{stores.user__id}}/{{stores.id}}">{{stores.user__username}}</a> offered ${{stores.price|floatformat:"2"}}
-                    <span class="act_list_date">
-                       {{stores.timestamp}}
-                   </span>
-               </div>
-           </li>
-
-           {% endif %}
-       </a>
-
-           {% endfor %}
-
-
-       </ul>
-   </div>
-
-                    <!--     <div class="col-md-4">
-                            <span class="filter__l">Filter</span>
-                            <span class="filter__r">Reset</span>
-                            <div class="spacer-half"></div>
-                            <div class="clearfix"></div>
-                            <ul class="activity-filter">
-                                <li class="filter_by_sales"><i class="fa fa-shopping-basket"></i>Sales</li>
-                                <li class="filter_by_likes"><i class="fa fa-heart"></i>Likes</li>
-                                <li class="filter_by_offers"><i class="fa fa-gavel"></i>Offers</li>
-                                <li class="filter_by_followings"><i class="fa fa-check"></i>Followings</li>
-                            </ul>
-
-                        </div> -->
-
                     </div>
-
-                </div>
             </section>
             <!-- section close -->
+            
 
+            <section aria-label="section">
+                <div class="container">
+					<div id="gallery" class="row">
+
+                        <div class="col-md-4 mb30 item">
+							<div class="de-image-hover rounded">
+								<a href="images/gallery/gallery-item-1.jpg" class="image-popup">								
+									<span class="dih-title-wrap">
+										<span class="dih-title">Gallery Title</span>
+									</span>
+									<span class="dih-overlay"></span>
+									<img src="images/gallery/gallery-item-1.jpg" class="lazy img-fluid" alt="">
+								</a>
+							</div>
+						</div>
+						
+						<div class="col-md-4 mb30 item">
+							<div class="de-image-hover rounded">
+								<a href="images/gallery/gallery-item-2.jpg" class="image-popup">								
+									<span class="dih-title-wrap">
+										<span class="dih-title">Gallery Title</span>
+									</span>
+									<span class="dih-overlay"></span>
+									<img src="images/gallery/gallery-item-2.jpg" class="lazy img-fluid" alt="">
+								</a>
+							</div>
+						</div>
+						
+						<div class="col-md-4 mb30 item">
+							<div class="de-image-hover rounded">
+								<a href="images/gallery/gallery-item-3.jpg" class="image-popup">								
+									<span class="dih-title-wrap">
+										<span class="dih-title">Gallery Title</span>
+									</span>
+									<span class="dih-overlay"></span>
+									<img src="images/gallery/gallery-item-3.jpg" class="lazy img-fluid" alt="">
+								</a>
+							</div>
+						</div>
+						
+						<div class="col-md-4 mb30 item">
+							<div class="de-image-hover rounded">
+								<a href="images/gallery/gallery-item-4.jpg" class="image-popup">								
+									<span class="dih-title-wrap">
+										<span class="dih-title">Gallery Title</span>
+									</span>
+									<span class="dih-overlay"></span>
+									<img src="images/gallery/gallery-item-4.jpg" class="lazy img-fluid" alt="">
+								</a>
+							</div>
+						</div>
+
+                        <div class="col-md-4 mb30 item">
+							<div class="de-image-hover rounded">
+								<a href="images/gallery/gallery-item-5.jpg" class="image-popup">								
+									<span class="dih-title-wrap">
+										<span class="dih-title">Gallery Title</span>
+									</span>
+									<span class="dih-overlay"></span>
+									<img src="images/gallery/gallery-item-5.jpg" class="lazy img-fluid" alt="">
+								</a>
+							</div>
+						</div>
+						
+						<div class="col-md-8 mb30 item">
+							<div class="de-image-hover rounded">
+								<a href="images/gallery/gallery-item-6.jpg" class="image-popup">								
+									<span class="dih-title-wrap">
+										<span class="dih-title">Gallery Title</span>
+									</span>
+									<span class="dih-overlay"></span>
+									<img src="images/gallery/gallery-item-6.jpg" class="lazy img-fluid" alt="">
+								</a>
+							</div>
+						</div>
+
+                        <div class="col-md-4 mb30 item">
+                            <div class="de-image-hover rounded">
+                                <a href="images/gallery/gallery-item-7.jpg" class="image-popup">                             
+                                    <span class="dih-title-wrap">
+                                        <span class="dih-title">Gallery Title</span>
+                                    </span>
+                                    <span class="dih-overlay"></span>
+                                    <img src="images/gallery/gallery-item-7.jpg" class="lazy img-fluid" alt="">
+                                </a>
+                            </div>
+                        </div>
+						
+                    </div>
+					
+				</div>
+					
+            </section>
+			
+			
         </div>
         <!-- content close -->
 
         <a href="#" id="back-to-top"></a>
         
         <!-- footer begin -->
-      <footer class="footer-light">
+        <footer class="footer-light">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 col-sm-6 col-xs-1">
                         <div class="widget">
                             <h5>Marketplace</h5>
                             <ul>
-                                <li><a href="#">Universal Temp Agency</a></li>
-                      <!--           <li><a href="#">Art</a></li>
+                                <li><a href="#">All NFTs</a></li>
+                                <li><a href="#">Art</a></li>
                                 <li><a href="#">Music</a></li>
                                 <li><a href="#">Domain Names</a></li>
                                 <li><a href="#">Virtual World</a></li>
-                                <li><a href="#">Collectibles</a></li> -->
+                                <li><a href="#">Collectibles</a></li>
                             </ul>
                         </div>
                     </div>
@@ -249,11 +249,11 @@
                             <h5>Resources</h5>
                             <ul>
                                 <li><a href="#">Help Center</a></li>
-                          <!--       <li><a href="#">Partners</a></li>
+                                <li><a href="#">Partners</a></li>
                                 <li><a href="#">Suggestions</a></li>
                                 <li><a href="#">Discord</a></li>
                                 <li><a href="#">Docs</a></li>
-                                <li><a href="#">Newsletter</a></li> -->
+                                <li><a href="#">Newsletter</a></li>
                             </ul>
                         </div>
                     </div>
@@ -262,11 +262,11 @@
                             <h5>Community</h5>
                             <ul>
                                 <li><a href="#">Community</a></li>
-                          <!--       <li><a href="#">Documentation</a></li>
+                                <li><a href="#">Documentation</a></li>
                                 <li><a href="#">Brand Assets</a></li>
                                 <li><a href="#">Blog</a></li>
                                 <li><a href="#">Forum</a></li>
-                                <li><a href="#">Mailing List</a></li> -->
+                                <li><a href="#">Mailing List</a></li>
                             </ul>
                         </div>
                     </div>
@@ -289,50 +289,54 @@
             <div class="subfooter">
                 <div class="container">
                     <div class="row">
-                         <div class="col-md-12">
-                                        <div class="de-flex">
-                                            <div class="de-flex-col">
-                                             <a href="https://www.instagram.com/aeravi.io/?hl=en" target="_blank">
-                                                <!-- <img alt="" class="f-logo" src="images/logo.png" /> --><span class="copy">&copy; Copyright - Aeravi Technologies LLC</span>
-                                            </a>
-                                        </div>
-                                        <div class="de-flex-col">
-                                            <div class="social-icons">
-                                                <a href="https://www.instagram.com/aeravi.io/?hl=en"><i class="fa fa-instagram fa-lg"></i></a>
-                                            </div>
-                                        </div>
+                        <div class="col-md-12">
+                            <div class="de-flex">
+                                <div class="de-flex-col">
+                                    <a href="index.html">
+                                        <img alt="" class="f-logo" src="images/logo.png" /><span class="copy">&copy; Copyright 2022 - Gigaland by Designesia</span>
+                                    </a>
+                                </div>
+                                <div class="de-flex-col">
+                                    <div class="social-icons">
+                                        <a href="#"><i class="fa fa-facebook fa-lg"></i></a>
+                                        <a href="#"><i class="fa fa-twitter fa-lg"></i></a>
+                                        <a href="#"><i class="fa fa-linkedin fa-lg"></i></a>
+                                        <a href="#"><i class="fa fa-pinterest fa-lg"></i></a>
+                                        <a href="#"><i class="fa fa-rss fa-lg"></i></a>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </footer>
-    <!-- footer close -->
+        <!-- footer close -->
+        
+    </div>
 
-</div>
 
-
-
+    
     <!-- Javascript Files
-        ================================================== -->
-        <script src="{% static 'js/jquery.min.js' %}"></script>
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
-        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-        <script src="{% static 'js/wow.min.js' %}"></script>
-        <script src="{% static 'js/jquery.isotope.min.js' %}"></script>
-        <script src="{% static 'js/easing.js' %}"></script>
-        <script src="{% static 'js/owl.carousel.js' %}"></script>
-        <script src="{% static 'js/validation.js' %}"></script>
-        <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
-        <script src="{% static 'js/enquire.min.js' %}"></script>
-        <script src="{% static 'js/jquery.plugin.js' %}"></script>
-        <script src="{% static 'js/jquery.countTo.js' %}"></script>
-        <script src="{% static 'js/jquery.countdown.js' %}"></script>
-        <script src="{% static 'js/jquery.lazy.min.js' %}"></script>
-        <script src="{% static 'js/jquery.lazy.plugins.min.js' %}"></script>
-        <script src="{% static 'js/designesia.js' %}"></script>
+    ================================================== -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/easing.js"></script>
+    <script src="js/owl.carousel.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/enquire.min.js"></script>
+    <script src="js/jquery.plugin.js"></script>
+    <script src="js/jquery.countTo.js"></script>
+    <script src="js/jquery.countdown.js"></script>
+    <script src="js/jquery.lazy.min.js"></script>
+    <script src="js/jquery.lazy.plugins.min.js"></script>
+    <script src="js/designesia.js"></script>
 
 
-    </body>
+</body>
 
-    </html>
+</html>

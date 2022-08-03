@@ -167,7 +167,7 @@ a.btn-border.light:hover,
 a.btn-main.btn-white,
 a.bc-btn,
 .de_tab .de_nav li span {
-    color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
 
@@ -244,8 +244,10 @@ a.btn-line.hover,
 .nft__item_share a,
 #de-click-menu-notification .d-count,
 .play-pause,
-.dark-scheme.de-clivus .box-url.style-2 {
-background: linear-gradient(217deg, var(--secondary-color), var(--secondary-color-2) 75%)
+.dark-scheme.de-clivus .box-url.style-2,
+#mainmenu ul li a strong,
+.dark-scheme #mainmenu li ul ul li a:hover {
+background: linear-gradient(to right, var(--secondary-color) 0%, var(--secondary-color-2) 100%)
 }
 
 section.dark {

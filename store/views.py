@@ -42,7 +42,7 @@ def store_detail(request):
         'id','product','title','body','price','quantity','auction','product_type', 'contract_type','service_type',
         'data_type','season','views','img_url','address', 'duration_timestamp','timestamp')
 
-    user_store_top_quality_rank_obj = User.objects.filter(quality_rank__gte=80)[:8].values('id','username','img_url','email','license','quality_rank','timestamp')
+    user_store_top_quality_rank_obj = User.objects.filter(quality_rank__gte=0)[:8].values('id','username','img_url','email','license','quality_rank','timestamp')
 
 
     for store in user_store_obj1:
@@ -478,4 +478,24 @@ def liveauctions(request):
 
 
     return render(request,'liveauctions.html',context)
+
+@requires_csrf_token
+def view_job_image(request):
+
+        return render(request,'user_job_detail.html',context)
+
+@requires_csrf_token
+def submit_image(request):
+
+        return render(request,'user_job_detail.html')
+
+@requires_csrf_token
+def submit_timesheet(request):
+
+        return render(request,'page.html',context)
+
+@requires_csrf_token
+def submit_message(request):
+
+        return render(request,'page.html',context)
 
