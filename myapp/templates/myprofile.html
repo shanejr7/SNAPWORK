@@ -499,14 +499,46 @@
                                               
                                                         
                                       
-                                               <h4>{{j.user__user_name}}</h4>
+                                           <!--     <h4>{{j.user__user_name}}</h4>
                                                <h4>Identity Verified: {{j.user__verified_identity}}</h4>
-                                               <h4>Background Check: {{j.user__background_check_status}}</h4>
+                                               <h4>Background Check: {{j.user__background_check_status}}</h4> -->
                                                  <div class="nft__item_share">
                                                     <h4>Job Portal</h4>
-                                                    <button href="#" target="_blank" class="view_image">Snapwork <i class="fa fa-camera fa-lg"></i></button>
-                                                    <button href="#" target="_blank" class="view_timesheet">Timesheet <i class="fa fa-calendar-times-o fa-lg"></i></button>
-                                                    <button href="#" class="view_message">Messenger <i class="fa fa-envelope fa-lg"></i></button>
+
+                                 
+
+                                                    <form style="margin-bottom:4px" name="view_job_form" id='view_job_form' class="form-border" method="POST" action="">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="ownerID" value="{{j.store__user_id}}">
+                                                        <input type="hidden" name="storeID" value="{{j.store__id}}">
+                                                        <input type="hidden" name="auctionID" value="{{j.user__id}}">
+
+                                                        <div class="btn btn-main color-2"><input class="btn btn-main color-2" type="submit" name="view_job" value="Snapwork"> <i class="fa fa-camera fa-lg"></i></div>
+                                                    </form>
+
+
+                                                      <form style="margin-bottom:4px"  name="view_timesheet_form" id='view_timesheet_form' class="form-border" method="POST" action="">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="ownerID" value="{{j.store__user_id}}">
+                                                        <input type="hidden" name="storeID" value="{{j.store__id}}">
+                                                        <input type="hidden" name="auctionID" value="{{j.user__id}}">
+
+                                                        <div class="btn btn-main color-2"><input class="btn btn-main color-2" type="submit" name="view_timesheet" value="Timesheet"> <i class="fa fa-calendar-times-o fa-lg"></i></div>
+                                                    </form>
+
+
+                                                      <form name="view_message_form" id='view_meessage_form' class="form-border" method="POST" action="">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="ownerID" value="{{j.store__user_id}}">
+                                                        <input type="hidden" name="storeID" value="{{j.store__id}}">
+                                                        <input type="hidden" name="auctionID" value="{{j.user__id}}">
+
+                                                        <div class="btn btn-main color-2"><input class="btn btn-main color-2" type="submit" name="view_meessage" value="Timesheet"> <i class="fa fa-send-o fa-lg"></i></div>
+                                                    </form>
+
+
+                                               
+                                          
                                                 </div>
                                             </div>
                                         </div>
@@ -599,9 +631,21 @@
                                           
                                                   <div class="nft__item_share">
                                                     <h4>Job Portal</h4>
-                                                    <button href="#" target="_blank" class="submit_image">Snapwork <i class="fa fa-camera fa-lg"></i></button>
-                                                    <button href="#" target="_blank" class="submit_timesheet">Timesheet <i class="fa fa-calendar-times-o fa-lg"></i></button>
-                                                    <button href="#" class="submit_message">Messenger <i class="fa fa-envelope fa-lg"></i></button>
+                                                  
+                                                    <form style="margin-bottom:4px" name="image_job_form" id='image_job_form' class="form-border" method="POST" action="" enctype="multipart/form-data" >
+
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="ownerID" value="{{j.store__user_id}}">
+                                                        <input type="hidden" name="storeID" value="{{j.store__id}}">
+                                                        <input type="hidden" name="auctionID" value="{{j.user__id}}">
+
+                                                        <div class="btn btn-main color-2"><input class="btn btn-main color-2" type="submit" name="submit_job_image" value="Snapwork"> <i class="fa fa-camera fa-lg"></i></div>
+                                                    </form>
+
+
+
+                                                    <button data-ownerID="" data-storeID="" auctionId="" data-csrf='{% csrf_token %}'  href="#" target="_blank" class="submit_timesheet">Timesheet <i class="fa fa-calendar-times-o fa-lg"></i></button>
+                                                    <button data-ownerID="" data-storeID="" auctionId="" data-csrf='{% csrf_token %}'  href="#" class="submit_message">Messenger <i class="fa fa-envelope fa-lg"></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -1192,6 +1236,7 @@
         <script>
             const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         </script>
+
 
                 <script type="text/javascript">
 

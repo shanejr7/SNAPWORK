@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from store.models import Store, User, Auction, Stakeholder
+from django.shortcuts import render, redirect
+from store.models import Store, User, Auction, Stakeholder, Stage
 from django.db.models import F
 from django.http import HttpResponse
 from django.http import JsonResponse
@@ -12,6 +12,7 @@ import boto3
 from botocore.exceptions import ClientError
 import os
 import json
+import cv2
 from django.conf import settings
 
 
@@ -480,14 +481,78 @@ def liveauctions(request):
     return render(request,'liveauctions.html',context)
 
 @requires_csrf_token
-def view_job_image(request):
+def view_job(request,uid,sid):
 
-        return render(request,'user_job_detail.html',context)
+    error =[]
+
+    try:
+        if request.session['id']:
+
+            stage = Stage.objects.filter(stakeholder__user_id=uid,stakeholder__store_id=sid).order_by('timestamp')
+
+            for job_stage in stage:
+                if job_stage['img_url'] != 'n/a':
+                    job_stage['img_url'] = s3_client.generate_presigned_url('get_object',
+                        Params={'Bucket': settings.AWS_STORAGE_BUCKET_NAME,'Key': str(job_stage['img_url'])})
+
+            context = {
+                "stage":stage,
+                "error": error,
+            }
+            return render(request,'user_job_detail.html',context)
+        else:
+            return redirect('/myapp/login/')
+
+    except:
+        return redirect('/myapp/login/')
+
+
+    return redirect('/myapp/login/')
 
 @requires_csrf_token
-def submit_image(request):
+def submit_job_image(request,uid,sid):
+    
 
-        return render(request,'user_job_detail.html')
+    error = []
+
+    if request.session['id']:
+
+        videoCaptureObject = cv2.VideoCapture(0)
+        result = True
+        while(result):
+            ret,frame = videoCaptureObject.read()
+            cv2.imwrite("NewPicture.jpg",frame)
+            result = False
+
+       
+        # s3_client.upload_fileobj(profile_file_name, settings.AWS_STORAGE_BUCKET_NAME, 'images/job/+str()')
+
+        videoCaptureObject.release()
+        cv2.destroyAllWindows()
+
+        upload_profile_img = ''
+        upload_banner_img = ''
+        key_profile_img =''
+        key_banner_img =''
+
+
+
+        return redirect('/myapp/myprofile/')
+    return redirect('/myapp/myprofile/')
+
+@requires_csrf_token
+def view_timesheet(request):
+  
+    jobs = []
+    error = []
+
+    store_id = strip_tags(request.POST.get('storeID'))
+    owner_id = strip_tags(request.POST.get('ownerID'))
+    auction_id = strip_tags(request.POST.get('auctionID'))
+
+    return render(request,'user_job_detail.html')
+
+
 
 @requires_csrf_token
 def submit_timesheet(request):
