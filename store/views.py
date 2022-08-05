@@ -13,6 +13,7 @@ from botocore.exceptions import ClientError
 import os
 import json
 import cv2
+import uuid
 from django.conf import settings
 
 
@@ -484,27 +485,26 @@ def liveauctions(request):
 def view_job(request,uid,sid):
 
     error =[]
+    stage =[]
 
-    try:
-        if request.session['id']:
+    if request.session['id']:
 
-            stage = Stage.objects.filter(stakeholder__user_id=uid,stakeholder__store_id=sid).order_by('timestamp')
+        stage = Stage.objects.filter(stakeholder__store__id=sid).values('img_url','timestamp').order_by('timestamp')
 
-            for job_stage in stage:
-                if job_stage['img_url'] != 'n/a':
-                    job_stage['img_url'] = s3_client.generate_presigned_url('get_object',
-                        Params={'Bucket': settings.AWS_STORAGE_BUCKET_NAME,'Key': str(job_stage['img_url'])})
+        for job_stage in stage:
+            job_stage['img_url'] = s3_client.generate_presigned_url('get_object',
+                Params={'Bucket': settings.AWS_STORAGE_BUCKET_NAME,'Key': str(job_stage['img_url'])})
 
-            context = {
-                "stage":stage,
-                "error": error,
-            }
-            return render(request,'user_job_detail.html',context)
-        else:
-            return redirect('/myapp/login/')
+        context = {
+            "stage":stage,
+            "error": error,
+        }
+        return render(request,'user_job_detail.html',context)
 
-    except:
+    else:
+
         return redirect('/myapp/login/')
+    return redirect('/myapp/login/')
 
 
     return redirect('/myapp/login/')
@@ -517,24 +517,30 @@ def submit_job_image(request,uid,sid):
 
     if request.session['id']:
 
+        date = datetime.datetime.now()
+        time_stamp = date.strftime('%m-%d-%Y %H:%M')
+
+        user_id = request.session['id']
+
         videoCaptureObject = cv2.VideoCapture(0)
         result = True
         while(result):
             ret,frame = videoCaptureObject.read()
-            cv2.imwrite("NewPicture.jpg",frame)
+            job_image_uuid = str(uuid.uuid4()) +'.jpg'
+      
+            cv2.imwrite(str(job_image_uuid)+'.jpg',frame)
+            data = open(str(job_image_uuid)+'.jpg','rb')
+            response = s3_client.upload_fileobj(data,settings.AWS_STORAGE_BUCKET_NAME, 'images/job/'+job_image_uuid)
             result = False
 
        
-        # s3_client.upload_fileobj(profile_file_name, settings.AWS_STORAGE_BUCKET_NAME, 'images/job/+str()')
+
+        stage = Stage(continuation_timestamp=time_stamp,termination_timestamp=time_stamp,img_url='images/job/'+job_image_uuid
+            ,stakeholder_id=sid,user_id=user_id,timestamp=time_stamp)
+        stage.save()
 
         videoCaptureObject.release()
         cv2.destroyAllWindows()
-
-        upload_profile_img = ''
-        upload_banner_img = ''
-        key_profile_img =''
-        key_banner_img =''
-
 
 
         return redirect('/myapp/myprofile/')

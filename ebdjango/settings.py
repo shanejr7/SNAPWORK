@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'store',
     'errorhandler',
     'storages',
+    'django_ftpserver',
 ]
 
 AWS_STORAGE_BUCKET_NAME = 'django-env-snapwork'

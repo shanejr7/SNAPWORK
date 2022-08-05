@@ -226,19 +226,19 @@ def profile_auth(request):
 	query_view_job =request.POST.get("view_job")
 
 	if query_view_job:
-		store_id =request.POST.get("storeID")
-		owner_id =request.POST.get("ownerID")
-		auction_id =request.POST.get("auctionID")
-		return redirect('/store/view-job/'+store_id+'/'+auction_id+'/')
+		store_id =request.POST["storeID"]
+		owner_id =request.POST["ownerID"]
+		auction_id =request.POST["auctionID"]
+		return redirect('/store/view-job/'+auction_id+'/'+store_id+'/')
 
 
 	query_submit_job_image =request.POST.get("submit_job_image")
 
 	if query_submit_job_image:
-		store_id =request.POST.get("storeID")
-		owner_id =request.POST.get("ownerID")
-		auction_id =request.POST.get("auctionID")
-		return redirect('/store/submit-job-image/'+store_id+'/'+auction_id+'/')
+		store_id =request.POST["storeID"]
+		owner_id =request.POST["ownerID"]
+		auction_id =request.POST["auctionID"]
+		return redirect('/store/submit-job-image/'+auction_id+'/'+store_id+'/')
 
 
 	try:
